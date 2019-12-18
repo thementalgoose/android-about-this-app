@@ -2,8 +2,6 @@
 
 Contains a collection of generic UI components that I reuse in all of my apps
 
-[![](https://jitpack.io/v/thementalgoose/android-utilities.svg)](https://jitpack.io/#thementalgoose/android-components)
-
 #### Root `build.gradle`
 
 ```
@@ -25,6 +23,7 @@ dependencies {
 ```
 
 Android Utilities [![](https://jitpack.io/v/thementalgoose/android-utilities.svg)](https://jitpack.io/#thementalgoose/android-utilities)
+
 Android Components [![](https://jitpack.io/v/thementalgoose/android-components.svg)](https://jitpack.io/#thementalgoose/android-components)
 
 
