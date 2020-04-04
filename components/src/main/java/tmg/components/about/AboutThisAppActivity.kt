@@ -89,6 +89,7 @@ class AboutThisAppActivity: MVVMActivity<AboutThisAppVM>(), AboutThisAppDependen
         showButtons(isDarkMode)
 
         setupToolbar(R.id.toolbar, true, R.drawable.ic_util_icon_back)
+        supportActionBar?.title = ""
 
         setStatusBarColor(ContextCompat.getColor(this, if (isDarkMode) R.color.aboutThisApp_headerDark else R.color.aboutThisApp_headerLight))
 
@@ -311,9 +312,9 @@ class AboutThisAppActivity: MVVMActivity<AboutThisAppVM>(), AboutThisAppDependen
                    name: String,
                    nameDesc: String,
                    imageUrl: String,
-                   github: String,
+                   github: String? = null,
                    email: String,
-                   website: String,
+                   website: String? = null,
                    packageName: String? = null,
                    play: String? = null,
                    dependencies: List<AboutThisAppDependency>,
