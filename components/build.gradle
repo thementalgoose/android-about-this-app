@@ -46,7 +46,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     // Android Utilities
-    implementation 'com.github.thementalgoose:android-utilities:1.0.1'
+    implementation 'com.github.thementalgoose:android-utilities:1.0.2'
 
     // View Model
     implementation 'android.arch.lifecycle:extensions:1.1.1'
