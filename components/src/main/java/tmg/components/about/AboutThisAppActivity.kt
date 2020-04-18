@@ -7,6 +7,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_about_this_app.*
@@ -15,8 +18,11 @@ import tmg.utilities.extensions.*
 import tmg.utilities.extensions.views.gone
 import tmg.utilities.extensions.views.visible
 import tmg.utilities.lifecycle.mvvm.MVVMActivity
+import tmg.utilities.lifecycle.rx.RxActivity
 
-class AboutThisAppActivity: MVVMActivity<AboutThisAppVM>(), AboutThisAppDependencyCallback {
+class AboutThisAppActivity: RxActivity(), AboutThisAppDependencyCallback {
+
+    private val viewModel: AboutThisAppVM = ViewModelProvider.NewInstanceFactory().create(AboutThisAppVM::class.java)
 
     private var isDarkMode: Boolean = false
 
@@ -35,10 +41,6 @@ class AboutThisAppActivity: MVVMActivity<AboutThisAppVM>(), AboutThisAppDependen
     private lateinit var appVersion: String
 
     private lateinit var adapter: AboutThisAppDependencyAdapter
-
-    override fun viewModelClass(): Class<AboutThisAppVM> {
-        return AboutThisAppVM::class.java
-    }
 
     override fun layoutId(): Int {
         return R.layout.activity_about_this_app

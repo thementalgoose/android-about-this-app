@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/llAboutThisAppBackground"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
-        style="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:id="@+id/toolbar"
-        android:background="@color/aboutThisApp_headerLight"
-        android:elevation="0dp"
+        style="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize" />
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/aboutThisApp_headerLight"
+        android:elevation="0dp" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -26,10 +26,10 @@
 
             <RelativeLayout
                 android:id="@+id/rlToolbar"
-                android:elevation="@dimen/aboutThisApp_toolbarElevation"
-                android:background="@color/aboutThisApp_headerLight"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@color/aboutThisApp_headerLight"
+                android:elevation="@dimen/aboutThisApp_toolbarElevation">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imgAboutAvatar"
@@ -42,7 +42,6 @@
                     android:layout_marginBottom="@dimen/aboutThisApp_edgePadding" />
 
                 <TextView
-                    android:textColor="@color/aboutThisApp_textName"
                     android:id="@+id/tvAboutThisAppName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -50,12 +49,12 @@
                     android:layout_marginTop="2dp"
                     android:layout_marginEnd="@dimen/aboutThisApp_edgePadding"
                     android:layout_toEndOf="@id/imgAboutAvatar"
+                    android:textColor="@color/aboutThisApp_textName"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     tools:text="Jordan Fisher" />
 
                 <TextView
-                    android:textColor="@color/aboutThisApp_textDesc"
                     android:id="@+id/tvAboutThisAppDesc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -64,17 +63,18 @@
                     android:layout_alignEnd="@id/tvAboutThisAppName"
                     android:layout_marginTop="@dimen/aboutThisApp_edgePaddingHalf"
                     android:layout_marginBottom="@dimen/aboutThisApp_edgePadding"
+                    android:textColor="@color/aboutThisApp_textDesc"
                     android:textSize="16sp"
                     tools:text="Mobile App Developer" />
 
             </RelativeLayout>
 
             <LinearLayout
-                android:layout_marginTop="@dimen/aboutThisApp_edgePadding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="24dp"
+                android:layout_marginTop="@dimen/aboutThisApp_edgePadding"
                 android:layout_marginEnd="24dp"
                 android:orientation="horizontal">
 
@@ -89,9 +89,9 @@
                     android:gravity="center"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
-                    android:textColor="@color/aboutThisApp_textLight"
                     android:text="@string/about_this_app_github"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textColor="@color/aboutThisApp_textLight" />
 
                 <Button
                     android:id="@+id/btnWebsiteLight"
@@ -104,9 +104,9 @@
                     android:gravity="center"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
-                    android:textColor="@color/aboutThisApp_textLight"
                     android:text="@string/about_this_app_website"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textColor="@color/aboutThisApp_textLight" />
 
                 <Button
                     android:id="@+id/btnEmailLight"
@@ -119,9 +119,9 @@
                     android:gravity="center"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
-                    android:textColor="@color/aboutThisApp_textLight"
                     android:text="@string/about_this_app_email"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textColor="@color/aboutThisApp_textLight" />
 
                 <Button
                     android:id="@+id/btnPlayLight"
@@ -133,10 +133,10 @@
                     android:foreground="?attr/selectableItemBackground"
                     android:gravity="center"
                     android:paddingTop="8dp"
-                    android:textColor="@color/aboutThisApp_textLight"
                     android:paddingBottom="8dp"
                     android:text="@string/about_this_app_play"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textColor="@color/aboutThisApp_textLight" />
 
                 <Button
                     android:id="@+id/btnGithubDark"
@@ -148,17 +148,16 @@
                     android:foreground="?attr/selectableItemBackground"
                     android:gravity="center"
                     android:paddingTop="8dp"
-                    android:textColor="@color/aboutThisApp_textDark"
                     android:paddingBottom="8dp"
                     android:text="@string/about_this_app_github"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textColor="@color/aboutThisApp_textDark" />
 
                 <Button
                     android:id="@+id/btnWebsiteDark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/aboutThisApp_textDark"
                     android:background="@null"
                     android:drawableTop="@drawable/ic_util_icon_website_dark"
                     android:foreground="?attr/selectableItemBackground"
@@ -166,7 +165,8 @@
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:text="@string/about_this_app_website"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textColor="@color/aboutThisApp_textDark" />
 
                 <Button
                     android:id="@+id/btnEmailDark"
@@ -174,18 +174,17 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:textColor="@color/aboutThisApp_textDark"
                     android:drawableTop="@drawable/ic_util_icon_email_dark"
                     android:foreground="?attr/selectableItemBackground"
                     android:gravity="center"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:text="@string/about_this_app_email"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textColor="@color/aboutThisApp_textDark" />
 
                 <Button
                     android:id="@+id/btnPlayDark"
-                    android:textColor="@color/aboutThisApp_textDark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -196,7 +195,8 @@
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:text="@string/about_this_app_play"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textColor="@color/aboutThisApp_textDark" />
 
             </LinearLayout>
 
@@ -215,7 +215,8 @@
                 android:id="@+id/rvAboutThisAppDependencies"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:nestedScrollingEnabled="true" />
+                android:nestedScrollingEnabled="true"
+                android:overScrollMode="never" />
 
             <TextView
                 android:id="@+id/tvAboutThisAppFootnotes"

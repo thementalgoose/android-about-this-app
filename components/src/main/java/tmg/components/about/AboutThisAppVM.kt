@@ -1,5 +1,6 @@
 package tmg.components.about
 
+import androidx.lifecycle.ViewModel
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 import io.reactivex.rxjava3.subjects.PublishSubject
@@ -43,7 +44,7 @@ interface AboutThisAppVMOutputs {
 
 //endregion
 
-class AboutThisAppVM: MVVMViewModel(), AboutThisAppVMInputs, AboutThisAppVMOutputs {
+class AboutThisAppVM: ViewModel(), AboutThisAppVMInputs, AboutThisAppVMOutputs {
 
     private val githubLinkEvent: BehaviorSubject<String> = BehaviorSubject.create()
     private val websiteLinkEvent: BehaviorSubject<String> = BehaviorSubject.create()
