@@ -7,17 +7,14 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_about_this_app.*
+import kotlinx.android.synthetic.main.about_this_app_activity.*
 import tmg.components.R
 import tmg.utilities.extensions.*
 import tmg.utilities.extensions.views.gone
 import tmg.utilities.extensions.views.visible
-import tmg.utilities.lifecycle.mvvm.MVVMActivity
 import tmg.utilities.lifecycle.rx.RxActivity
 
 class AboutThisAppActivity: RxActivity(), AboutThisAppDependencyCallback {
@@ -43,7 +40,7 @@ class AboutThisAppActivity: RxActivity(), AboutThisAppDependencyCallback {
     private lateinit var adapter: AboutThisAppDependencyAdapter
 
     override fun layoutId(): Int {
-        return R.layout.activity_about_this_app
+        return R.layout.about_this_app_activity
     }
 
     override fun arguments(bundle: Bundle) {

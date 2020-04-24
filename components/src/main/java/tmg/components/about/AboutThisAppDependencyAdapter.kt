@@ -23,7 +23,7 @@ class AboutThisAppDependencyAdapter(
         parent: ViewGroup,
         viewType: Int
     ): AboutThisAppDependencyViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_view_dependency_item, parent, false)
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.about_this_app_item_view_dependency_item, parent, false)
         return AboutThisAppDependencyViewHolder(callback, isDarkMode, view)
     }
 }
