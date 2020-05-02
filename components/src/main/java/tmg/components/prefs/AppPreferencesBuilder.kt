@@ -36,6 +36,13 @@ fun AppPreferencesItemScreen.category(title: String, block: AppPreferencesItemCa
     this.addAll(holder.list)
 }
 
+fun AppPreferencesItemScreen.category(@StringRes title: Int, block: AppPreferencesItemCategory.() -> Unit) {
+    this.add(AppPreferencesItem.Category(string(title)))
+    val holder = AppPreferencesItemCategory(context = context)
+    block(holder)
+    this.addAll(holder.list)
+}
+
 fun AppPreferencesItemCategory.preference(prefsKey: String, title: String, description: String) {
     add(AppPreferencesItem.Preference(
         prefKey = prefsKey,
