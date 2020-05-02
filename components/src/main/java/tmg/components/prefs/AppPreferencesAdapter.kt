@@ -14,8 +14,8 @@ import tmg.components.prefs.AppPreferencesItem.SwitchPreference
 import tmg.utilities.extensions.toEnum
 
 open class AppPreferencesAdapter(
-    private val prefClicked: (prefKey: String) -> Unit = { _ -> },
-    private val prefSwitchClicked: (prefKey: String, newState: Boolean) -> Unit = { _, _ -> }
+    val prefClicked: (prefKey: String) -> Unit = { _ -> },
+    val prefSwitchClicked: (prefKey: String, newState: Boolean) -> Unit = { _, _ -> }
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var list: List<AppPreferencesItem> = emptyList()
@@ -56,8 +56,7 @@ open class AppPreferencesAdapter(
             this.switchWidget.isChecked = model.isChecked
 
             this.clMain.setOnClickListener {
-                prefSwitchClicked(model.prefKey, !model.isChecked)
-                updateSwitch(model.prefKey, !model.isChecked)
+                switchChecked(model.prefKey, !model.isChecked)
             }
         }
     }
@@ -107,6 +106,11 @@ open class AppPreferencesAdapter(
     override fun getItemViewType(position: Int): Int = list[position].type.ordinal
 
     override fun getItemCount(): Int = list.size
+
+    fun switchChecked(key: String, isChecked: Boolean) {
+        prefSwitchClicked(key, isChecked)
+        updateSwitch(key, isChecked)
+    }
 
     private fun updateSwitch(key: String, isChecked: Boolean) {
         val newList: List<AppPreferencesItem> = list
