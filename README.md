@@ -20,7 +20,7 @@ allprojects {
 ```
 dependencies {
     implementation 'com.github.thementalgoose:android-components:2.0.0'
-    implementation 'com.github.thementalgoose:android-utilities:1.1.0'
+    implementation 'com.github.thementalgoose:android-utilities:1.1.1'
 }
 ```
 
