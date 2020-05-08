@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
                         isDarkMode = false,
                         appName = "Sample App",
                         appVersion = "1.0.0",
-                        dependencies = List(30) {
+                        dependencies = List(4) {
                             AboutThisAppDependency(
                                 order = it,
                                 dependencyName = "Utilities",

@@ -69,8 +69,8 @@ class AboutThisAppActivity: RxActivity(), AboutThisAppDependencyCallback {
         }
     }
 
-    override fun initViews() {
-        super.initViews()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         viewModel.inputs.setupLinks(
             github = github,
