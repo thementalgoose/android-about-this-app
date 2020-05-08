@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -12,7 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.about_this_app_activity.*
 import tmg.components.R
-import tmg.utilities.extensions.*
+import tmg.utilities.extensions.bindText
+import tmg.utilities.extensions.click
+import tmg.utilities.extensions.setStatusBarColor
+import tmg.utilities.extensions.subscribeNoError
 import tmg.utilities.extensions.views.gone
 import tmg.utilities.extensions.views.visible
 import tmg.utilities.lifecycle.rx.RxActivity
@@ -73,7 +77,7 @@ class AboutThisAppActivity: RxActivity(), AboutThisAppDependencyCallback {
             website = website,
             email = email,
             play = play,
-            appPackage = appPackageName
+            appPackage = if (play == null) appPackageName else null
         )
         viewModel.inputs.setupData(
             name = name,
@@ -127,11 +131,11 @@ class AboutThisAppActivity: RxActivity(), AboutThisAppDependencyCallback {
         if (isDarkMode && github != null) btnGithubLight.visible() else btnGithubLight.gone()
         if (isDarkMode && website != null) btnWebsiteLight.visible() else btnWebsiteLight.gone()
         if (isDarkMode && email != null) btnEmailLight.visible() else btnEmailLight.gone()
-        if (isDarkMode && play != null) btnPlayLight.visible() else btnPlayLight.gone()
+        if (isDarkMode && (play != null || appPackageName != null)) btnPlayLight.visible() else btnPlayLight.gone()
         if (!isDarkMode && github != null) btnGithubDark.visible() else btnGithubDark.gone()
         if (!isDarkMode && website != null) btnWebsiteDark.visible() else btnWebsiteDark.gone()
         if (!isDarkMode && email != null) btnEmailDark.visible() else btnEmailDark.gone()
-        if (!isDarkMode && play != null) btnPlayDark.visible() else btnPlayDark.gone()
+        if (!isDarkMode && (play != null || appPackageName != null)) btnPlayDark.visible() else btnPlayDark.gone()
     }
 
     override fun observeViewModel() {
@@ -330,8 +334,8 @@ class AboutThisAppActivity: RxActivity(), AboutThisAppDependencyCallback {
                    footnote: String,
                    thankYou: String
         ): Intent {
-            if (play == null && packageName == null) {
-                throw Exception("You must set either a play store link or give the package name")
+            if (packageName != null && play != null) {
+                Log.e("Components", "You have provided a package name and a play store link. The play store URL will be used")
             }
             val intent = Intent(context, AboutThisAppActivity::class.java)
             intent.putExtra(INTENT_IS_DARK_MODE, isDarkMode)
