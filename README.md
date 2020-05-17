@@ -1,4 +1,4 @@
-# Android Components class
+# Android Components
 
 Contains a collection of generic UI components that I reuse in all of my apps
 
