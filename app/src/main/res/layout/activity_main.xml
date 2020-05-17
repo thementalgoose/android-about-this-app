@@ -8,7 +8,13 @@
         android:id="@+id/btnAboutThisApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="About This App" />
+        android:text="About This App (Light mode)" />
+
+    <Button
+        android:id="@+id/btnAboutThisAppDarkMode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="About This App (Dark mode)" />
 
     <Button
         android:id="@+id/btnSettings"
