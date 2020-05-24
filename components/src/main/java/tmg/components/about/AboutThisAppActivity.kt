@@ -7,29 +7,29 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
+import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.about_this_app_activity.*
 import tmg.components.R
-import tmg.utilities.extensions.bindText
-import tmg.utilities.extensions.click
 import tmg.utilities.extensions.setStatusBarColor
-import tmg.utilities.extensions.subscribeNoError
 import tmg.utilities.extensions.views.gone
+import tmg.utilities.extensions.views.show
 import tmg.utilities.extensions.views.visible
 import tmg.utilities.lifecycle.rx.RxActivity
 
-class AboutThisAppActivity: RxActivity(), AboutThisAppDependencyCallback {
-
-    private val viewModel: AboutThisAppVM = ViewModelProvider.NewInstanceFactory().create(AboutThisAppVM::class.java)
+class AboutThisAppActivity: RxActivity(), AboutThisAppDependencyCallback, View.OnClickListener {
 
     private var isDarkMode: Boolean = false
 
     private lateinit var name: String
     private lateinit var nameDesc: String
-    private lateinit var imageUrl: String
+
+    private var imageUrl: String? = null
+    @DrawableRes
+    private var imageRes: Int? = null
     private var github: String? = null
     private var email: String? = null
     private var website: String? = null
@@ -62,7 +62,8 @@ class AboutThisAppActivity: RxActivity(), AboutThisAppDependencyCallback {
             appName = it.getString(INTENT_APP_NAME)!!
             name = it.getString(INTENT_NAME)!!
             nameDesc = it.getString(INTENT_NAME_DESC)!!
-            imageUrl = it.getString(INTENT_IMAGE_URL)!!
+            imageUrl = it.getString(INTENT_IMAGE_URL)
+            imageRes = it.getInt(INTENT_IMAGE_RES)
             footnote = it.getString(INTENT_FOOTNOTE)!!
             thankYou = it.getString(INTENT_THANK_YOU)!!
             appVersion = it.getString(INTENT_APP_VERSION)!!
@@ -71,24 +72,6 @@ class AboutThisAppActivity: RxActivity(), AboutThisAppDependencyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        viewModel.inputs.setupLinks(
-            github = github,
-            website = website,
-            email = email,
-            play = play,
-            appPackage = if (play == null) appPackageName else null
-        )
-        viewModel.inputs.setupData(
-            name = name,
-            nameDesc = nameDesc,
-            imageUrl = imageUrl,
-            footnote = footnote,
-            thankYou = thankYou,
-            appVersion = appVersion
-        )
-
-        viewModel.inputs.setupDependencies(dependencies)
 
         showButtons(isDarkMode)
 
@@ -142,147 +125,29 @@ class AboutThisAppActivity: RxActivity(), AboutThisAppDependencyCallback {
 
         // Inputs
 
-        btnGithubLight
-            .click()
-            .subscribeNoError {
-                viewModel.inputs.clickGithub()
-            }
-            .autoDispose()
+        btnGithubLight.setOnClickListener(this)
+        btnEmailLight.setOnClickListener(this)
+        btnPlayLight.setOnClickListener(this)
+        btnWebsiteLight.setOnClickListener(this)
 
-        btnEmailLight
-            .click()
-            .subscribeNoError {
-                viewModel.inputs.clickEmail()
-            }
-            .autoDispose()
+        btnGithubDark.setOnClickListener(this)
+        btnEmailDark.setOnClickListener(this)
+        btnPlayDark.setOnClickListener(this)
+        btnWebsiteDark.setOnClickListener(this)
 
-        btnPlayLight
-            .click()
-            .subscribeNoError {
-                viewModel.inputs.clickPlay()
-            }
-            .autoDispose()
+        tvAboutThisAppName.text = name
+        tvAboutThisAppDesc.text = nameDesc
 
-        btnWebsiteLight
-            .click()
-            .subscribeNoError {
-                viewModel.inputs.clickWebsite()
-            }
-            .autoDispose()
+        imgAboutAvatar.show(imageRes != null || imageUrl != null)
+        Glide.with(this)
+                .load(if (imageUrl != null) imageUrl else imageRes)
+                .into(imgAboutAvatar)
 
-        btnGithubDark
-            .click()
-            .subscribeNoError {
-                viewModel.inputs.clickGithub()
-            }
-            .autoDispose()
+        tvAboutThisAppAppVersion.text = getString(R.string.app_version_version_name, appVersion)
+        tvAboutThisAppThankYou.text = thankYou
+        tvAboutThisAppFootnotes.text = footnote
 
-        btnEmailDark
-            .click()
-            .subscribeNoError {
-                viewModel.inputs.clickEmail()
-            }
-            .autoDispose()
-
-        btnPlayDark
-            .click()
-            .subscribeNoError {
-                viewModel.inputs.clickPlay()
-            }
-            .autoDispose()
-
-        btnWebsiteDark
-            .click()
-            .subscribeNoError {
-                viewModel.inputs.clickWebsite()
-            }
-            .autoDispose()
-
-
-
-        // Outputs
-
-        viewModel.outputs
-            .clickedWebsite()
-            .subscribe {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it)))
-            }
-            .autoDispose()
-
-        viewModel.outputs
-            .clickedEmail()
-            .subscribeNoError {
-                val intent = Intent(Intent.ACTION_SEND)
-                intent.type = "text/html"
-                intent.putExtra(Intent.EXTRA_EMAIL, it)
-                intent.putExtra(Intent.EXTRA_SUBJECT, appName)
-                startActivity(Intent.createChooser(intent, getString(R.string.about_this_app_send_email)))
-            }
-            .autoDispose()
-
-        viewModel.outputs
-            .clickedGithub()
-            .subscribeNoError {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it)))
-            }
-            .autoDispose()
-
-        viewModel.outputs
-            .clickedPlay()
-            .subscribeNoError {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it)))
-            }
-            .autoDispose()
-
-
-
-        viewModel.outputs
-            .name()
-            .bindText(tvAboutThisAppName)
-            .autoDispose()
-
-        viewModel.outputs
-            .nameDesc()
-            .bindText(tvAboutThisAppDesc)
-            .autoDispose()
-
-        viewModel.outputs
-            .imageUrl()
-            .subscribeNoError {
-                Glide.with(this)
-                    .load(it)
-                    .into(imgAboutAvatar)
-            }
-            .autoDispose()
-
-
-
-        viewModel.outputs
-            .appVersion()
-            .subscribeNoError {
-                tvAboutThisAppAppVersion.text = getString(R.string.app_version_version_name, it)
-            }
-            .autoDispose()
-
-        viewModel.outputs
-            .thankyou()
-            .bindText(tvAboutThisAppThankYou)
-            .autoDispose()
-
-        viewModel.outputs
-            .footnote()
-            .bindText(tvAboutThisAppFootnotes)
-            .autoDispose()
-
-
-
-        viewModel.outputs
-            .dependencies()
-            .subscribeNoError {
-                adapter.replaceAll(it)
-            }
-            .autoDispose()
-
+        adapter.replaceAll(dependencies)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -305,6 +170,7 @@ class AboutThisAppActivity: RxActivity(), AboutThisAppDependencyCallback {
         private const val INTENT_NAME: String = "INTENT_NAME"
         private const val INTENT_NAME_DESC: String = "INTENT_NAME_DESC"
         private const val INTENT_IMAGE_URL: String = "INTENT_IMAGE_URL"
+        private const val INTENT_IMAGE_RES: String = "INTENT_IMAGE_RES"
         private const val INTENT_GITHUB: String = "INTENT_GITHUB"
         private const val INTENT_EMAIL: String = "INTENT_EMAIL"
         private const val INTENT_WEBSITE: String = "INTENT_WEBSITE"
@@ -322,7 +188,8 @@ class AboutThisAppActivity: RxActivity(), AboutThisAppDependencyCallback {
                    isDarkMode: Boolean,
                    name: String,
                    nameDesc: String,
-                   imageUrl: String,
+                   imageUrl: String? = null,
+                   @DrawableRes imageRes: Int? = null,
                    github: String? = null,
                    email: String,
                    website: String? = null,
@@ -342,6 +209,7 @@ class AboutThisAppActivity: RxActivity(), AboutThisAppDependencyCallback {
             intent.putExtra(INTENT_NAME, name)
             intent.putExtra(INTENT_NAME_DESC, nameDesc)
             intent.putExtra(INTENT_IMAGE_URL, imageUrl)
+            intent.putExtra(INTENT_IMAGE_RES, imageRes)
             intent.putExtra(INTENT_GITHUB, github)
             intent.putExtra(INTENT_EMAIL, email)
             intent.putExtra(INTENT_WEBSITE, website)
@@ -353,6 +221,31 @@ class AboutThisAppActivity: RxActivity(), AboutThisAppDependencyCallback {
             intent.putExtra(INTENT_FOOTNOTE, footnote)
             intent.putExtra(INTENT_THANK_YOU, thankYou)
             return intent
+        }
+    }
+
+    override fun onClick(p0: View?) {
+        when (p0) {
+            btnGithubLight,
+            btnGithubDark -> {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(github)))
+            }
+            btnPlayLight,
+            btnPlayDark -> {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(if (appPackageName != null) "https://play.google.com/store/apps/details?id=${appPackageName}" else play)))
+            }
+            btnWebsiteLight,
+            btnWebsiteDark -> {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(website)))
+            }
+            btnEmailLight,
+            btnEmailDark -> {
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.type = "text/html"
+                intent.putExtra(Intent.EXTRA_EMAIL, email)
+                intent.putExtra(Intent.EXTRA_SUBJECT, appName)
+                startActivity(Intent.createChooser(intent, getString(R.string.about_this_app_send_email)))
+            }
         }
     }
 

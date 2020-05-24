@@ -17,6 +17,12 @@
         android:text="About This App (Dark mode)" />
 
     <Button
+        android:id="@+id/btnAboutThisAppDarkImageRes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="About This App (Image Res)" />
+
+    <Button
         android:id="@+id/btnSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
