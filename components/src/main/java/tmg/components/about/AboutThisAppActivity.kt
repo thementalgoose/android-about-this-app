@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.about_this_app_activity.*
 import tmg.components.R
-import tmg.utilities.extensions.setStatusBarColor
+import tmg.utilities.extensions.setStatusBarColorDark
 import tmg.utilities.extensions.views.gone
 import tmg.utilities.extensions.views.show
 import tmg.utilities.extensions.views.visible
@@ -78,7 +78,7 @@ class AboutThisAppActivity: RxActivity(), AboutThisAppDependencyCallback, View.O
         setupToolbar(R.id.toolbar, true, R.drawable.ic_util_icon_back)
         supportActionBar?.title = ""
 
-        setStatusBarColor(ContextCompat.getColor(this, if (isDarkMode) R.color.aboutThisApp_headerDark else R.color.aboutThisApp_headerLight))
+        setStatusBarColorDark(ContextCompat.getColor(this, if (isDarkMode) R.color.aboutThisApp_headerDark else R.color.aboutThisApp_headerLight))
 
         if (isDarkMode) {
             llAboutThisAppBackground.setBackgroundColor(ContextCompat.getColor(this, R.color.aboutThisApp_backgroundDark))
