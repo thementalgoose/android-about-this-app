@@ -27,83 +27,31 @@ class SettingsActivity: AppCompatActivity() {
         rvSettings.layoutManager = LinearLayoutManager(this)
         rvSettings.adapter = adapter
 
-        adapter.list = prefsList(applicationContext) {
-            category("Title 1") {
+        adapter.list = prefsList {
+            category(R.string.settings_cat_1) {
                 preference(
                     prefsKey = "key_1",
-                    title = "Test",
-                    description = "Lorem Ipsum some kind of text here which hopefully spans more than 1 line"
-                )
-                preference(
-                    prefsKey = "key_2",
-                    title = "Test",
-                    description = "Lorem Ipsum some kind of text here which hopefully spans more than 1 line"
-                )
-                preference(
-                    prefsKey = "key_3",
-                    title = "Test",
-                    description = "Lorem Ipsum some kind of text here which hopefully spans more than 1 line"
-                )
-                preference(
-                    prefsKey = "key_4",
-                    title = "Test",
-                    description = "Lorem Ipsum some kind of text here which hopefully spans more than 1 line"
-                )
-                switch(
-                    prefsKey = "key_5",
-                    title = "Test",
-                    description = "Lorem Ipsum some kind of text here which hopefully spans more than 1 line",
-                    isChecked = false
-                )
-                preference(
-                    prefsKey = "key_6",
-                    title = R.string.about_this_app_email,
-                    description = R.string.about_this_app_github
+                    title = R.string.settings_pref_title,
+                    description = R.string.settings_pref_desc
                 )
                 switch(
                     prefsKey = "key_7",
-                    title = "Test",
-                    description = "Lorem Ipsum some kind of text here which hopefully spans more than 1 line",
+                    title = R.string.settings_switchpref_title,
+                    description = R.string.settings_switchpref_title,
                     isChecked = true
                 )
             }
-            category("SECOND") {
+            category(R.string.settings_cat_1) {
                 preference(
-                    prefsKey = "key_testing_1",
-                    title = "Another Test Item",
-                    description = "Lorem Ipsum some kind of text here which hopefully spans more than 1 line"
-                )
-                preference(
-                    prefsKey = "key_testing_2",
-                    title = "Another Test Item",
-                    description = "Lorem Ipsum some kind of text here which hopefully spans more than 1 line"
+                    prefsKey = "key_2",
+                    title = R.string.settings_pref_title,
+                    description = R.string.settings_pref_desc
                 )
                 switch(
-                    prefsKey = "key_testing_5",
-                    title = "Another Test Item",
-                    description = "Lorem Ipsum some kind of text here which hopefully spans more than 1 line",
-                    isChecked = true
-                )
-                switch(
-                    prefsKey = "key_testing_7",
-                    title = "Another Test Item",
-                    description = "Lorem Ipsum some kind of text here which hopefully spans more than 1 line",
+                    prefsKey = "key_3",
+                    title = R.string.settings_switchpref_title,
+                    description = R.string.settings_switchpref_title,
                     isChecked = false
-                )
-                preference(
-                    prefsKey = "key_testing_3",
-                    title = "Another Test Item",
-                    description = "Lorem Ipsum some kind of text here which hopefully spans more than 1 line"
-                )
-                preference(
-                    prefsKey = "key_testing_4",
-                    title = "Another Test Item",
-                    description = "Lorem Ipsum some kind of text here which hopefully spans more than 1 line"
-                )
-                preference(
-                    prefsKey = "key_testing_6",
-                    title = "Another Test Item",
-                    description = "Lorem Ipsum some kind of text here which hopefully spans more than 1 line"
                 )
             }
         }

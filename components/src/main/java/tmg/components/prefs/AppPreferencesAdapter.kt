@@ -3,6 +3,7 @@ package tmg.components.prefs
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.StringRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.app_preferences_category.view.tvTitle
@@ -35,7 +36,7 @@ open class AppPreferencesAdapter(
 
     open fun bindCategory(view: View, model: AppPreferencesItem.Category) {
         view.apply {
-            this.tvTitle.text = model.title
+            this.tvTitle.setText(model.title)
         }
     }
 
@@ -44,15 +45,15 @@ open class AppPreferencesAdapter(
             this.clMain.setOnClickListener {
                 prefClicked(model.prefKey)
             }
-            this.tvTitle.text = model.title
-            this.tvDescription.text = model.description
+            this.tvTitle.setText(model.title)
+            this.tvDescription.setText(model.description)
         }
     }
 
     open fun bindPreferenceSwitch(view: View, model: SwitchPreference) {
         view.apply {
-            this.tvTitle.text = model.title
-            this.tvDescription.text = model.description
+            this.tvTitle.setText(model.title)
+            this.tvDescription.setText(model.description)
             this.switchWidget.isChecked = model.isChecked
 
             this.clMain.setOnClickListener {
@@ -60,7 +61,6 @@ open class AppPreferencesAdapter(
             }
         }
     }
-
     //endregion
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
