@@ -3,13 +3,35 @@ package tmg.components.about
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import tmg.components.R
 import tmg.utilities.sortedlist.SortedListAdapter
 import tmg.utilities.sortedlist.SortedListComparator
 
+
 class AboutThisAppDependencyAdapter(
-    private val callback: AboutThisAppDependencyCallback,
-    private val isDarkMode: Boolean
+    private val callback: AboutThisAppDependencyCallback
+): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        TODO("Not yet implemented")
+    }
+
+    override fun getItemCount(): Int {
+        TODO("Not yet implemented")
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        TODO("Not yet implemented")
+    }
+
+}
+
+
+class AboutThisAppDependencyAdapter(
+    private val callback: AboutThisAppDependencyCallback
 ): SortedListAdapter<AboutThisAppDependency, AboutThisAppDependencyViewHolder>(AboutThisAppDependency::class.java, AboutThisAppDependencyComparator()) {
     override fun onBindViewHolder(
         holder: AboutThisAppDependencyViewHolder,
@@ -24,7 +46,7 @@ class AboutThisAppDependencyAdapter(
         viewType: Int
     ): AboutThisAppDependencyViewHolder {
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.about_this_app_item_view_dependency_item, parent, false)
-        return AboutThisAppDependencyViewHolder(callback, isDarkMode, view)
+        return AboutThisAppDependencyViewHolder(callback, view)
     }
 }
 

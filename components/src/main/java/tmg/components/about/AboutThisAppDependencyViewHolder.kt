@@ -11,60 +11,19 @@ import tmg.components.R
 
 class AboutThisAppDependencyViewHolder(
     private val callback: AboutThisAppDependencyCallback,
-    isDarkMode: Boolean,
     itemView: View
 ): RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
-    private val clAboutThisAppDependencyMain: ConstraintLayout = itemView.findViewById(R.id.clAboutThisAppDependencyMain)
-    private val imgAboutThisAppDependencyIcon: ImageView = itemView.findViewById(R.id.imgAboutThisAppDependencyIcon)
-    private val tvAboutThisAppDependencyName: TextView = itemView.findViewById(R.id.tvAboutThisAppDependencyName)
-    private val tvAboutThisAppDependencyAuthor: TextView = itemView.findViewById(R.id.tvAboutThisAppDependencyAuthor)
-    private val tvAboutThisAppDependencyUrl: TextView = itemView.findViewById(R.id.tvAboutThisAppDependencyUrl)
+    private val clAboutThisAppDependencyMain: ConstraintLayout = itemView.findViewById(R.id.aboutThisAppDependency_container)
+    private val imgAboutThisAppDependencyIcon: ImageView = itemView.findViewById(R.id.aboutThisAppDependency_icon)
+    private val tvAboutThisAppDependencyName: TextView = itemView.findViewById(R.id.aboutThisAppDependency_name)
+    private val tvAboutThisAppDependencyAuthor: TextView = itemView.findViewById(R.id.aboutThisAppDependency_author)
+    private val tvAboutThisAppDependencyUrl: TextView = itemView.findViewById(R.id.aboutThisAppDependency_url)
 
     private lateinit var dependency: AboutThisAppDependency
 
     init {
         clAboutThisAppDependencyMain.setOnClickListener(this)
-        if (isDarkMode) {
-            tvAboutThisAppDependencyName.setTextColor(
-                ContextCompat.getColor(
-                    itemView.context,
-                    R.color.aboutThisApp_textLight
-                )
-            )
-            tvAboutThisAppDependencyAuthor.setTextColor(
-                ContextCompat.getColor(
-                    itemView.context,
-                    R.color.aboutThisApp_textLight
-                )
-            )
-            tvAboutThisAppDependencyUrl.setTextColor(
-                ContextCompat.getColor(
-                    itemView.context,
-                    R.color.aboutThisApp_textLight
-                )
-            )
-        }
-        else {
-            tvAboutThisAppDependencyName.setTextColor(
-                ContextCompat.getColor(
-                    itemView.context,
-                    R.color.aboutThisApp_textDark
-                )
-            )
-            tvAboutThisAppDependencyAuthor.setTextColor(
-                ContextCompat.getColor(
-                    itemView.context,
-                    R.color.aboutThisApp_textDark
-                )
-            )
-            tvAboutThisAppDependencyUrl.setTextColor(
-                ContextCompat.getColor(
-                    itemView.context,
-                    R.color.aboutThisApp_textDark
-                )
-            )
-        }
     }
 
     fun bind(dependency: AboutThisAppDependency) {
@@ -72,6 +31,7 @@ class AboutThisAppDependencyViewHolder(
         tvAboutThisAppDependencyName.text = dependency.dependencyName
         tvAboutThisAppDependencyAuthor.text = dependency.author
         tvAboutThisAppDependencyUrl.text = dependency.url
+
         Glide.with(itemView)
             .load(dependency.imageUrl)
             .into(imgAboutThisAppDependencyIcon)

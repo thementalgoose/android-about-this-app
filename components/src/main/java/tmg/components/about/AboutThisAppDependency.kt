@@ -39,5 +39,4 @@ data class AboutThisAppDependency(
             return arrayOfNulls(size)
         }
     }
-
 }

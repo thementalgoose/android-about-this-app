@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint android:id="@+id/widget" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+
+        <!-- Constraints to override -->
+        <Constraint
+            android:id="@+id/aboutThisApp_icon"
+            android:layout_width="@dimen/aboutThisApp_iconCollapsedWidth"
+            android:layout_height="@dimen/aboutThisApp_iconCollapsedHeight"
+            android:layout_marginStart="@dimen/aboutThisApp_paddingMedium"
+            app:layout_constraintBottom_toBottomOf="@id/aboutThisApp_header"
+            app:layout_constraintStart_toEndOf="@id/aboutThisApp_backButton"
+            app:layout_constraintTop_toTopOf="@id/aboutThisApp_header" />
+        <Constraint
+            android:id="@+id/aboutThisApp_header"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            app:layout_constraintBottom_toTopOf="@id/container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
+
+    <Transition
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@+id/start"
+        app:duration="300"
+        app:motionInterpolator="linear">
+
+        <!-- Controlled via swipe on recycler view -->
+        <OnSwipe
+            app:dragDirection="dragUp"
+            app:touchAnchorId="@id/aboutThisApp_list" />
+
+        <!-- Arc animation on icon -->
+        <KeyFrameSet>
+            <KeyPosition
+                app:framePosition="33"
+                app:keyPositionType="pathRelative"
+                app:motionTarget="@id/aboutThisApp_icon"
+                app:percentX="0.302"
+                app:percentY="0.191" />
+            <KeyPosition
+                app:framePosition="66"
+                app:keyPositionType="pathRelative"
+                app:motionTarget="@id/aboutThisApp_icon"
+                app:percentX="0.682"
+                app:percentY="0.196" />
+        </KeyFrameSet>
+    </Transition>
+</MotionScene>

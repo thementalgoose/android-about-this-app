@@ -4,9 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import tmg.components.about.AboutThisAppActivity
 import tmg.components.about.AboutThisAppConfiguration
 import tmg.components.about.AboutThisAppDependency
+import tmg.components.about.AboutThisAppActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
                 isDarkMode = false,
                 appName = "Sample App",
                 appVersion = "1.0.0",
-                dependencies = List(4) {
+                dependencies = List(14) {
                     AboutThisAppDependency(
                         order = it,
                         dependencyName = "Utilities",
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                 isDarkMode = true,
                 appName = "Sample App",
                 appVersion = "1.0.0",
-                dependencies = List(5) {
+                dependencies = List(15) {
                     AboutThisAppDependency(
                         order = it,
                         dependencyName = "Utilities",
@@ -86,32 +86,37 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnAboutThisAppDarkImageRes.setOnClickListener {
+
+            val configuration = AboutThisAppConfiguration(
+                isDarkMode = true,
+                appName = "Sample App",
+                appVersion = "1.0.0",
+                dependencies = List(5) {
+                    AboutThisAppDependency(
+                        order = it,
+                        dependencyName = "Utilities",
+                        author = "Jordan Fisher",
+                        imageUrl = "https://avatars0.githubusercontent.com/u/5982159?s=460&v=4",
+                        url = "https://github.com/thementalgoose/android-utilities"
+                    )
+                },
+                email = "thementalgoose@gmail.com",
+                footnote = "Thank you!",
+                github = "https://github.com/thementalgoose/android-components",
+                play = null,
+                name = "Jordan Fisher",
+                nameDesc = "App developer!",
+                imageRes = R.drawable.ic_launcher_foreground,
+                appPackageName = this.packageName,
+                thankYou = "Thanks again!",
+                website = "https://jordanfisher.io"
+            )
+
             startActivity(
                 AboutThisAppActivity
                     .intent(
                         context = this,
-                        isDarkMode = true,
-                        appName = "Sample App",
-                        appVersion = "1.0.0",
-                        dependencies = List(4) {
-                            AboutThisAppDependency(
-                                order = it,
-                                dependencyName = "Utilities",
-                                author = "Jordan Fisher",
-                                imageUrl = "https://avatars0.githubusercontent.com/u/5982159?s=460&v=4",
-                                url = "https://github.com/thementalgoose/android-utilities"
-                            )
-                        },
-                        email = "thementalgoose@gmail.com",
-                        footnote = "Thank you!",
-                        github = "https://github.com/thementalgoose/android-components",
-                        play = null,
-                        name = "Jordan Fisher",
-                        nameDesc = "App developer!",
-                        imageRes = R.drawable.icon,
-                        packageName = this.packageName,
-                        thankYou = "Thank you!",
-                        website = "https://jordanfisher.io"
+                        configuration = configuration
                     )
             )
         }
