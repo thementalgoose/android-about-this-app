@@ -19,32 +19,35 @@ allprojects {
 
 ```
 dependencies {
-    implementation 'com.github.thementalgoose:android-components:2.1.0'
-    implementation 'com.github.thementalgoose:android-utilities:2.0.1'
+    implementation 'com.github.thementalgoose:android-components:3.0.0'
 }
 ```
 
-Android Utilities [![](https://jitpack.io/v/thementalgoose/android-utilities.svg)](https://jitpack.io/#thementalgoose/android-utilities)
 Android Components [![](https://jitpack.io/v/thementalgoose/android-components.svg)](https://jitpack.io/#thementalgoose/android-components)
 
 
 ## Usage
 
+Inside your app style supplied to this activity, provide the following attributes
+
 ```
-<!-- Override colours in the setting by declaring these in your app -->
-<color name="aboutThisApp_headerDark">#3C306E</color>
-<color name="aboutThisApp_headerLight">#5D25E6</color>
+<!-- About This App Activity (light) -->
+<item name="aboutThisApp_header">?attr/colorPrimary</item>
+<item name="aboutThisApp_textPrimary">#f8f8f8</item>
+<item name="aboutThisApp_textSecondary">#e8e8e8</item>
+<item name="aboutThisApp_textToolbar">#f8f8f8</item>
+<item name="aboutThisApp_iconPrimary">?attr/aboutThisApp_textPrimary</item>
+<item name="aboutThisApp_backgroundPrimary">#181818</item>
+<item name="aboutThisApp_backgroundSecondary">#383838</item>
 
-<color name="aboutThisApp_textDesc">#f2f2f2</color>
-<color name="aboutThisApp_textName">#fbfbfb</color>
-
-<color name="aboutThisApp_backgroundLight">#f2f2f2</color>
-<color name="aboutThisApp_textLight">#f8f8f8</color>
-<color name="aboutThisApp_textLightSecondary">#e8e8e8</color>
-
-<color name="aboutThisApp_backgroundDark">#282828</color>
-<color name="aboutThisApp_textDark">#222222</color>
-<color name="aboutThisApp_textDarkSecondary">#383838</color>
+<!-- About This App Activity (dark) -->
+<item name="aboutThisApp_header">@color/colorPrimary</item>
+<item name="aboutThisApp_textPrimary">#f8f8f8</item>
+<item name="aboutThisApp_textSecondary">#e8e8e8</item>
+<item name="aboutThisApp_textToolbar">#f8f8f8</item>
+<item name="aboutThisApp_iconPrimary">?attr/aboutThisApp_textPrimary</item>
+<item name="aboutThisApp_backgroundPrimary">#181818</item>
+<item name="aboutThisApp_backgroundSecondary">#383838</item>
 ```
 
 ## License
