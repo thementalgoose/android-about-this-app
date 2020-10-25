@@ -8,15 +8,15 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground"
-    android:paddingStart="@dimen/aboutThisApp_edgePadding"
-    android:paddingTop="@dimen/aboutThisApp_edgePaddingHalf"
-    android:paddingEnd="@dimen/aboutThisApp_edgePadding"
-    android:paddingBottom="@dimen/aboutThisApp_edgePaddingHalf">
+    android:paddingStart="@dimen/aboutThisApp_paddingMedium"
+    android:paddingTop="@dimen/aboutThisApp_paddingSmall"
+    android:paddingEnd="@dimen/aboutThisApp_paddingMedium"
+    android:paddingBottom="@dimen/aboutThisApp_paddingSmall">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/aboutThisAppDependency_icon"
-        android:layout_width="@dimen/aboutThisApp_dependencyIconSize"
-        android:layout_height="@dimen/aboutThisApp_dependencyIconSize"
+        android:layout_width="@dimen/aboutThisApp_dependencyIconWidth"
+        android:layout_height="@dimen/aboutThisApp_dependencyIconHeight"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,9 +24,9 @@
         android:id="@+id/aboutThisAppDependency_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/aboutThisApp_edgePadding"
-        android:textSize="16sp"
+        android:layout_marginStart="@dimen/aboutThisApp_paddingMedium"
         android:textColor="?attr/aboutThisApp_textPrimary"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/aboutThisAppDependency_icon"
@@ -34,10 +34,10 @@
         tools:text="Realm" />
 
     <TextView
-        android:layout_marginTop="2dp"
         android:id="@+id/aboutThisAppDependency_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         android:textColor="?attr/aboutThisApp_textPrimary"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/aboutThisAppDependency_name"
@@ -48,10 +48,10 @@
         android:id="@+id/aboutThisAppDependency_url"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="?attr/aboutThisApp_textSecondary"
-        android:layout_marginStart="@dimen/aboutThisApp_edgePaddingHalf"
+        android:layout_marginStart="@dimen/aboutThisApp_paddingSmall"
         android:ellipsize="end"
         android:maxLines="1"
+        android:textColor="?attr/aboutThisApp_textSecondary"
         app:layout_constraintBottom_toBottomOf="@id/aboutThisAppDependency_author"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/aboutThisAppDependency_author"

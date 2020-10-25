@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:background="#62001E" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/aboutThisApp_icon"
         android:layout_width="@dimen/aboutThisApp_iconWidth"
         android:layout_height="@dimen/aboutThisApp_iconHeight"
@@ -54,9 +54,9 @@
         android:id="@+id/aboutThisApp_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/aboutThisApp_edgePadding"
+        android:layout_marginStart="@dimen/aboutThisApp_paddingMedium"
         android:layout_marginTop="@dimen/aboutThisApp_paddingSmall"
-        android:layout_marginEnd="@dimen/aboutThisApp_edgePadding"
+        android:layout_marginEnd="@dimen/aboutThisApp_paddingMedium"
         android:gravity="center"
         android:textColor="?attr/aboutThisApp_textPrimary"
         android:textSize="20sp"
@@ -68,8 +68,8 @@
         android:id="@+id/aboutThisApp_nameToolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/aboutThisApp_edgePadding"
-        android:layout_marginEnd="@dimen/aboutThisApp_edgePadding"
+        android:layout_marginStart="@dimen/aboutThisApp_paddingMedium"
+        android:layout_marginEnd="@dimen/aboutThisApp_paddingMedium"
         android:ellipsize="end"
         android:gravity="start"
         android:lines="1"
@@ -87,9 +87,9 @@
         android:id="@+id/aboutThisApp_nameDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/aboutThisApp_edgePadding"
+        android:layout_marginStart="@dimen/aboutThisApp_paddingMedium"
         android:layout_marginTop="@dimen/aboutThisApp_paddingSmall"
-        android:layout_marginEnd="@dimen/aboutThisApp_edgePadding"
+        android:layout_marginEnd="@dimen/aboutThisApp_paddingMedium"
         android:gravity="center"
         android:textColor="?attr/aboutThisApp_textSecondary"
         android:textSize="16sp"

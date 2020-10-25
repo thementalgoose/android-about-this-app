@@ -4,8 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.Message
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -19,9 +17,10 @@ class AboutThisAppActivity: AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.about_this_app_activity)
-
         configuration = intent.extras?.getParcelable(keyConfiguration) ?: throw RuntimeException("Please provide an 'AboutThisAppConfiguration' item (via. AboutThisAppActivity.intent(context, AboutThisAppConfiguration))")
+        setTheme(configuration.themeRes)
+
+        setContentView(R.layout.about_this_app_activity)
 
         aboutThisApp_backButton.setOnClickListener {
             onBackPressed()

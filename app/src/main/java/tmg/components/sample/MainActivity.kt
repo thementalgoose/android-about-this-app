@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         btnAboutThisApp.setOnClickListener {
 
             val configuration = AboutThisAppConfiguration(
-                isDarkMode = false,
+                themeRes = R.style.AppTheme,
                 appName = "Sample App",
                 appVersion = "1.0.0",
                 dependencies = List(14) {
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         btnAboutThisAppDarkMode.setOnClickListener {
 
             val configuration = AboutThisAppConfiguration(
-                isDarkMode = true,
+                themeRes = R.style.AppThemeDark,
                 appName = "Sample App",
                 appVersion = "1.0.0",
                 dependencies = List(15) {
@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         btnAboutThisAppDarkImageRes.setOnClickListener {
 
             val configuration = AboutThisAppConfiguration(
-                isDarkMode = true,
+                themeRes = R.style.AppTheme,
                 appName = "Sample App",
                 appVersion = "1.0.0",
                 dependencies = List(5) {

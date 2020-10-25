@@ -4,11 +4,12 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.util.Log
 import androidx.annotation.DrawableRes
-import tmg.components.BuildConfig
+import androidx.annotation.StyleRes
 import tmg.components.utils.marketUri
 
 data class AboutThisAppConfiguration(
-    val isDarkMode: Boolean,
+    @StyleRes
+    val themeRes: Int,
     val name: String,
     val nameDesc: String,
     val imageUrl: String? = null,
@@ -48,7 +49,7 @@ data class AboutThisAppConfiguration(
         }
 
     constructor(parcel: Parcel) : this(
-        parcel.readByte() != 0.toByte(),
+        parcel.readInt(),
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString(),
@@ -71,7 +72,7 @@ data class AboutThisAppConfiguration(
     }
 
     override fun writeToParcel(p0: Parcel?, p1: Int) {
-        p0?.writeByte(if (isDarkMode) 1 else 0)
+        p0?.writeInt(themeRes)
         p0?.writeString(name)
         p0?.writeString(nameDesc)
         p0?.writeString(imageUrl)
@@ -90,7 +91,7 @@ data class AboutThisAppConfiguration(
     }
 
     override fun describeContents(): Int {
-        return isDarkMode.hashCode() +
+        return themeRes.hashCode() +
             name.hashCode() +
             nameDesc.hashCode() +
             imageUrl.hashCode() +
