@@ -4,7 +4,7 @@ import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import tmg.components.R
 
-sealed class AboutThisAppItem(
+internal sealed class AboutThisAppItem(
     @LayoutRes val layoutId: Int
 ) {
     data class Dependency(
@@ -12,8 +12,7 @@ sealed class AboutThisAppItem(
     ): AboutThisAppItem(R.layout.about_this_app_item_view_dependency_item)
 
     data class Message(
-        @StringRes
-        val msg: Int,
+        val msg: String,
         val isCentered: Boolean = true,
         val isPrimary: Boolean = true
     ): AboutThisAppItem(R.layout.about_this_app_item_view_message)

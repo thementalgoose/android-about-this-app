@@ -4,25 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Message
 import android.util.Log
-import android.view.MenuItem
-import android.view.View
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
-import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.about_this_app_activity.*
 import tmg.components.R
-import tmg.utilities.extensions.setStatusBarColorDark
-import tmg.utilities.extensions.views.gone
-import tmg.utilities.extensions.views.show
-import tmg.utilities.extensions.views.visible
-import tmg.utilities.lifecycle.common.CommonActivity
-import tmg.utilities.lifecycle.rx.RxActivity
 
 //class AboutThisAppActivity : CommonActivity(), AboutThisAppDependencyCallback, View.OnClickListener {
 
@@ -301,7 +288,7 @@ import tmg.utilities.lifecycle.rx.RxActivity
 //    }
 
 class AboutThisAppActivity: AppCompatActivity(),
-    AboutThisAppDependencyCallback {
+    AboutThisAppCallback {
 
     private lateinit var configuration: AboutThisAppConfiguration
 
@@ -315,10 +302,42 @@ class AboutThisAppActivity: AppCompatActivity(),
             onBackPressed()
         }
 
-        val adapter = AboutThisAppDependencyAdapter(this)
+        val adapter = AboutThisAppAdapter(this)
         aboutThisApp_list.adapter = adapter
         aboutThisApp_list.layoutManager = LinearLayoutManager(this)
-        adapter.add(configuration.dependencies)
+
+        adapter.items = populateList()
+    }
+
+    private fun populateList(): List<AboutThisAppItem> {
+        val list: MutableList<AboutThisAppItem> = mutableListOf()
+
+        list.add(AboutThisAppItem.Header(
+            play = configuration.playStore,
+            email = configuration.email,
+            website = configuration.website,
+            github = configuration.github
+        ))
+
+        configuration.subtitle?.let {
+            list.add(AboutThisAppItem.Message(
+                msg = it
+            ))
+        }
+
+        list.addAll(configuration.dependencies.map {
+            AboutThisAppItem.Dependency(it)
+        })
+
+        configuration.footnote?.let {
+            list.add(AboutThisAppItem.Message(
+                msg = it,
+                isCentered = false
+            ))
+        }
+
+        list.add(AboutThisAppItem.Message(getString(R.string.about_this_app_app_version, configuration.appVersion)))
+        return list
     }
 
     //region AboutThisAppDependencyCallback
@@ -327,14 +346,28 @@ class AboutThisAppActivity: AppCompatActivity(),
 
     }
 
+    override fun clickPlay() {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(configuration.playStore))
+        startActivity(intent)
+    }
+
+    override fun clickEmail() {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "text/html"
+        intent.putExtra(Intent.EXTRA_EMAIL, configuration.email)
+        intent.putExtra(Intent.EXTRA_SUBJECT, configuration.appName)
+        startActivity(Intent.createChooser(intent, getString(R.string.about_this_app_send_email)))
+    }
+
+    override fun clickWebsite() {
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(configuration.website)))
+    }
+
+    override fun clickGithub() {
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(configuration.github)))
+    }
+
     //endregion
-
-
-
-
-
-
-
 
     companion object {
 
@@ -342,12 +375,6 @@ class AboutThisAppActivity: AppCompatActivity(),
 
         @JvmStatic
         fun intent(context: Context, configuration: AboutThisAppConfiguration): Intent {
-            if (configuration.appPackageName != null && configuration.play != null) {
-                Log.e(
-                    "Components",
-                    "You have provided a package name and a play store link. The play store URL will be used"
-                )
-            }
             val intent = Intent(
                 context,
                 AboutThisAppActivity::class.java

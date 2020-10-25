@@ -20,7 +20,7 @@
         <Constraint
             android:id="@+id/aboutThisApp_header"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
+            android:layout_height="?attr/actionBarSize"
             app:layout_constraintBottom_toTopOf="@id/container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +36,7 @@
         <!-- Controlled via swipe on recycler view -->
         <OnSwipe
             app:dragDirection="dragUp"
+            app:touchAnchorSide="top"
             app:touchAnchorId="@id/aboutThisApp_list" />
 
         <!-- Arc animation on icon -->

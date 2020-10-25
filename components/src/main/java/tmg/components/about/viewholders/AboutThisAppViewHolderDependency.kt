@@ -1,16 +1,18 @@
-package tmg.components.about
+package tmg.components.about.viewholders
 
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import tmg.components.R
+import tmg.components.about.AboutThisAppCallback
+import tmg.components.about.AboutThisAppDependency
+import tmg.components.about.AboutThisAppItem
 
-class AboutThisAppDependencyViewHolder(
-    private val callback: AboutThisAppDependencyCallback,
+internal class AboutThisAppViewHolderDependency(
+    private val callback: AboutThisAppCallback,
     itemView: View
 ): RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
@@ -26,8 +28,8 @@ class AboutThisAppDependencyViewHolder(
         clAboutThisAppDependencyMain.setOnClickListener(this)
     }
 
-    fun bind(dependency: AboutThisAppDependency) {
-        this.dependency = dependency
+    fun bind(item: AboutThisAppItem.Dependency) {
+        this.dependency = item.item
         tvAboutThisAppDependencyName.text = dependency.dependencyName
         tvAboutThisAppDependencyAuthor.text = dependency.author
         tvAboutThisAppDependencyUrl.text = dependency.url

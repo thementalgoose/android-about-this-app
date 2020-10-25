@@ -9,7 +9,8 @@
 
         <item name="aboutThisApp_header">@color/colorPrimary</item>
         <item name="aboutThisApp_textPrimary">#181818</item>
-        <item name="aboutThisApp_textSecondary">#181818</item>
+        <item name="aboutThisApp_textSecondary">#383838</item>
+        <item name="aboutThisApp_iconPrimary">?attr/aboutThisApp_textPrimary</item>
         <item name="aboutThisApp_backgroundPrimary">#fbfbfb</item>
         <item name="aboutThisApp_backgroundSecondary">#f2f2f2</item>
     </style>
