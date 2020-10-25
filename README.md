@@ -33,12 +33,12 @@ Inside your app style supplied to this activity, provide the following attribute
 ```
 <!-- About This App Activity (light) -->
 <item name="aboutThisApp_header">?attr/colorPrimary</item>
-<item name="aboutThisApp_textPrimary">#f8f8f8</item>
-<item name="aboutThisApp_textSecondary">#e8e8e8</item>
+<item name="aboutThisApp_textPrimary">#181818</item>
+<item name="aboutThisApp_textSecondary">#383838</item>
 <item name="aboutThisApp_textToolbar">#f8f8f8</item>
 <item name="aboutThisApp_iconPrimary">?attr/aboutThisApp_textPrimary</item>
-<item name="aboutThisApp_backgroundPrimary">#181818</item>
-<item name="aboutThisApp_backgroundSecondary">#383838</item>
+<item name="aboutThisApp_backgroundPrimary">#fbfbfb</item>
+<item name="aboutThisApp_backgroundSecondary">#f2f2f2</item>
 
 <!-- About This App Activity (dark) -->
 <item name="aboutThisApp_header">@color/colorPrimary</item>
