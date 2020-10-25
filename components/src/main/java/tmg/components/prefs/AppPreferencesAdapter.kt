@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.app_preferences_preference.view.tvDescript
 import kotlinx.android.synthetic.main.app_preferences_preference_switch.view.*
 import tmg.components.R
 import tmg.components.prefs.AppPreferencesItem.SwitchPreference
-import tmg.utilities.extensions.toEnum
+import tmg.components.utils.toEnum
 
 open class AppPreferencesAdapter(
     val prefClicked: (prefKey: String) -> Unit = { _ -> },

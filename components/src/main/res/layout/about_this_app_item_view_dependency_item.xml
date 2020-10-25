@@ -2,57 +2,60 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/clAboutThisAppDependencyMain"
+    android:id="@+id/aboutThisAppDependency_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground"
-    android:paddingStart="@dimen/aboutThisApp_edgePadding"
-    android:paddingTop="@dimen/aboutThisApp_edgePaddingHalf"
-    android:paddingEnd="@dimen/aboutThisApp_edgePadding"
-    android:paddingBottom="@dimen/aboutThisApp_edgePaddingHalf">
+    android:paddingStart="@dimen/aboutThisApp_paddingMedium"
+    android:paddingTop="@dimen/aboutThisApp_paddingSmall"
+    android:paddingEnd="@dimen/aboutThisApp_paddingMedium"
+    android:paddingBottom="@dimen/aboutThisApp_paddingSmall">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imgAboutThisAppDependencyIcon"
-        android:layout_width="@dimen/aboutThisApp_dependencyIconSize"
-        android:layout_height="@dimen/aboutThisApp_dependencyIconSize"
+        android:id="@+id/aboutThisAppDependency_icon"
+        android:layout_width="@dimen/aboutThisApp_dependencyIconWidth"
+        android:layout_height="@dimen/aboutThisApp_dependencyIconHeight"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvAboutThisAppDependencyName"
+        android:id="@+id/aboutThisAppDependency_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/aboutThisApp_edgePadding"
+        android:layout_marginStart="@dimen/aboutThisApp_paddingMedium"
+        android:textColor="?attr/aboutThisApp_textPrimary"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/imgAboutThisAppDependencyIcon"
-        app:layout_constraintTop_toTopOf="@id/imgAboutThisAppDependencyIcon"
+        app:layout_constraintStart_toEndOf="@id/aboutThisAppDependency_icon"
+        app:layout_constraintTop_toTopOf="@id/aboutThisAppDependency_icon"
         tools:text="Realm" />
 
     <TextView
-        android:layout_marginTop="2dp"
-        android:id="@+id/tvAboutThisAppDependencyAuthor"
+        android:id="@+id/aboutThisAppDependency_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textColor="?attr/aboutThisApp_textPrimary"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/tvAboutThisAppDependencyName"
-        app:layout_constraintTop_toBottomOf="@id/tvAboutThisAppDependencyName"
+        app:layout_constraintStart_toStartOf="@id/aboutThisAppDependency_name"
+        app:layout_constraintTop_toBottomOf="@id/aboutThisAppDependency_name"
         tools:text="Realm" />
 
     <TextView
-        android:id="@+id/tvAboutThisAppDependencyUrl"
+        android:id="@+id/aboutThisAppDependency_url"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/aboutThisApp_edgePaddingHalf"
+        android:layout_marginStart="@dimen/aboutThisApp_paddingSmall"
         android:ellipsize="end"
         android:maxLines="1"
-        app:layout_constraintBottom_toBottomOf="@id/tvAboutThisAppDependencyAuthor"
+        android:textColor="?attr/aboutThisApp_textSecondary"
+        app:layout_constraintBottom_toBottomOf="@id/aboutThisAppDependency_author"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tvAboutThisAppDependencyAuthor"
-        app:layout_constraintTop_toTopOf="@id/tvAboutThisAppDependencyAuthor"
+        app:layout_constraintStart_toEndOf="@id/aboutThisAppDependency_author"
+        app:layout_constraintTop_toTopOf="@id/aboutThisAppDependency_author"
         tools:text="https://realm.io" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

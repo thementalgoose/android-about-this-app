@@ -1,297 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/llAboutThisAppBackground"
+    android:id="@+id/aboutThisApp_motionLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:background="?attr/aboutThisApp_backgroundPrimary"
+    app:layoutDescription="@xml/about_this_app_scene"
+    tools:showPaths="true">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
+    <ImageView
+        android:id="@+id/aboutThisApp_insets"
+        android:background="?attr/aboutThisApp_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="#62001E" />
+
+    <ImageView
+        android:id="@+id/aboutThisApp_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/aboutThisApp_headerHeight"
+        android:background="?attr/aboutThisApp_header"
+        app:layout_constraintBottom_toTopOf="@id/container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/aboutThisApp_insets"
+        tools:background="#62001E" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/aboutThisApp_icon"
+        android:layout_width="@dimen/aboutThisApp_iconWidth"
+        android:layout_height="@dimen/aboutThisApp_iconHeight"
+        app:layout_constraintBottom_toBottomOf="@id/aboutThisApp_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/aboutThisApp_header"
+        tools:background="#214198" />
+
+    <ImageView
+        android:id="@+id/aboutThisApp_backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginStart="@dimen/aboutThisApp_paddingSmall"
+        android:background="@null"
+        android:foreground="?attr/selectableItemBackground"
+        android:padding="@dimen/aboutThisApp_paddingSmall"
+        android:src="@drawable/ic_util_icon_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/aboutThisApp_insets" />
+
+    <TextView
+        android:id="@+id/aboutThisApp_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        android:layout_marginStart="@dimen/aboutThisApp_paddingMedium"
+        android:layout_marginTop="@dimen/aboutThisApp_paddingSmall"
+        android:layout_marginEnd="@dimen/aboutThisApp_paddingMedium"
+        android:gravity="center"
+        android:textColor="?attr/aboutThisApp_textPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/aboutThisApp_icon"
+        tools:text="Flashback" />
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:contentScrim="#00ffffff"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+    <TextView
+        android:id="@+id/aboutThisApp_nameToolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/aboutThisApp_paddingMedium"
+        android:layout_marginEnd="@dimen/aboutThisApp_paddingMedium"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:lines="1"
+        android:maxLines="1"
+        android:textColor="?attr/aboutThisApp_textToolbar"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/aboutThisApp_backButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/aboutThisApp_icon"
+        app:layout_constraintTop_toBottomOf="@id/aboutThisApp_insets"
+        tools:text="Flashback" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_gravity="bottom"
-                app:layout_collapseMode="pin" />
-
-            <RelativeLayout
-                android:id="@+id/rlToolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/aboutThisApp_headerLight"
-                android:elevation="@dimen/aboutThisApp_toolbarElevation"
-                app:layout_collapseMode="parallax">
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    style="@style/Theme.AppCompat.DayNight.NoActionBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:background="@color/aboutThisApp_headerLight"
-                    android:elevation="0dp" />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/imgAboutAvatar"
-                    android:layout_width="@dimen/aboutThisApp_avatarSize"
-                    android:layout_height="@dimen/aboutThisApp_avatarSize"
-                    android:layout_below="@id/toolbar"
-                    android:layout_alignParentStart="true"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/aboutThisApp_edgePadding"
-                    android:layout_marginTop="@dimen/aboutThisApp_edgePadding"
-                    android:layout_marginBottom="@dimen/aboutThisApp_edgePadding" />
-
-                <TextView
-                    android:id="@+id/tvAboutThisAppName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/imgAboutAvatar"
-                    android:layout_marginStart="@dimen/aboutThisApp_edgePadding"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginEnd="@dimen/aboutThisApp_edgePadding"
-                    android:layout_toEndOf="@id/imgAboutAvatar"
-                    android:textColor="@color/aboutThisApp_textName"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    tools:text="Jordan Fisher" />
-
-                <TextView
-                    android:id="@+id/tvAboutThisAppDesc"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tvAboutThisAppName"
-                    android:layout_alignStart="@id/tvAboutThisAppName"
-                    android:layout_alignEnd="@id/tvAboutThisAppName"
-                    android:layout_marginTop="@dimen/aboutThisApp_edgePaddingHalf"
-                    android:layout_marginBottom="@dimen/aboutThisApp_edgePadding"
-                    android:textColor="@color/aboutThisApp_textDesc"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/tvAboutThisAppName"
-                    app:layout_constraintTop_toBottomOf="@id/tvAboutThisAppName"
-                    tools:text="Mobile App Developer" />
-
-            </RelativeLayout>
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.core.widget.NestedScrollView
+    <TextView
+        android:id="@+id/aboutThisApp_nameDesc"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/aboutThisApp_paddingMedium"
+        android:layout_marginTop="@dimen/aboutThisApp_paddingSmall"
+        android:layout_marginEnd="@dimen/aboutThisApp_paddingMedium"
+        android:gravity="center"
+        android:textColor="?attr/aboutThisApp_textSecondary"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/aboutThisApp_name"
+        tools:text="Formula 1 statistics" />
 
-        <LinearLayout
-            android:id="@+id/nsvContent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/aboutThisApp_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:nestedScrollingEnabled="true"
+        android:overScrollMode="never"
+        android:paddingTop="@dimen/aboutThisApp_paddingSmall"
+        android:paddingBottom="@dimen/aboutThisApp_paddingMedium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/aboutThisApp_nameDesc" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="@dimen/aboutThisApp_edgePadding"
-                android:layout_marginEnd="24dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:id="@+id/btnGithubLight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/aboutThisApp_backgroundDark"
-                    android:drawableTop="@drawable/ic_util_icon_github_light"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:gravity="center"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:text="@string/about_this_app_github"
-                    android:textAllCaps="false"
-                    android:textColor="@color/aboutThisApp_textLight" />
-
-                <TextView
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:id="@+id/btnWebsiteLight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/aboutThisApp_backgroundDark"
-                    android:drawableTop="@drawable/ic_util_icon_website_light"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:gravity="center"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:text="@string/about_this_app_website"
-                    android:textAllCaps="false"
-                    android:textColor="@color/aboutThisApp_textLight" />
-
-                <TextView
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:id="@+id/btnEmailLight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/aboutThisApp_backgroundDark"
-                    android:drawableTop="@drawable/ic_util_icon_email_light"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:gravity="center"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:text="@string/about_this_app_email"
-                    android:textAllCaps="false"
-                    android:textColor="@color/aboutThisApp_textLight" />
-
-                <TextView
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:id="@+id/btnPlayLight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/aboutThisApp_backgroundDark"
-                    android:drawableTop="@drawable/ic_util_icon_play_light"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:gravity="center"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:text="@string/about_this_app_play"
-                    android:textAllCaps="false"
-                    android:textColor="@color/aboutThisApp_textLight" />
-
-                <TextView
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:id="@+id/btnGithubDark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/aboutThisApp_backgroundLight"
-                    android:drawableTop="@drawable/ic_util_icon_github_dark"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:gravity="center"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:text="@string/about_this_app_github"
-                    android:textAllCaps="false"
-                    android:textColor="@color/aboutThisApp_textDark" />
-
-                <TextView
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:id="@+id/btnWebsiteDark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/aboutThisApp_backgroundLight"
-                    android:drawableTop="@drawable/ic_util_icon_website_dark"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:gravity="center"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:text="@string/about_this_app_website"
-                    android:textAllCaps="false"
-                    android:textColor="@color/aboutThisApp_textDark" />
-
-                <TextView
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:id="@+id/btnEmailDark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/aboutThisApp_backgroundLight"
-                    android:drawableTop="@drawable/ic_util_icon_email_dark"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:gravity="center"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:text="@string/about_this_app_email"
-                    android:textAllCaps="false"
-                    android:textColor="@color/aboutThisApp_textDark" />
-
-                <TextView
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:id="@+id/btnPlayDark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/aboutThisApp_backgroundLight"
-                    android:drawableTop="@drawable/ic_util_icon_play_dark"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:gravity="center"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:text="@string/about_this_app_play"
-                    android:textAllCaps="false"
-                    android:textColor="@color/aboutThisApp_textDark" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tvAboutThisAppThankYou"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingStart="@dimen/aboutThisApp_edgePadding"
-                android:paddingTop="@dimen/aboutThisApp_edgePadding"
-                android:paddingEnd="@dimen/aboutThisApp_edgePadding"
-                android:paddingBottom="@dimen/aboutThisApp_edgePadding"
-                tools:text="A big thank you to everyone listed below for making this app possible" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvAboutThisAppDependencies"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:nestedScrollingEnabled="false"
-                android:overScrollMode="never" />
-
-            <TextView
-                android:id="@+id/tvAboutThisAppFootnotes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/aboutThisApp_edgePadding"
-                android:paddingTop="@dimen/aboutThisApp_edgePadding"
-                android:paddingEnd="@dimen/aboutThisApp_edgePadding"
-                tools:text="More footnote values for feedback" />
-
-            <TextView
-                android:id="@+id/tvAboutThisAppAppVersion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingStart="@dimen/aboutThisApp_edgePadding"
-                android:paddingTop="@dimen/aboutThisApp_edgePadding"
-                android:paddingEnd="@dimen/aboutThisApp_edgePadding"
-                android:layout_marginBottom="@dimen/aboutThisApp_edgePadding"
-                android:paddingBottom="@dimen/aboutThisApp_edgePadding"
-                tools:text="App Version 1.0" />
-
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>
