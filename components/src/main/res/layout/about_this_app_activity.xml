@@ -9,12 +9,15 @@
     app:layoutDescription="@xml/about_this_app_scene"
     tools:showPaths="true">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/aboutThisApp_toolbarGuideline"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/aboutThisApp_insets"
+        android:background="?attr/aboutThisApp_header"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="?attr/actionBarSize" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="#62001E" />
 
     <ImageView
         android:id="@+id/aboutThisApp_header"
@@ -24,7 +27,7 @@
         app:layout_constraintBottom_toTopOf="@id/container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/aboutThisApp_insets"
         tools:background="#62001E" />
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -40,15 +43,14 @@
     <ImageView
         android:id="@+id/aboutThisApp_backButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:layout_marginStart="@dimen/aboutThisApp_paddingSmall"
         android:background="@null"
         android:foreground="?attr/selectableItemBackground"
         android:padding="@dimen/aboutThisApp_paddingSmall"
         android:src="@drawable/ic_util_icon_back"
-        app:layout_constraintBottom_toBottomOf="@id/aboutThisApp_toolbarGuideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/aboutThisApp_insets" />
 
     <TextView
         android:id="@+id/aboutThisApp_name"
@@ -77,10 +79,10 @@
         android:textColor="?attr/aboutThisApp_textToolbar"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/aboutThisApp_toolbarGuideline"
+        app:layout_constraintBottom_toBottomOf="@id/aboutThisApp_backButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/aboutThisApp_icon"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/aboutThisApp_insets"
         tools:text="Flashback" />
 
     <TextView

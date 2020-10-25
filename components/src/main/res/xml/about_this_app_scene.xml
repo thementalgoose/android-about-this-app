@@ -14,9 +14,9 @@
             android:layout_width="@dimen/aboutThisApp_iconCollapsedWidth"
             android:layout_height="@dimen/aboutThisApp_iconCollapsedHeight"
             android:layout_marginStart="@dimen/aboutThisApp_paddingSmall"
-            app:layout_constraintBottom_toBottomOf="@id/aboutThisApp_header"
+            app:layout_constraintBottom_toBottomOf="@id/aboutThisApp_backButton"
             app:layout_constraintStart_toEndOf="@id/aboutThisApp_backButton"
-            app:layout_constraintTop_toTopOf="@id/aboutThisApp_header" />
+            app:layout_constraintTop_toTopOf="@id/aboutThisApp_backButton" />
         <Constraint
             android:id="@+id/aboutThisApp_header"
             android:layout_width="match_parent"
@@ -24,7 +24,7 @@
             app:layout_constraintBottom_toTopOf="@id/container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/aboutThisApp_insets" />
         <Constraint
             android:id="@+id/aboutThisApp_nameDesc"
             android:layout_width="match_parent"
@@ -32,7 +32,7 @@
             android:layout_marginStart="@dimen/aboutThisApp_paddingMedium"
             android:layout_marginTop="@dimen/aboutThisApp_paddingSmall"
             android:layout_marginEnd="@dimen/aboutThisApp_paddingMedium"
-            app:layout_constraintBottom_toBottomOf="@id/aboutThisApp_toolbarGuideline" />
+            app:layout_constraintBottom_toBottomOf="@id/aboutThisApp_backButton" />
         <Constraint
             android:id="@+id/aboutThisApp_name"
             android:layout_width="0dp"

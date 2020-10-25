@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -50,13 +51,11 @@ open class AboutThisAppActivity: AppCompatActivity(),
 
         adapter.items = populateList()
 
-        findViewById<View>(R.id.aboutThisApp_motionLayout)?.let {
-            ViewCompat.setOnApplyWindowInsetsListener(it) { view, insets ->
-                aboutThisApp_motionLayout.setPadding(0, insets.systemWindowInsetTop, 0, 0)
-                aboutThisApp_list.setPadding(0, 0, 0, insets.systemWindowInsetBottom)
+        ViewCompat.setOnApplyWindowInsetsListener(aboutThisApp_motionLayout) { view, insets ->
+            aboutThisApp_insets.setPadding(0, insets.systemWindowInsetTop, 0, 0)
+            aboutThisApp_list.setPadding(0, 0, 0, insets.systemWindowInsetBottom)
 
-                insets
-            }
+            insets
         }
     }
 
