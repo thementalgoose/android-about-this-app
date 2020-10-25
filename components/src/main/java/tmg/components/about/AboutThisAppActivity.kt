@@ -4,13 +4,16 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.about_this_app_activity.*
 import tmg.components.R
+import kotlin.reflect.KClass
 
-class AboutThisAppActivity: AppCompatActivity(),
+open class AboutThisAppActivity: AppCompatActivity(),
     AboutThisAppCallback {
 
     private lateinit var configuration: AboutThisAppConfiguration
@@ -46,6 +49,15 @@ class AboutThisAppActivity: AppCompatActivity(),
         aboutThisApp_list.layoutManager = LinearLayoutManager(this)
 
         adapter.items = populateList()
+
+        findViewById<View>(R.id.aboutThisApp_motionLayout)?.let {
+            ViewCompat.setOnApplyWindowInsetsListener(it) { view, insets ->
+                aboutThisApp_motionLayout.setPadding(0, insets.systemWindowInsetTop, 0, 0)
+                aboutThisApp_list.setPadding(0, 0, 0, insets.systemWindowInsetBottom)
+
+                insets
+            }
+        }
     }
 
     private fun populateList(): List<AboutThisAppItem> {
@@ -113,11 +125,8 @@ class AboutThisAppActivity: AppCompatActivity(),
         private const val keyConfiguration: String = "configuration"
 
         @JvmStatic
-        fun intent(context: Context, configuration: AboutThisAppConfiguration): Intent {
-            val intent = Intent(
-                context,
-                AboutThisAppActivity::class.java
-            )
+        fun intent(context: Context, configuration: AboutThisAppConfiguration, clazz: KClass<out AboutThisAppActivity> = AboutThisAppActivity::class): Intent {
+            val intent = Intent(context, clazz.java)
             intent.putExtra(keyConfiguration, configuration)
             return intent
         }

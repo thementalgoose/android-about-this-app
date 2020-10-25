@@ -24,7 +24,6 @@ data class AboutThisAppConfiguration(
     val appVersion: String,
     val subtitle: String? = null,
     val footnote: String? = null,
-    val insetsForNavigationBar: Boolean = false,
     var dependencies: List<AboutThisAppDependency>
 ): Parcelable {
 
@@ -63,7 +62,6 @@ data class AboutThisAppConfiguration(
         parcel.readString() ?: "",
         parcel.readString(),
         parcel.readString(),
-        (parcel.readByte() != 0.toByte()),
         emptyList()
     ) {
         val dependencyList: List<AboutThisAppDependency> = mutableListOf()
@@ -86,7 +84,6 @@ data class AboutThisAppConfiguration(
         p0?.writeString(appVersion)
         p0?.writeString(subtitle)
         p0?.writeString(footnote)
-        p0?.writeByte(if (insetsForNavigationBar) 1 else 0)
         p0?.writeList(dependencies)
     }
 
@@ -105,8 +102,7 @@ data class AboutThisAppConfiguration(
             appName.hashCode() +
             appVersion.hashCode() +
             footnote.hashCode() +
-            subtitle.hashCode() +
-            insetsForNavigationBar.hashCode()
+            subtitle.hashCode()
     }
 
     companion object CREATOR : Parcelable.Creator<AboutThisAppConfiguration> {
