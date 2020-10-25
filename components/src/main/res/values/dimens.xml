@@ -6,7 +6,7 @@
     <dimen name="aboutThisApp_iconCollapsedWidth">36dp</dimen>
     <dimen name="aboutThisApp_iconCollapsedHeight">36dp</dimen>
 
-    <dimen name="aboutThisApp_headerHeight">200dp</dimen>
+    <dimen name="aboutThisApp_headerHeight">160dp</dimen>
 
     <dimen name="aboutThisApp_paddingMedium">16dp</dimen>
     <dimen name="aboutThisApp_paddingSmall">8dp</dimen>

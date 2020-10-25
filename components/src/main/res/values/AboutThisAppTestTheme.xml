@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#985173</item>
+        <item name="colorPrimaryDark">#985173</item>
+        <item name="colorAccent">#981264</item>
+
+        <item name="aboutThisApp_header">#985173</item>
+        <item name="aboutThisApp_textPrimary">#181818</item>
+        <item name="aboutThisApp_textSecondary">#383838</item>
+        <item name="aboutThisApp_textToolbar">#f8f8f8</item>
+        <item name="aboutThisApp_iconPrimary">?attr/aboutThisApp_textPrimary</item>
+        <item name="aboutThisApp_backgroundPrimary">#fbfbfb</item>
+        <item name="aboutThisApp_backgroundSecondary">#f2f2f2</item>
+    </style>
+</resources>

@@ -13,7 +13,7 @@
             android:id="@+id/aboutThisApp_icon"
             android:layout_width="@dimen/aboutThisApp_iconCollapsedWidth"
             android:layout_height="@dimen/aboutThisApp_iconCollapsedHeight"
-            android:layout_marginStart="@dimen/aboutThisApp_paddingMedium"
+            android:layout_marginStart="@dimen/aboutThisApp_paddingSmall"
             app:layout_constraintBottom_toBottomOf="@id/aboutThisApp_header"
             app:layout_constraintStart_toEndOf="@id/aboutThisApp_backButton"
             app:layout_constraintTop_toTopOf="@id/aboutThisApp_header" />
@@ -25,6 +25,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/aboutThisApp_nameDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/aboutThisApp_edgePadding"
+            android:layout_marginTop="@dimen/aboutThisApp_paddingSmall"
+            android:layout_marginEnd="@dimen/aboutThisApp_edgePadding"
+            app:layout_constraintBottom_toBottomOf="@id/aboutThisApp_toolbarGuideline" />
+        <Constraint
+            android:id="@+id/aboutThisApp_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/aboutThisApp_edgePadding"
+            android:layout_marginEnd="@dimen/aboutThisApp_edgePadding"
+            app:layout_constraintBottom_toTopOf="@id/aboutThisApp_nameDesc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </ConstraintSet>
 
     <Transition
@@ -36,8 +53,8 @@
         <!-- Controlled via swipe on recycler view -->
         <OnSwipe
             app:dragDirection="dragUp"
-            app:touchAnchorSide="top"
-            app:touchAnchorId="@id/aboutThisApp_list" />
+            app:touchAnchorId="@id/aboutThisApp_list"
+            app:touchAnchorSide="top" />
 
         <!-- Arc animation on icon -->
         <KeyFrameSet>
@@ -54,5 +71,38 @@
                 app:percentX="0.682"
                 app:percentY="0.196" />
         </KeyFrameSet>
+
+        <!-- Transparency for labels -->
+        <KeyFrameSet>
+            <KeyAttribute
+                android:alpha="0.0"
+                app:framePosition="33"
+                app:motionTarget="@id/aboutThisApp_name" />
+            <KeyAttribute
+                android:alpha="0.0"
+                app:framePosition="100"
+                app:motionTarget="@id/aboutThisApp_name" />
+            <KeyAttribute
+                android:alpha="0.0"
+                app:framePosition="33"
+                app:motionTarget="@id/aboutThisApp_nameDesc" />
+            <KeyAttribute
+                android:alpha="0.0"
+                app:framePosition="100"
+                app:motionTarget="@id/aboutThisApp_nameDesc" />
+        </KeyFrameSet>
+
+        <!-- Toolbar text -->
+        <KeyFrameSet>
+            <KeyAttribute
+                android:alpha="0.0"
+                app:framePosition="0"
+                app:motionTarget="@id/aboutThisApp_nameToolbar" />
+            <KeyAttribute
+                android:alpha="0.0"
+                app:framePosition="90"
+                app:motionTarget="@id/aboutThisApp_nameToolbar" />
+        </KeyFrameSet>
+
     </Transition>
 </MotionScene>

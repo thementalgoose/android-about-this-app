@@ -3,6 +3,7 @@
     <attr name="aboutThisApp_header" format="reference" />
     <attr name="aboutThisApp_textPrimary" format="color" />
     <attr name="aboutThisApp_textSecondary" format="color" />
+    <attr name="aboutThisApp_textToolbar" format="color" />
     <attr name="aboutThisApp_iconPrimary" format="color" />
     <attr name="aboutThisApp_backgroundPrimary" format="color" />
     <attr name="aboutThisApp_backgroundSecondary" format="color" />
