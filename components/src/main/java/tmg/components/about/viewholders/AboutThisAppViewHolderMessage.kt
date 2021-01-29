@@ -16,10 +16,6 @@ internal class AboutThisAppViewHolderMessage(
 
     fun bind(item: AboutThisAppItem.Message) {
         itemView.aboutThisAppMessage_title.gravity = if (item.isCentered) Gravity.CENTER else Gravity.START
-        val colour = when (item.isPrimary) {
-            true -> itemView.context.theme.getColor(R.attr.aboutThisApp_textPrimary)
-            false -> itemView.context.theme.getColor(R.attr.aboutThisApp_textSecondary)
-        }
-        itemView.aboutThisAppMessage_title.setText(item.msg)
+        itemView.aboutThisAppMessage_title.text = item.msg
     }
 }

@@ -6,4 +6,6 @@
     <string name="about_this_app_play">Play</string>
     <string name="about_this_app_app_version">App Version %s</string>
     <string name="about_this_app_send_email">Send Email</string>
+
+    <string name="about_this_app_ab_back_button">Back</string>
 </resources>
