@@ -30,6 +30,9 @@ open class AboutThisAppActivity: AppCompatActivity(),
             onBackPressed()
         }
 
+        configuration.imageBackground?.let {
+            aboutThisApp_icon.setBackgroundResource(it)
+        }
         if (configuration.imageUrl != null) {
             Glide.with(this)
                 .load(configuration.imageUrl)
@@ -51,7 +54,7 @@ open class AboutThisAppActivity: AppCompatActivity(),
 
         adapter.items = populateList()
 
-        ViewCompat.setOnApplyWindowInsetsListener(aboutThisApp_motionLayout) { view, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(aboutThisApp_motionLayout) { _, insets ->
             aboutThisApp_insets.setPadding(0, insets.systemWindowInsetTop, 0, 0)
             aboutThisApp_list.setPadding(0, 0, 0, insets.systemWindowInsetBottom)
 

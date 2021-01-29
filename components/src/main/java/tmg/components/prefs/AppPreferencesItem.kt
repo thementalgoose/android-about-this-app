@@ -26,4 +26,8 @@ sealed class AppPreferencesItem(
         val description: Int,
         var isChecked: Boolean
     ): AppPreferencesItem(AppPreferencesItemType.PREF_SWITCH)
+
+    data class Footer(
+        val version: String
+    ): AppPreferencesItem(AppPreferencesItemType.FOOTER)
 }

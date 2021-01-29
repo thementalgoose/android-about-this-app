@@ -3,13 +3,14 @@ package tmg.components.prefs
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.StringRes
+import android.widget.Switch
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.app_preferences_category.view.tvTitle
 import kotlinx.android.synthetic.main.app_preferences_preference.view.clMain
 import kotlinx.android.synthetic.main.app_preferences_preference.view.tvDescription
 import kotlinx.android.synthetic.main.app_preferences_preference_switch.view.*
+import tmg.components.BuildConfig
 import tmg.components.R
 import tmg.components.prefs.AppPreferencesItem.SwitchPreference
 import tmg.components.utils.toEnum
@@ -34,6 +35,8 @@ open class AppPreferencesAdapter(
 
     open val preferenceSwitchLayoutId: Int = R.layout.app_preferences_preference_switch
 
+    open val preferenceFooterLayoutId: Int = R.layout.app_preferences_footer
+
     open fun bindCategory(view: View, model: AppPreferencesItem.Category) {
         view.apply {
             this.tvTitle.setText(model.title)
@@ -55,12 +58,18 @@ open class AppPreferencesAdapter(
             this.tvTitle.setText(model.title)
             this.tvDescription.setText(model.description)
             this.switchWidget.isChecked = model.isChecked
-
             this.clMain.setOnClickListener {
                 switchChecked(model.prefKey, !model.isChecked)
             }
         }
     }
+
+    open fun bindPreferenceFooter(view: View, model: AppPreferencesItem.Footer) {
+        view.apply {
+            this.tvTitle.text = model.version
+        }
+    }
+
     //endregion
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -73,6 +82,9 @@ open class AppPreferencesAdapter(
             )
             AppPreferencesItemType.PREF_SWITCH -> AppPreferencesViewHolder(
                 LayoutInflater.from(parent.context).inflate(preferenceSwitchLayoutId, parent, false)
+            )
+            AppPreferencesItemType.FOOTER -> AppPreferencesViewHolder(
+                LayoutInflater.from(parent.context).inflate(preferenceFooterLayoutId, parent, false)
             )
             null -> throw Error("Type not supported!")
         }
@@ -96,11 +108,17 @@ open class AppPreferencesAdapter(
                     list[position] as SwitchPreference
                 )
             }
+            AppPreferencesItemType.FOOTER -> {
+                bindPreferenceFooter(
+                    holder.itemView,
+                    list[position] as AppPreferencesItem.Footer
+                )
+            }
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        onBindViewHolder(holder, position, mutableListOf())
+        this.onBindViewHolder(holder, position, mutableListOf())
     }
 
     override fun getItemViewType(position: Int): Int = list[position].type.ordinal
@@ -130,20 +148,22 @@ open class AppPreferencesAdapter(
         private val newList: List<AppPreferencesItem>
     ) : DiffUtil.Callback() {
 
-        override fun areItemsTheSame(old: Int, new: Int): Boolean =
-            if (oldList[old] is SwitchPreference && newList[new] is SwitchPreference) {
-                (oldList[old] as SwitchPreference).prefKey == (newList[old] as SwitchPreference).prefKey
-            }
-            else {
-                oldList[old] == newList[new]
-            }
-
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-            oldList[oldItemPosition] == newList[newItemPosition]
-
         override fun getOldListSize(): Int = oldList.size
 
         override fun getNewListSize(): Int = newList.size
+
+        override fun areItemsTheSame(old: Int, new: Int): Boolean {
+            val oldItem = oldList[old]
+            val newItem = newList[new]
+            return oldItem == newItem || isSwitchPref(oldItem, newItem)
+        }
+
+        override fun areContentsTheSame(old: Int, new: Int): Boolean {
+            return oldList[old] == newList[new]
+        }
+
+        private fun isSwitchPref(oldItem: AppPreferencesItem, newItem: AppPreferencesItem) =
+            oldItem is SwitchPreference && newItem is SwitchPreference && oldItem.prefKey == newItem.prefKey
     }
 
     //endregion
