@@ -50,7 +50,7 @@ class SettingsActivity: AppCompatActivity() {
                 switch(
                     prefsKey = "key_3",
                     title = R.string.settings_switchpref_title,
-                    description = R.string.settings_switchpref_title,
+                    description = R.string.settings_switchpref_desc,
                     isChecked = false
                 )
             }
