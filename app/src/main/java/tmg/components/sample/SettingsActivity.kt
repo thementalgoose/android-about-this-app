@@ -54,6 +54,7 @@ class SettingsActivity: AppCompatActivity() {
                     isChecked = false
                 )
             }
+            footer(BuildConfig.VERSION_NAME)
         }
     }
 }

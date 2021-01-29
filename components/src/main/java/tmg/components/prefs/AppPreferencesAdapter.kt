@@ -3,13 +3,13 @@ package tmg.components.prefs
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.StringRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.app_preferences_category.view.tvTitle
 import kotlinx.android.synthetic.main.app_preferences_preference.view.clMain
 import kotlinx.android.synthetic.main.app_preferences_preference.view.tvDescription
 import kotlinx.android.synthetic.main.app_preferences_preference_switch.view.*
+import tmg.components.BuildConfig
 import tmg.components.R
 import tmg.components.prefs.AppPreferencesItem.SwitchPreference
 import tmg.components.utils.toEnum
@@ -33,6 +33,8 @@ open class AppPreferencesAdapter(
     open val preferenceLayoutId: Int = R.layout.app_preferences_preference
 
     open val preferenceSwitchLayoutId: Int = R.layout.app_preferences_preference_switch
+
+    open val preferenceFooterLayoutId: Int = R.layout.app_preferences_footer
 
     open fun bindCategory(view: View, model: AppPreferencesItem.Category) {
         view.apply {
@@ -61,6 +63,13 @@ open class AppPreferencesAdapter(
             }
         }
     }
+
+    open fun bindPreferenceFooter(view: View, model: AppPreferencesItem.Footer) {
+        view.apply {
+            this.tvTitle.text = model.version
+        }
+    }
+
     //endregion
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -73,6 +82,9 @@ open class AppPreferencesAdapter(
             )
             AppPreferencesItemType.PREF_SWITCH -> AppPreferencesViewHolder(
                 LayoutInflater.from(parent.context).inflate(preferenceSwitchLayoutId, parent, false)
+            )
+            AppPreferencesItemType.FOOTER -> AppPreferencesViewHolder(
+                LayoutInflater.from(parent.context).inflate(preferenceFooterLayoutId, parent, false)
             )
             null -> throw Error("Type not supported!")
         }
@@ -94,6 +106,12 @@ open class AppPreferencesAdapter(
                 bindPreferenceSwitch(
                     holder.itemView,
                     list[position] as SwitchPreference
+                )
+            }
+            AppPreferencesItemType.FOOTER -> {
+                bindPreferenceFooter(
+                    holder.itemView,
+                    list[position] as AppPreferencesItem.Footer
                 )
             }
         }

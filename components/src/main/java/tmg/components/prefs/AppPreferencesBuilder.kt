@@ -42,6 +42,11 @@ fun AppPreferencesItemCategory.preference(prefsKey: String, @StringRes title: In
     ))
 }
 
+fun AppPreferencesItemScreen.footer(version: String) {
+    add(AppPreferencesItem.Footer(
+        version = version
+    ))
+}
 
 fun AppPreferencesItemCategory.switch(prefsKey: String, @StringRes title: Int, @StringRes description: Int, isChecked: Boolean) {
     add(AppPreferencesItem.SwitchPreference(
