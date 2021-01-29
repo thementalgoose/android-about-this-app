@@ -71,6 +71,7 @@ class MainActivity : AppCompatActivity() {
                 name = "Flashback",
                 nameDesc = "Formula 1 Statistics",
                 imageUrl = "https://avatars0.githubusercontent.com/u/5982159?s=460&v=4",
+                imageBackground = R.drawable.test_image_background,
                 appPackageName = this.packageName,
                 subtitle = "Thanks again!",
                 website = "https://jordanfisher.io"
@@ -107,6 +108,7 @@ class MainActivity : AppCompatActivity() {
                 name = "Jordan Fisher",
                 nameDesc = "App developer!",
                 imageRes = R.drawable.ic_launcher_foreground,
+                imageBackground = R.drawable.test_image_background,
                 appPackageName = this.packageName,
                 subtitle = "Thanks again!",
                 website = "https://jordanfisher.io"

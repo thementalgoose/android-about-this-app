@@ -30,6 +30,9 @@ open class AboutThisAppActivity: AppCompatActivity(),
             onBackPressed()
         }
 
+        configuration.imageBackground?.let {
+            aboutThisApp_icon.setBackgroundResource(it)
+        }
         if (configuration.imageUrl != null) {
             Glide.with(this)
                 .load(configuration.imageUrl)

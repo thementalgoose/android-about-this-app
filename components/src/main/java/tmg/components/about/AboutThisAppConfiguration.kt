@@ -15,6 +15,8 @@ data class AboutThisAppConfiguration(
     val imageUrl: String? = null,
     @DrawableRes
     val imageRes: Int? = null,
+    @DrawableRes
+    val imageBackground: Int? = null,
     val github: String? = null,
     val email: String? = null,
     val website: String? = null,
@@ -38,12 +40,16 @@ data class AboutThisAppConfiguration(
 
     val playStore: String
         get() {
-            return if (play == null) {
-                marketUri.format(appPackageName)
-            } else if (appPackageName != null) {
-                play
-            } else {
-                throw RuntimeException("Please provide either an appPackageName or a play store URL")
+            return when {
+                play == null -> {
+                    marketUri.format(appPackageName)
+                }
+                appPackageName != null -> {
+                    play
+                }
+                else -> {
+                    throw RuntimeException("Please provide either an appPackageName or a play store URL")
+                }
             }
         }
 
@@ -52,6 +58,7 @@ data class AboutThisAppConfiguration(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString(),
+        parcel.readInt(),
         parcel.readInt(),
         parcel.readString(),
         parcel.readString() ?: "",
@@ -75,6 +82,7 @@ data class AboutThisAppConfiguration(
         p0?.writeString(nameDesc)
         p0?.writeString(imageUrl)
         p0?.writeInt(imageRes ?: 0)
+        p0?.writeInt(imageBackground ?: 0)
         p0?.writeString(github)
         p0?.writeString(email)
         p0?.writeString(website)
@@ -93,6 +101,7 @@ data class AboutThisAppConfiguration(
             nameDesc.hashCode() +
             imageUrl.hashCode() +
             (imageRes ?: 0).hashCode() +
+            (imageBackground ?: 0).hashCode() +
             github.hashCode() +
             email.hashCode() +
             website.hashCode() +
