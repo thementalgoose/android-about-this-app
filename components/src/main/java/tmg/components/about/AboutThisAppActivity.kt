@@ -4,59 +4,62 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.View
+import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.about_this_app_activity.*
 import tmg.components.R
+import tmg.components.databinding.AboutThisAppActivityBinding
 import kotlin.reflect.KClass
 
 open class AboutThisAppActivity: AppCompatActivity(),
     AboutThisAppCallback {
 
+    private lateinit var binding: AboutThisAppActivityBinding
+
     private lateinit var configuration: AboutThisAppConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         configuration = intent.extras?.getParcelable(keyConfiguration) ?: throw RuntimeException("Please provide an 'AboutThisAppConfiguration' item (via. AboutThisAppActivity.intent(context, AboutThisAppConfiguration))")
         setTheme(configuration.themeRes)
 
-        setContentView(R.layout.about_this_app_activity)
+        binding = AboutThisAppActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        aboutThisApp_backButton.setOnClickListener {
+        binding.aboutThisAppBackButton.setOnClickListener {
             onBackPressed()
         }
 
         configuration.imageBackground?.let {
-            aboutThisApp_icon.setBackgroundResource(it)
+            binding.aboutThisAppIcon.setBackgroundResource(it)
         }
         if (configuration.imageUrl != null) {
             Glide.with(this)
                 .load(configuration.imageUrl)
-                .into(aboutThisApp_icon)
+                .into(binding.aboutThisAppIcon)
         }
         else if (configuration.imageRes != null) {
             Glide.with(this)
                 .load(configuration.imageRes)
-                .into(aboutThisApp_icon)
+                .into(binding.aboutThisAppIcon)
         }
 
-        aboutThisApp_name.text = configuration.name
-        aboutThisApp_nameToolbar.text = configuration.name
-        aboutThisApp_nameDesc.text = configuration.nameDesc
+        binding.aboutThisAppName.text = configuration.name
+        binding.aboutThisAppNameToolbar.text = configuration.name
+        binding.aboutThisAppNameDesc.text = configuration.nameDesc
 
         val adapter = AboutThisAppAdapter(this)
-        aboutThisApp_list.adapter = adapter
-        aboutThisApp_list.layoutManager = LinearLayoutManager(this)
+        binding.aboutThisAppList.adapter = adapter
+        binding.aboutThisAppList.layoutManager = LinearLayoutManager(this)
 
         adapter.items = populateList()
 
-        ViewCompat.setOnApplyWindowInsetsListener(aboutThisApp_motionLayout) { _, insets ->
-            aboutThisApp_insets.setPadding(0, insets.systemWindowInsetTop, 0, 0)
-            aboutThisApp_list.setPadding(0, 0, 0, insets.systemWindowInsetBottom)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.aboutThisAppMotionLayout) { _, insets ->
+            binding.aboutThisAppInsets.setPadding(0, insets.systemWindowInsetTop, 0, 0)
+            binding.aboutThisAppList.setPadding(0, 0, 0, insets.systemWindowInsetBottom)
 
             insets
         }

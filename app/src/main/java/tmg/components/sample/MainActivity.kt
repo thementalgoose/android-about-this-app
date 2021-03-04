@@ -3,17 +3,21 @@ package tmg.components.sample
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
 import tmg.components.about.AboutThisAppConfiguration
 import tmg.components.about.AboutThisAppDependency
 import tmg.components.about.AboutThisAppActivity
+import tmg.components.sample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        btnAboutThisApp.setOnClickListener {
+        binding.btnAboutThisApp.setOnClickListener {
 
             val configuration = AboutThisAppConfiguration(
                 themeRes = R.style.AppTheme,
@@ -49,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        btnAboutThisAppDarkMode.setOnClickListener {
+        binding.btnAboutThisAppDarkMode.setOnClickListener {
 
             val configuration = AboutThisAppConfiguration(
                 themeRes = R.style.AppThemeDark,
@@ -86,7 +90,7 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        btnAboutThisAppDarkImageRes.setOnClickListener {
+        binding.btnAboutThisAppDarkImageRes.setOnClickListener {
 
             val configuration = AboutThisAppConfiguration(
                 themeRes = R.style.AppTheme,
@@ -123,7 +127,7 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        btnSettings.setOnClickListener {
+        binding.btnSettings.setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
         }
     }

@@ -1,24 +1,21 @@
 package tmg.components.prefs
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Switch
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.app_preferences_category.view.tvTitle
-import kotlinx.android.synthetic.main.app_preferences_preference.view.clMain
-import kotlinx.android.synthetic.main.app_preferences_preference.view.tvDescription
-import kotlinx.android.synthetic.main.app_preferences_preference_switch.view.*
-import tmg.components.BuildConfig
-import tmg.components.R
+import androidx.viewbinding.ViewBinding
+import tmg.components.databinding.AppPreferencesCategoryBinding
+import tmg.components.databinding.AppPreferencesFooterBinding
+import tmg.components.databinding.AppPreferencesPreferenceBinding
+import tmg.components.databinding.AppPreferencesPreferenceSwitchBinding
 import tmg.components.prefs.AppPreferencesItem.SwitchPreference
 import tmg.components.utils.toEnum
 
 open class AppPreferencesAdapter(
     val prefClicked: (prefKey: String) -> Unit = { _ -> },
     val prefSwitchClicked: (prefKey: String, newState: Boolean) -> Unit = { _, _ -> }
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+) : RecyclerView.Adapter<AppPreferencesViewHolder>() {
 
     var list: List<AppPreferencesItem> = emptyList()
         set(value) {
@@ -29,22 +26,31 @@ open class AppPreferencesAdapter(
 
     //region Override methods
 
-    open val categoryLayoutId: Int = R.layout.app_preferences_category
+    open fun categoryLayoutId(viewGroup: ViewGroup): ViewBinding = AppPreferencesCategoryBinding.inflate(
+        LayoutInflater.from(viewGroup.context), viewGroup, false
+    )
 
-    open val preferenceLayoutId: Int = R.layout.app_preferences_preference
+    open fun preferenceLayoutId(viewGroup: ViewGroup): ViewBinding = AppPreferencesPreferenceBinding.inflate(
+        LayoutInflater.from(viewGroup.context), viewGroup, false
+    )
 
-    open val preferenceSwitchLayoutId: Int = R.layout.app_preferences_preference_switch
+    open fun preferenceSwitchLayoutId(viewGroup: ViewGroup): ViewBinding = AppPreferencesPreferenceSwitchBinding.inflate(
+        LayoutInflater.from(viewGroup.context), viewGroup, false
+    )
 
-    open val preferenceFooterLayoutId: Int = R.layout.app_preferences_footer
+    open fun preferenceFooterLayoutId(viewGroup: ViewGroup): ViewBinding = AppPreferencesFooterBinding.inflate(
+        LayoutInflater.from(viewGroup.context), viewGroup, false
+    )
 
-    open fun bindCategory(view: View, model: AppPreferencesItem.Category) {
-        view.apply {
+    open fun bindCategory(view: ViewBinding, model: AppPreferencesItem.Category) {
+
+        (view as? AppPreferencesCategoryBinding)?.apply {
             this.tvTitle.setText(model.title)
         }
     }
 
-    open fun bindPreference(view: View, model: AppPreferencesItem.Preference) {
-        view.apply {
+    open fun bindPreference(view: ViewBinding, model: AppPreferencesItem.Preference) {
+        (view as? AppPreferencesPreferenceBinding)?.apply {
             this.clMain.setOnClickListener {
                 prefClicked(model.prefKey)
             }
@@ -53,8 +59,8 @@ open class AppPreferencesAdapter(
         }
     }
 
-    open fun bindPreferenceSwitch(view: View, model: SwitchPreference) {
-        view.apply {
+    open fun bindPreferenceSwitch(view: ViewBinding, model: SwitchPreference) {
+        (view as? AppPreferencesPreferenceSwitchBinding)?.apply {
             this.tvTitle.setText(model.title)
             this.tvDescription.setText(model.description)
             this.switchWidget.isChecked = model.isChecked
@@ -64,60 +70,60 @@ open class AppPreferencesAdapter(
         }
     }
 
-    open fun bindPreferenceFooter(view: View, model: AppPreferencesItem.Footer) {
-        view.apply {
+    open fun bindPreferenceFooter(view: ViewBinding, model: AppPreferencesItem.Footer) {
+        (view as? AppPreferencesFooterBinding)?.apply {
             this.tvTitle.text = model.version
         }
     }
 
     //endregion
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppPreferencesViewHolder {
         return when (viewType.toEnum<AppPreferencesItemType>()) {
             AppPreferencesItemType.CATEGORY -> AppPreferencesViewHolder(
-                LayoutInflater.from(parent.context).inflate(categoryLayoutId, parent, false)
+                categoryLayoutId(parent)
             )
             AppPreferencesItemType.PREF -> AppPreferencesViewHolder(
-                LayoutInflater.from(parent.context).inflate(preferenceLayoutId, parent, false)
+                preferenceLayoutId(parent)
             )
             AppPreferencesItemType.PREF_SWITCH -> AppPreferencesViewHolder(
-                LayoutInflater.from(parent.context).inflate(preferenceSwitchLayoutId, parent, false)
+                preferenceSwitchLayoutId(parent)
             )
             AppPreferencesItemType.FOOTER -> AppPreferencesViewHolder(
-                LayoutInflater.from(parent.context).inflate(preferenceFooterLayoutId, parent, false)
+                preferenceFooterLayoutId(parent)
             )
             null -> throw Error("Type not supported!")
         }
     }
 
     override fun onBindViewHolder(
-        holder: RecyclerView.ViewHolder,
+        holder: AppPreferencesViewHolder,
         position: Int,
         payloads: MutableList<Any>
     ) {
         when (getItemViewType(position).toEnum<AppPreferencesItemType>()) {
             AppPreferencesItemType.CATEGORY -> {
-                bindCategory(holder.itemView, list[position] as AppPreferencesItem.Category)
+                bindCategory(holder.binding, list[position] as AppPreferencesItem.Category)
             }
             AppPreferencesItemType.PREF -> {
-                bindPreference(holder.itemView, list[position] as AppPreferencesItem.Preference)
+                bindPreference(holder.binding, list[position] as AppPreferencesItem.Preference)
             }
             AppPreferencesItemType.PREF_SWITCH -> {
                 bindPreferenceSwitch(
-                    holder.itemView,
+                    holder.binding,
                     list[position] as SwitchPreference
                 )
             }
             AppPreferencesItemType.FOOTER -> {
                 bindPreferenceFooter(
-                    holder.itemView,
+                    holder.binding,
                     list[position] as AppPreferencesItem.Footer
                 )
             }
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AppPreferencesViewHolder, position: Int) {
         this.onBindViewHolder(holder, position, mutableListOf())
     }
 

@@ -2,5 +2,8 @@ package tmg.components.prefs
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
 
-class AppPreferencesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+class AppPreferencesViewHolder(
+    val binding: ViewBinding
+) : RecyclerView.ViewHolder(binding.root)

@@ -1,8 +1,11 @@
 package tmg.components.about.viewholders
 
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.about_this_app_item_view_header.view.*
+import tmg.components.R
 import tmg.components.about.AboutThisAppCallback
 import tmg.components.about.AboutThisAppItem
 import tmg.components.utils.show
@@ -12,32 +15,37 @@ internal class AboutThisAppViewHolderHeader(
     itemView: View
 ): RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
+    private val email: TextView = itemView.findViewById(R.id.aboutThisAppLinks_email)
+    private val github: TextView = itemView.findViewById(R.id.aboutThisAppLinks_github)
+    private val play: TextView = itemView.findViewById(R.id.aboutThisAppLinks_play)
+    private val website: TextView = itemView.findViewById(R.id.aboutThisAppLinks_website)
+
     init {
-        itemView.aboutThisAppLinks_email.setOnClickListener(this)
-        itemView.aboutThisAppLinks_github.setOnClickListener(this)
-        itemView.aboutThisAppLinks_play.setOnClickListener(this)
-        itemView.aboutThisAppLinks_website.setOnClickListener(this)
+        email.setOnClickListener(this)
+        github.setOnClickListener(this)
+        play.setOnClickListener(this)
+        website.setOnClickListener(this)
     }
 
     fun bind(item: AboutThisAppItem.Header) {
-        itemView.aboutThisAppLinks_email.show(item.email != null)
-        itemView.aboutThisAppLinks_github.show(item.github != null)
-        itemView.aboutThisAppLinks_play.show(item.play != null)
-        itemView.aboutThisAppLinks_website.show(item.website != null)
+        email.show(item.email != null)
+        github.show(item.github != null)
+        play.show(item.play != null)
+        website.show(item.website != null)
     }
 
     override fun onClick(v: View?) {
         when (v) {
-            itemView.aboutThisAppLinks_email -> {
+            email -> {
                 callback.clickEmail()
             }
-            itemView.aboutThisAppLinks_github -> {
+            github -> {
                 callback.clickGithub()
             }
-            itemView.aboutThisAppLinks_play -> {
+            play -> {
                 callback.clickPlay()
             }
-            itemView.aboutThisAppLinks_website -> {
+            website -> {
                 callback.clickWebsite()
             }
         }

@@ -4,16 +4,18 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_settings.*
 import tmg.components.prefs.*
+import tmg.components.sample.databinding.ActivitySettingsBinding
 
 class SettingsActivity: AppCompatActivity() {
 
+    private lateinit var binding: ActivitySettingsBinding
     lateinit var adapter: AppPreferencesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_settings)
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         adapter = AppPreferencesAdapter(
             prefClicked = { key ->
@@ -24,8 +26,8 @@ class SettingsActivity: AppCompatActivity() {
             }
         )
 
-        rvSettings.layoutManager = LinearLayoutManager(this)
-        rvSettings.adapter = adapter
+        binding.rvSettings.layoutManager = LinearLayoutManager(this)
+        binding.rvSettings.adapter = adapter
 
         adapter.list = prefsList {
             category(R.string.settings_cat_1) {
