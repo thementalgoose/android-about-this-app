@@ -19,7 +19,7 @@ allprojects {
 
 ```
 dependencies {
-    implementation 'com.github.thementalgoose:android-components:4.0.0'
+    implementation 'com.github.thementalgoose:android-components:4.0.1'
 }
 ```
 

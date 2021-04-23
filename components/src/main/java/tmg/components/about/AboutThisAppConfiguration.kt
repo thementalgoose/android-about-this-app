@@ -26,6 +26,7 @@ data class AboutThisAppConfiguration(
     val appVersion: String,
     val subtitle: String? = null,
     val footnote: String? = null,
+    val guid: String? = null,
     var dependencies: List<AboutThisAppDependency>
 ): Parcelable {
 
@@ -69,6 +70,7 @@ data class AboutThisAppConfiguration(
         parcel.readString() ?: "",
         parcel.readString(),
         parcel.readString(),
+        parcel.readString(),
         emptyList()
     ) {
         val dependencyList: List<AboutThisAppDependency> = mutableListOf()
@@ -92,6 +94,7 @@ data class AboutThisAppConfiguration(
         p0?.writeString(appVersion)
         p0?.writeString(subtitle)
         p0?.writeString(footnote)
+        p0?.writeString(guid)
         p0?.writeList(dependencies)
     }
 
@@ -111,6 +114,7 @@ data class AboutThisAppConfiguration(
             appName.hashCode() +
             appVersion.hashCode() +
             footnote.hashCode() +
+            guid.hashCode() +
             subtitle.hashCode()
     }
 
