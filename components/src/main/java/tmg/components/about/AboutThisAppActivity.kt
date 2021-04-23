@@ -93,6 +93,9 @@ open class AboutThisAppActivity: AppCompatActivity(),
         }
 
         list.add(AboutThisAppItem.Message(getString(R.string.about_this_app_app_version, configuration.appVersion)))
+        configuration.guid?.let {
+            list.add(AboutThisAppItem.Message(it, isPrimary = false, isCentered = true))
+        }
         return list
     }
 
