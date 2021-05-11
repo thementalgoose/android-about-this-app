@@ -1,9 +1,3 @@
 <resources>
     <string name="app_name">Components</string>
-
-    <string name="settings_cat_1">Test Category</string>
-    <string name="settings_pref_title">Test Pref title</string>
-    <string name="settings_pref_desc">Test Pref desc</string>
-    <string name="settings_switchpref_title">Test Switch title</string>
-    <string name="settings_switchpref_desc">Test Switch desc</string>
 </resources>
