@@ -2,7 +2,7 @@
 
 The "About This App" cover screen that I use in my apps
 
-[![](https://jitpack.io/v/thementalgoose/android-about-this-app.svg)](https://jitpack.io/#thementalgoose/android-about-this-app)
+[![](https://jitpack.io/v/thementalgoose/android-about-this-app.svg)](https://jitpack.io/#thementalgoose/android-about-this-app) [![main](https://github.com/thementalgoose/android-about-this-app/workflows/Main/badge.svg)](https://github.com/thementalgoose/android-about-this-app/actions)
 
 ![about-this-app](res/aboutthisapp.gif)
 

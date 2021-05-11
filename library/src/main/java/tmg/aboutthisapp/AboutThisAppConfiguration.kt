@@ -5,7 +5,7 @@ import android.os.Parcelable
 import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
-import tmg.aboutthisapp.utils.marketUri
+import tmg.aboutthisapp.utils.getMarketUri
 
 data class AboutThisAppConfiguration(
     @StyleRes
@@ -42,11 +42,11 @@ data class AboutThisAppConfiguration(
     val playStore: String
         get() {
             return when {
-                play == null -> {
-                    marketUri.format(appPackageName)
+                play != null -> {
+                    play
                 }
                 appPackageName != null -> {
-                    play
+                    getMarketUri(appPackageName)
                 }
                 else -> {
                     throw RuntimeException("Please provide either an appPackageName or a play store URL")
