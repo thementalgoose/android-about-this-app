@@ -1,11 +1,11 @@
-package tmg.components.about
+package tmg.aboutthisapp
 
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.StyleRes
-import tmg.components.utils.marketUri
+import tmg.aboutthisapp.utils.marketUri
 
 data class AboutThisAppConfiguration(
     @StyleRes

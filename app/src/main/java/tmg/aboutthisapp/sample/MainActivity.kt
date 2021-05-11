@@ -1,12 +1,11 @@
-package tmg.components.sample
+package tmg.aboutthisapp.sample
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import tmg.components.about.AboutThisAppConfiguration
-import tmg.components.about.AboutThisAppDependency
-import tmg.components.about.AboutThisAppActivity
-import tmg.components.sample.databinding.ActivityMainBinding
+import tmg.aboutthisapp.AboutThisAppConfiguration
+import tmg.aboutthisapp.AboutThisAppDependency
+import tmg.aboutthisapp.AboutThisAppActivity
+import tmg.aboutthisapp.sample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

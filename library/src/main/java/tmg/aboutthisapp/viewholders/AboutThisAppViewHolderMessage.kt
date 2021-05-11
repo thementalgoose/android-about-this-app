@@ -1,4 +1,4 @@
-package tmg.components.about.viewholders
+package tmg.aboutthisapp.viewholders
 
 import android.graphics.Typeface
 import android.util.TypedValue
@@ -6,9 +6,9 @@ import android.view.Gravity
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import tmg.components.R
-import tmg.components.about.AboutThisAppCallback
-import tmg.components.about.AboutThisAppItem
+import tmg.aboutthisapp.R
+import tmg.aboutthisapp.AboutThisAppCallback
+import tmg.aboutthisapp.AboutThisAppItem
 
 internal class AboutThisAppViewHolderMessage(
     private val callback: AboutThisAppCallback,

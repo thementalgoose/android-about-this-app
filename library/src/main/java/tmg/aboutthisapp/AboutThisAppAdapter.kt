@@ -1,12 +1,11 @@
-package tmg.components.about
+package tmg.aboutthisapp
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import tmg.components.R
-import tmg.components.about.viewholders.AboutThisAppViewHolderDependency
-import tmg.components.about.viewholders.AboutThisAppViewHolderHeader
-import tmg.components.about.viewholders.AboutThisAppViewHolderMessage
+import tmg.aboutthisapp.viewholders.AboutThisAppViewHolderDependency
+import tmg.aboutthisapp.viewholders.AboutThisAppViewHolderHeader
+import tmg.aboutthisapp.viewholders.AboutThisAppViewHolderMessage
 
 internal class AboutThisAppAdapter(
     private val callback: AboutThisAppCallback

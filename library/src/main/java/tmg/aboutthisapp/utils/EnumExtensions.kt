@@ -1,4 +1,4 @@
-package tmg.components.utils
+package tmg.aboutthisapp.utils
 
 /**
  * Convert any string value into it's enum value by a given property of the enum

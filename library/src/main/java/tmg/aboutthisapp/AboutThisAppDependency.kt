@@ -1,4 +1,4 @@
-package tmg.components.about
+package tmg.aboutthisapp
 
 import android.os.Parcel
 import android.os.Parcelable

@@ -1,14 +1,12 @@
-package tmg.components.about.viewholders
+package tmg.aboutthisapp.viewholders
 
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import tmg.components.R
-import tmg.components.about.AboutThisAppCallback
-import tmg.components.about.AboutThisAppItem
-import tmg.components.utils.show
+import tmg.aboutthisapp.R
+import tmg.aboutthisapp.AboutThisAppCallback
+import tmg.aboutthisapp.AboutThisAppItem
+import tmg.aboutthisapp.utils.show
 
 internal class AboutThisAppViewHolderHeader(
     private val callback: AboutThisAppCallback,

@@ -1,4 +1,4 @@
-package tmg.components.about
+package tmg.aboutthisapp
 
 interface AboutThisAppCallback {
     fun dependencyItemClicked(item: AboutThisAppDependency)

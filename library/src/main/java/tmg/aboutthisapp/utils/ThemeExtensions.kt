@@ -1,4 +1,4 @@
-package tmg.components.utils
+package tmg.aboutthisapp.utils
 
 import android.content.res.Resources
 import android.util.TypedValue

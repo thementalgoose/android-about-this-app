@@ -1,4 +1,4 @@
-package tmg.components.about.viewholders
+package tmg.aboutthisapp.viewholders
 
 import android.view.View
 import android.widget.ImageView
@@ -6,10 +6,10 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import tmg.components.R
-import tmg.components.about.AboutThisAppCallback
-import tmg.components.about.AboutThisAppDependency
-import tmg.components.about.AboutThisAppItem
+import tmg.aboutthisapp.R
+import tmg.aboutthisapp.AboutThisAppCallback
+import tmg.aboutthisapp.AboutThisAppDependency
+import tmg.aboutthisapp.AboutThisAppItem
 
 internal class AboutThisAppViewHolderDependency(
     private val callback: AboutThisAppCallback,

@@ -1,16 +1,14 @@
-package tmg.components.about
+package tmg.aboutthisapp
 
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import tmg.components.R
-import tmg.components.databinding.AboutThisAppActivityBinding
+import tmg.aboutthisapp.databinding.AboutThisAppActivityBinding
 import kotlin.reflect.KClass
 
 open class AboutThisAppActivity: AppCompatActivity(),
@@ -68,17 +66,21 @@ open class AboutThisAppActivity: AppCompatActivity(),
     private fun populateList(): List<AboutThisAppItem> {
         val list: MutableList<AboutThisAppItem> = mutableListOf()
 
-        list.add(AboutThisAppItem.Header(
-            play = configuration.playStore,
-            email = configuration.email,
-            website = configuration.website,
-            github = configuration.github
-        ))
+        list.add(
+            AboutThisAppItem.Header(
+                play = configuration.playStore,
+                email = configuration.email,
+                website = configuration.website,
+                github = configuration.github
+            )
+        )
 
         configuration.subtitle?.let {
-            list.add(AboutThisAppItem.Message(
-                msg = it
-            ))
+            list.add(
+                AboutThisAppItem.Message(
+                    msg = it
+                )
+            )
         }
 
         list.addAll(configuration.dependencies.map {
@@ -86,13 +88,22 @@ open class AboutThisAppActivity: AppCompatActivity(),
         })
 
         configuration.footnote?.let {
-            list.add(AboutThisAppItem.Message(
-                msg = it,
-                isCentered = false
-            ))
+            list.add(
+                AboutThisAppItem.Message(
+                    msg = it,
+                    isCentered = false
+                )
+            )
         }
 
-        list.add(AboutThisAppItem.Message(getString(R.string.about_this_app_app_version, configuration.appVersion)))
+        list.add(
+            AboutThisAppItem.Message(
+                getString(
+                    R.string.about_this_app_app_version,
+                    configuration.appVersion
+                )
+            )
+        )
         configuration.guid?.let {
             list.add(AboutThisAppItem.Message(it, isPrimary = false, isCentered = true))
         }

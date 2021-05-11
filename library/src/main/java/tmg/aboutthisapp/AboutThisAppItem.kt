@@ -1,8 +1,6 @@
-package tmg.components.about
+package tmg.aboutthisapp
 
 import androidx.annotation.LayoutRes
-import androidx.annotation.StringRes
-import tmg.components.R
 
 internal sealed class AboutThisAppItem(
     @LayoutRes val layoutId: Int
