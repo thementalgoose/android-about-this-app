@@ -1,6 +1,6 @@
 # Android About This App
 
-The "About This App" cover screen
+The "About This App" cover screen that I use in my apps
 
 ![about-this-app](res/aboutthisapp.gif)
 
