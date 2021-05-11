@@ -1,29 +1,32 @@
-# Android Components
+# Android About This App
 
-Contains a collection of generic UI components that I reuse in all of my apps
+The "About This App" cover screen
 
-## Install
+![about-this-app](res/aboutthisapp.gif)
 
-#### `build.gradle`
+## Installation
 
-```
-allprojects {
-	repositories {
-		...
-		maven { url 'https://jitpack.io' }
-	}
-}
-```
+<details>
+    <summary><code>build.gradle</code></summary>
 
-#### `app/build.gradle`
+    allprojects {
+        repositories {
+            ...
+            maven { url 'https://jitpack.io' }
+        }
+    }
+</details>
 
-```
-dependencies {
-    implementation 'com.github.thementalgoose:android-components:4.0.1'
-}
-```
+<details>
+    <summary><code>app/build.gradle</code></summary>
 
-Android Components [![](https://jitpack.io/v/thementalgoose/android-components.svg)](https://jitpack.io/#thementalgoose/android-components)
+    dependencies {
+        implementation 'com.github.thementalgoose:android-about-this-app:5.0.0'
+        // Use Jitpack version if newer
+    }
+
+Jitpack version: [![](https://jitpack.io/v/thementalgoose/android-about-this-app.svg)](https://jitpack.io/#thementalgoose/android-about-this-app)
+</details>
 
 
 ## Usage
