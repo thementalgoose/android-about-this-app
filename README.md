@@ -1,29 +1,34 @@
-# Android Components
+# Android About This App
 
-Contains a collection of generic UI components that I reuse in all of my apps
+The "About This App" cover screen that I use in my apps
 
-## Install
+[![](https://jitpack.io/v/thementalgoose/android-about-this-app.svg)](https://jitpack.io/#thementalgoose/android-about-this-app) [![main](https://github.com/thementalgoose/android-about-this-app/workflows/Main/badge.svg)](https://github.com/thementalgoose/android-about-this-app/actions)
 
-#### `build.gradle`
+![about-this-app](res/aboutthisapp.gif)
 
-```
-allprojects {
-	repositories {
-		...
-		maven { url 'https://jitpack.io' }
-	}
-}
-```
+## Installation
 
-#### `app/build.gradle`
+<details>
+    <summary><code>build.gradle</code></summary>
 
-```
-dependencies {
-    implementation 'com.github.thementalgoose:android-components:4.0.1'
-}
-```
+    allprojects {
+        repositories {
+            ...
+            maven { url 'https://jitpack.io' }
+        }
+    }
+</details>
 
-Android Components [![](https://jitpack.io/v/thementalgoose/android-components.svg)](https://jitpack.io/#thementalgoose/android-components)
+<details>
+    <summary><code>app/build.gradle</code></summary>
+
+    dependencies {
+        implementation 'com.github.thementalgoose:android-about-this-app:5.0.0'
+        // Use Jitpack version if newer
+    }
+
+Jitpack version: [![](https://jitpack.io/v/thementalgoose/android-about-this-app.svg)](https://jitpack.io/#thementalgoose/android-about-this-app)
+</details>
 
 
 ## Usage
