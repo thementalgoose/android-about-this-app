@@ -64,7 +64,8 @@ class MainActivity : AppCompatActivity() {
                         order = it,
                         dependencyName = "Utilities",
                         author = "Jordan Fisher",
-                        imageUrl = "https://avatars0.githubusercontent.com/u/5982159?s=460&v=4",
+                        imageUrl = "",
+                        imageRes = R.drawable.test_drawable,
                         url = "https://github.com/thementalgoose/android-utilities"
                     )
                 },
