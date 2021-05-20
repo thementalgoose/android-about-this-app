@@ -2,6 +2,8 @@ package tmg.aboutthisapp
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 
 data class AboutThisAppDependency(
@@ -11,6 +13,8 @@ data class AboutThisAppDependency(
     val imageUrl: String = "",
     @DrawableRes
     val imageRes: Int = 0,
+    @ColorInt
+    val backgroundColor: Int = 0,
     val url: String
 ): Parcelable {
     constructor(parcel: Parcel) : this(
@@ -18,6 +22,7 @@ data class AboutThisAppDependency(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
+        parcel.readInt(),
         parcel.readInt(),
         parcel.readString() ?: ""
     )
@@ -28,11 +33,12 @@ data class AboutThisAppDependency(
         parcel.writeString(author)
         parcel.writeString(imageUrl)
         parcel.writeInt(imageRes)
+        parcel.writeInt(backgroundColor)
         parcel.writeString(url)
     }
 
     override fun describeContents(): Int {
-        return dependencyName.hashCode() + author.hashCode() + imageUrl.hashCode() + url.hashCode() + imageRes.hashCode()
+        return dependencyName.hashCode() + author.hashCode() + imageUrl.hashCode() + url.hashCode() + imageRes.hashCode() + backgroundColor.hashCode()
     }
 
     companion object CREATOR : Parcelable.Creator<AboutThisAppDependency> {

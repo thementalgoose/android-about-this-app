@@ -1,15 +1,17 @@
 package tmg.aboutthisapp.viewholders
 
+import android.graphics.Color.TRANSPARENT
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import tmg.aboutthisapp.R
+import de.hdodenhof.circleimageview.CircleImageView
 import tmg.aboutthisapp.AboutThisAppCallback
 import tmg.aboutthisapp.AboutThisAppDependency
 import tmg.aboutthisapp.AboutThisAppItem
+import tmg.aboutthisapp.R
 
 internal class AboutThisAppViewHolderDependency(
     private val callback: AboutThisAppCallback,
@@ -17,7 +19,7 @@ internal class AboutThisAppViewHolderDependency(
 ): RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
     private val clAboutThisAppDependencyMain: ConstraintLayout = itemView.findViewById(R.id.aboutThisAppDependency_container)
-    private val imgAboutThisAppDependencyIcon: ImageView = itemView.findViewById(R.id.aboutThisAppDependency_icon)
+    private val imgAboutThisAppDependencyIcon: CircleImageView = itemView.findViewById(R.id.aboutThisAppDependency_icon)
     private val tvAboutThisAppDependencyName: TextView = itemView.findViewById(R.id.aboutThisAppDependency_name)
     private val tvAboutThisAppDependencyAuthor: TextView = itemView.findViewById(R.id.aboutThisAppDependency_author)
     private val tvAboutThisAppDependencyUrl: TextView = itemView.findViewById(R.id.aboutThisAppDependency_url)
@@ -33,6 +35,13 @@ internal class AboutThisAppViewHolderDependency(
         tvAboutThisAppDependencyName.text = dependency.dependencyName
         tvAboutThisAppDependencyAuthor.text = dependency.author
         tvAboutThisAppDependencyUrl.text = dependency.url
+
+        if (dependency.backgroundColor != 0) {
+            imgAboutThisAppDependencyIcon.circleBackgroundColor = dependency.backgroundColor
+        }
+        else {
+            imgAboutThisAppDependencyIcon.setBackgroundColor(TRANSPARENT)
+        }
 
         when {
             dependency.imageUrl.isNotEmpty() -> {

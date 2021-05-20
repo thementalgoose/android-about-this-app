@@ -1,5 +1,6 @@
 package tmg.aboutthisapp.sample
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import tmg.aboutthisapp.AboutThisAppConfiguration
@@ -59,16 +60,25 @@ class MainActivity : AppCompatActivity() {
                 themeRes = R.style.AppThemeDark,
                 appName = "Sample App",
                 appVersion = "1.0.0",
-                dependencies = List(15) {
+                dependencies = listOf(
                     AboutThisAppDependency(
-                        order = it,
+                        order = 0,
                         dependencyName = "Utilities",
                         author = "Jordan Fisher",
                         imageUrl = "",
                         imageRes = R.drawable.test_drawable,
                         url = "https://github.com/thementalgoose/android-utilities"
-                    )
-                },
+                    ),
+                    AboutThisAppDependency(
+                        order = 1,
+                        dependencyName = "Moar",
+                        author = "Jordan Fisher",
+                        imageUrl = "",
+                        imageRes = R.drawable.test_icon,
+                        backgroundColor = Color.RED,
+                        url = "https://github.com/thementalgoose/android-utilities"
+                    ),
+                ),
                 email = "thementalgoose@gmail.com",
                 footnote = "Thank you!",
                 github = "https://github.com/thementalgoose/android-components",
