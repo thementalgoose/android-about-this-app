@@ -34,9 +34,20 @@ internal class AboutThisAppViewHolderDependency(
         tvAboutThisAppDependencyAuthor.text = dependency.author
         tvAboutThisAppDependencyUrl.text = dependency.url
 
-        Glide.with(itemView)
-            .load(dependency.imageUrl)
-            .into(imgAboutThisAppDependencyIcon)
+        when {
+            dependency.imageUrl.isNotEmpty() -> {
+                Glide.with(itemView)
+                    .load(dependency.imageUrl)
+                    .into(imgAboutThisAppDependencyIcon)
+            }
+            dependency.imageRes != 0 -> {
+                Glide.with(itemView).clear(imgAboutThisAppDependencyIcon)
+                imgAboutThisAppDependencyIcon.setImageResource(dependency.imageRes)
+            }
+            else -> {
+                Glide.with(itemView).clear(imgAboutThisAppDependencyIcon)
+            }
+        }
     }
 
     //region View.OnClickListener
