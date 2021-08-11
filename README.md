@@ -33,6 +33,41 @@ Jitpack version: [![](https://jitpack.io/v/thementalgoose/android-about-this-app
 
 ## Usage
 
+Initialise with a config
+
+```kotlin
+// Specify a configuration
+val configuration = AboutThisAppConfiguration(
+    themeRes = R.style.AppTheme,
+    appName = "Sample App",
+    appVersion = "1.0.0",
+    dependencies = List(14) {
+        AboutThisAppDependency(
+            order = it,
+            dependencyName = "Myself",
+            author = "Jordan Fisher",
+            imageUrl = "https://avatars0.githubusercontent.com/u/5982159?s=460&v=4",
+            url = "https://github.com/thementalgoose/android-about-this-app"
+        )
+    },
+    email = "thementalgoose@gmail.com",
+    footnote = "Thank you!",
+    github = "https://github.com/thementalgoose",
+    play = null,
+    guid = "abcdefg-abcd-abcd-abcdefg",
+    guidLongClickCopy = true,
+    name = "My Application",
+    nameDesc = "A sample app being shown",
+    imageUrl = "https://avatars0.githubusercontent.com/u/5982159?s=460&v=4",
+    appPackageName = this.packageName,
+    subtitle = "Thank you!",
+    website = "https://google.com"
+)
+
+// Launch
+startActivity(AboutThisAppActivity.intent(this, configuration))
+```
+
 Inside your app style supplied to this activity, provide the following attributes
 
 ```

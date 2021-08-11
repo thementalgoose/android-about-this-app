@@ -105,7 +105,12 @@ open class AboutThisAppActivity: AppCompatActivity(),
             )
         )
         configuration.guid?.let {
-            list.add(AboutThisAppItem.Message(it, isPrimary = false, isCentered = true))
+            list.add(AboutThisAppItem.Message(
+                msg = it,
+                isPrimary = false,
+                isCentered = true,
+                longClickCopy = configuration.guidLongClickCopy
+            ))
         }
         return list
     }

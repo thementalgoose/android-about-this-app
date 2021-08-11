@@ -12,7 +12,8 @@ internal sealed class AboutThisAppItem(
     data class Message(
         val msg: String,
         val isCentered: Boolean = true,
-        val isPrimary: Boolean = true
+        val isPrimary: Boolean = true,
+        val longClickCopy: Boolean = false
     ): AboutThisAppItem(R.layout.about_this_app_item_view_message)
 
     data class Header(

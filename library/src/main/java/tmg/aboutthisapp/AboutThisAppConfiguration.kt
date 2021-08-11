@@ -27,6 +27,7 @@ data class AboutThisAppConfiguration(
     val subtitle: String? = null,
     val footnote: String? = null,
     val guid: String? = null,
+    val guidLongClickCopy: Boolean = false,
     var dependencies: List<AboutThisAppDependency>
 ): Parcelable {
 
@@ -71,6 +72,7 @@ data class AboutThisAppConfiguration(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
+        parcel.readInt() == 1,
         emptyList()
     ) {
         val dependencyList: List<AboutThisAppDependency> = mutableListOf()
@@ -95,6 +97,7 @@ data class AboutThisAppConfiguration(
         p0?.writeString(subtitle)
         p0?.writeString(footnote)
         p0?.writeString(guid)
+        p0?.writeInt(if (guidLongClickCopy) 1 else 0)
         p0?.writeList(dependencies)
     }
 
@@ -115,6 +118,7 @@ data class AboutThisAppConfiguration(
             appVersion.hashCode() +
             footnote.hashCode() +
             guid.hashCode() +
+            guidLongClickCopy.hashCode() +
             subtitle.hashCode()
     }
 

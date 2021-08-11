@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
                 github = "https://github.com/thementalgoose/android-components",
                 play = null,
                 guid = "abcdefg-abcd-abcd-abcdefg",
+                guidLongClickCopy = true,
                 name = "Flashback",
                 nameDesc = "Formula 1 Statistics",
                 imageUrl = "https://avatars0.githubusercontent.com/u/5982159?s=460&v=4",

@@ -8,4 +8,6 @@
     <string name="about_this_app_send_email">Send Email</string>
 
     <string name="about_this_app_ab_back_button">Back</string>
+
+    <string name="about_this_app_copy_to_clipboard">Copied to clipboard</string>
 </resources>
