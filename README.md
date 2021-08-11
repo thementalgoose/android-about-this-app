@@ -23,7 +23,7 @@ The "About This App" cover screen that I use in my apps
     <summary><code>app/build.gradle</code></summary>
 
     dependencies {
-        implementation 'com.github.thementalgoose:android-about-this-app:5.0.0'
+        implementation 'com.github.thementalgoose:android-about-this-app:5.0.4'
         // Use Jitpack version if newer
     }
 
@@ -70,7 +70,7 @@ startActivity(AboutThisAppActivity.intent(this, configuration))
 
 Inside your app style supplied to this activity, provide the following attributes
 
-```
+```xml
 <!-- About This App Activity (light) -->
 <item name="aboutThisApp_header">?attr/colorPrimary</item>
 <item name="aboutThisApp_textPrimary">#181818</item>
