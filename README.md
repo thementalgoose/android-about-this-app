@@ -23,7 +23,7 @@ The "About This App" cover screen that I use in my apps
     <summary><code>app/build.gradle</code></summary>
 
     dependencies {
-        implementation 'com.github.thementalgoose:android-about-this-app:5.0.4'
+        implementation 'com.github.thementalgoose:android-about-this-app:5.1.0'
         // Use Jitpack version if newer
     }
 
@@ -88,6 +88,14 @@ Inside your app style supplied to this activity, provide the following attribute
 <item name="aboutThisApp_iconPrimary">?attr/aboutThisApp_textPrimary</item>
 <item name="aboutThisApp_backgroundPrimary">#181818</item>
 <item name="aboutThisApp_backgroundSecondary">#383838</item>
+
+<!-- 
+Overscroll mode is disabled on API 30 and below. 
+To enable, override the int constant 
+-->
+<integer name="aboutThisApp_overscrollMode">2</integer> <!-- never -->
+<integer name="aboutThisApp_overscrollMode">1</integer> <!-- ifContentScrolls -->
+<integer name="aboutThisApp_overscrollMode">0</integer> <!-- always -->
 ```
 
 ## License
