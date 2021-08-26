@@ -119,7 +119,7 @@
         android:layout_height="0dp"
         android:clipToPadding="false"
         android:nestedScrollingEnabled="true"
-        android:overScrollMode="never"
+        android:overScrollMode="@integer/aboutThisApp_overscrollMode"
         android:paddingTop="@dimen/aboutThisApp_paddingSmall"
         android:paddingBottom="@dimen/aboutThisApp_paddingMedium"
         app:layout_constraintBottom_toBottomOf="parent"
