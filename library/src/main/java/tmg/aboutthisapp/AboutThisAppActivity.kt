@@ -16,12 +16,16 @@ open class AboutThisAppActivity: AppCompatActivity(),
 
     private lateinit var binding: AboutThisAppActivityBinding
 
-    private lateinit var configuration: AboutThisAppConfiguration
+    private var _configuration: AboutThisAppConfiguration? = null
+    private val configuration: AboutThisAppConfiguration
+        get() = _configuration ?: throw RuntimeException("Please provide an 'AboutThisAppConfiguration' item (via. AboutThisAppActivity.intent(context, AboutThisAppConfiguration))")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        configuration = intent.extras?.getParcelable(keyConfiguration) ?: throw RuntimeException("Please provide an 'AboutThisAppConfiguration' item (via. AboutThisAppActivity.intent(context, AboutThisAppConfiguration))")
+        if (_configuration == null) {
+            _configuration = intent.extras?.getParcelable(keyConfiguration)
+        }
         setTheme(configuration.themeRes)
 
         binding = AboutThisAppActivityBinding.inflate(layoutInflater)
@@ -61,6 +65,11 @@ open class AboutThisAppActivity: AppCompatActivity(),
 
             insets
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelable(keyConfiguration, configuration)
+        super.onSaveInstanceState(outState)
     }
 
     private fun populateList(): List<AboutThisAppItem> {
