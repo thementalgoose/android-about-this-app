@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'maven-publish'
 apply plugin: "de.mannodermaus.android-junit5"
 
 repositories {
@@ -102,4 +103,19 @@ dependencies {
         exclude group: 'org.junit.jupiter'
     }
     testImplementation "io.mockk:mockk:1.12.1"
+}
+
+task androidSourcesJar(type: Jar) {
+    classifier 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+project.afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+            }
+        }
+    }
 }
