@@ -4,9 +4,11 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.util.Log
 import androidx.annotation.DrawableRes
+import androidx.annotation.Keep
 import androidx.annotation.StyleRes
 import tmg.aboutthisapp.utils.getMarketUri
 
+@Keep
 data class AboutThisAppConfiguration(
     @StyleRes
     val themeRes: Int,
