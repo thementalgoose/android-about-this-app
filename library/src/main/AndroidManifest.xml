@@ -1,2 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="tmg.aboutthisapp" />
+    package="tmg.aboutthisapp">
+
+    <application>
+        <activity android:name=".AboutThisAppActivity" />
+    </application>
+</manifest>

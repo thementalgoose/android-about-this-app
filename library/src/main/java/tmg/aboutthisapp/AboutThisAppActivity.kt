@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import androidx.annotation.Keep
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,20 +13,20 @@ import com.bumptech.glide.Glide
 import tmg.aboutthisapp.databinding.AboutThisAppActivityBinding
 import kotlin.reflect.KClass
 
-open class AboutThisAppActivity: AppCompatActivity(),
-    AboutThisAppCallback {
+open class AboutThisAppActivity: AppCompatActivity(), AboutThisAppCallback {
 
     private lateinit var binding: AboutThisAppActivityBinding
 
-    private var _configuration: AboutThisAppConfiguration? = null
-    private val configuration: AboutThisAppConfiguration
-        get() = _configuration ?: throw RuntimeException("Please provide an 'AboutThisAppConfiguration' item (via. AboutThisAppActivity.intent(context, AboutThisAppConfiguration))")
+    open fun onConfigurationNotFound() {
+        Log.e("AboutThisApp", "Cannot find configuration whilst creating an activity, closing activity")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        if (_configuration == null) {
-            _configuration = intent.extras?.getParcelable(keyConfiguration)
+        val configuration: AboutThisAppConfiguration = intent.extras?.getParcelable<AboutThisAppConfiguration>(keyConfiguration) ?: run {
+            onConfigurationNotFound()
+            finish()
+            return
         }
         setTheme(configuration.themeRes)
 
@@ -38,6 +40,7 @@ open class AboutThisAppActivity: AppCompatActivity(),
         configuration.imageBackground?.let {
             binding.aboutThisAppIcon.setBackgroundResource(it)
         }
+
         if (configuration.imageUrl != null) {
             Glide.with(this)
                 .load(configuration.imageUrl)
@@ -57,7 +60,7 @@ open class AboutThisAppActivity: AppCompatActivity(),
         binding.aboutThisAppList.adapter = adapter
         binding.aboutThisAppList.layoutManager = LinearLayoutManager(this)
 
-        adapter.items = populateList()
+        adapter.items = configuration.populateList()
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.aboutThisAppMotionLayout) { _, insets ->
             binding.aboutThisAppInsets.setPadding(0, insets.systemWindowInsetTop, 0, 0)
@@ -67,24 +70,20 @@ open class AboutThisAppActivity: AppCompatActivity(),
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putParcelable(keyConfiguration, configuration)
-        super.onSaveInstanceState(outState)
-    }
-
-    private fun populateList(): List<AboutThisAppItem> {
+    private fun AboutThisAppConfiguration.populateList(): List<AboutThisAppItem> {
         val list: MutableList<AboutThisAppItem> = mutableListOf()
 
         list.add(
             AboutThisAppItem.Header(
-                play = configuration.playStore,
-                email = configuration.email,
-                website = configuration.website,
-                github = configuration.github
+                play = this.playStore,
+                email = this.email,
+                website = this.website,
+                github = this.github,
+                appName = this.appName
             )
         )
 
-        configuration.subtitle?.let {
+        this.subtitle?.let {
             list.add(
                 AboutThisAppItem.Message(
                     msg = it
@@ -92,11 +91,11 @@ open class AboutThisAppActivity: AppCompatActivity(),
             )
         }
 
-        list.addAll(configuration.dependencies.map {
+        list.addAll(this.dependencies.map {
             AboutThisAppItem.Dependency(it)
         })
 
-        configuration.footnote?.let {
+        this.footnote?.let {
             list.add(
                 AboutThisAppItem.Message(
                     msg = it,
@@ -109,16 +108,16 @@ open class AboutThisAppActivity: AppCompatActivity(),
             AboutThisAppItem.Message(
                 getString(
                     R.string.about_this_app_app_version,
-                    configuration.appVersion
+                    this.appVersion
                 )
             )
         )
-        configuration.guid?.let {
+        this.guid?.let {
             list.add(AboutThisAppItem.Message(
                 msg = it,
                 isPrimary = false,
                 isCentered = true,
-                longClickCopy = configuration.guidLongClickCopy
+                longClickCopy = this.guidLongClickCopy
             ))
         }
         return list
@@ -130,35 +129,31 @@ open class AboutThisAppActivity: AppCompatActivity(),
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(item.url)))
     }
 
-    override fun clickPlay() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(configuration.playStore))
+    override fun clickUrl(url: String?) {
+        val webUrl = url ?: return
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(webUrl))
         startActivity(intent)
     }
 
-    override fun clickEmail() {
+    override fun sendEmail(email: String?, subject: String) {
+        val emailAddress = email ?: return
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "text/html"
-        intent.putExtra(Intent.EXTRA_EMAIL, configuration.email)
-        intent.putExtra(Intent.EXTRA_SUBJECT, configuration.appName)
+        intent.putExtra(Intent.EXTRA_EMAIL, emailAddress)
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject)
         startActivity(Intent.createChooser(intent, getString(R.string.about_this_app_send_email)))
-    }
-
-    override fun clickWebsite() {
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(configuration.website)))
-    }
-
-    override fun clickGithub() {
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(configuration.github)))
     }
 
     //endregion
 
     companion object {
 
+        @Keep
         private const val keyConfiguration: String = "configuration"
 
         @JvmStatic
-        fun intent(context: Context, configuration: AboutThisAppConfiguration, clazz: KClass<out AboutThisAppActivity> = AboutThisAppActivity::class): Intent {
+        @Keep
+        fun intent(context: Context, configuration: AboutThisAppConfiguration?, clazz: KClass<out AboutThisAppActivity> = AboutThisAppActivity::class): Intent {
             val intent = Intent(context, clazz.java)
             intent.putExtra(keyConfiguration, configuration)
             return intent

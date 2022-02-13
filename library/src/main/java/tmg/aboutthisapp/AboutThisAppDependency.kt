@@ -5,7 +5,9 @@ import android.os.Parcelable
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.annotation.Keep
 
+@Keep
 data class AboutThisAppDependency(
     val order: Int,
     val dependencyName: String,
