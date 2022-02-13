@@ -19,3 +19,10 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class tmg.aboutthisapp.AboutThisAppActivity { *; }
+-keep class tmg.aboutthisapp.AboutThisAppConfiguration { *; }
+-keep class tmg.aboutthisapp.AboutThisAppDependency { *; }
+
+-keep class androidx.core.widget.NestedScrollView { *; }
+-keep class androidx.constraintlayout.motion.widget.MotionLayout { *; }

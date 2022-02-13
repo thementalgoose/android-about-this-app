@@ -138,5 +138,42 @@ class MainActivity : AppCompatActivity() {
                     )
             )
         }
+
+        binding.btnAboutThisAppDarkImageRes.setOnClickListener {
+
+            val configuration = AboutThisAppConfiguration(
+                themeRes = R.style.AppTheme,
+                appName = "Sample App",
+                appVersion = "1.0.0",
+                dependencies = List(5) {
+                    AboutThisAppDependency(
+                        order = it,
+                        dependencyName = "Utilities",
+                        author = "Jordan Fisher",
+                        imageUrl = "https://avatars0.githubusercontent.com/u/5982159?s=460&v=4",
+                        url = "https://github.com/thementalgoose/android-utilities"
+                    )
+                },
+                email = "thementalgoose@gmail.com",
+                footnote = "Thank you!",
+                github = "https://github.com/thementalgoose/android-components",
+                play = null,
+                name = "Jordan Fisher",
+                nameDesc = "App developer!",
+                imageRes = R.drawable.ic_launcher_foreground,
+                imageBackground = R.drawable.test_image_background,
+                appPackageName = this.packageName,
+                subtitle = "Thanks again!",
+                website = "https://jordanfisher.io"
+            )
+
+            startActivity(
+                AboutThisAppActivity
+                    .intent(
+                        context = this,
+                        configuration = configuration
+                    )
+            )
+        }
     }
 }

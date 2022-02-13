@@ -20,6 +20,7 @@ internal sealed class AboutThisAppItem(
         val play: String? = null,
         val email: String? = null,
         val website: String? = null,
-        val github: String? = null
+        val github: String? = null,
+        val appName: String? = null
     ): AboutThisAppItem(R.layout.about_this_app_item_view_header)
 }

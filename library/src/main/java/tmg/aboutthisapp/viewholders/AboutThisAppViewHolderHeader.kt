@@ -25,7 +25,10 @@ internal class AboutThisAppViewHolderHeader(
         website.setOnClickListener(this)
     }
 
+    private lateinit var item: AboutThisAppItem.Header
+
     fun bind(item: AboutThisAppItem.Header) {
+        this.item = item
         email.show(item.email != null)
         github.show(item.github != null)
         play.show(item.play != null)
@@ -35,16 +38,16 @@ internal class AboutThisAppViewHolderHeader(
     override fun onClick(v: View?) {
         when (v) {
             email -> {
-                callback.clickEmail()
+                callback.sendEmail(item.email, item.appName ?: "")
             }
             github -> {
-                callback.clickGithub()
+                callback.clickUrl(item.github)
             }
             play -> {
-                callback.clickPlay()
+                callback.clickUrl(item.play)
             }
             website -> {
-                callback.clickWebsite()
+                callback.clickUrl(item.website)
             }
         }
     }

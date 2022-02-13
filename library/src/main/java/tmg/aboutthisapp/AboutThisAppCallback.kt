@@ -2,8 +2,6 @@ package tmg.aboutthisapp
 
 interface AboutThisAppCallback {
     fun dependencyItemClicked(item: AboutThisAppDependency)
-    fun clickPlay()
-    fun clickEmail()
-    fun clickWebsite()
-    fun clickGithub()
+    fun clickUrl(url: String?)
+    fun sendEmail(email: String?, subject: String)
 }
