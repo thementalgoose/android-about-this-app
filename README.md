@@ -23,7 +23,7 @@ The "About This App" cover screen that I use in my apps
     <summary><code>app/build.gradle</code></summary>
 
     dependencies {
-        implementation 'com.github.thementalgoose:android-about-this-app:5.1.0'
+        implementation 'com.github.thementalgoose:android-about-this-app:5.3.0'
         // Use Jitpack version if newer
     }
 
@@ -101,7 +101,7 @@ To enable, override the int constant
 ## License
 
 ```
-Copyright (C) 2020 Jordan Fisher
+Copyright (C) 2022 Jordan Fisher
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
