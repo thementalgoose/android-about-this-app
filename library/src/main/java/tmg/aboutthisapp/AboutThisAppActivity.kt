@@ -1,16 +1,21 @@
 package tmg.aboutthisapp
 
+import android.content.ActivityNotFoundException
+import android.content.ClipData
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.annotation.Keep
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import tmg.aboutthisapp.databinding.AboutThisAppActivityBinding
+import tmg.aboutthisapp.utils.clipboardManager
 import kotlin.reflect.KClass
 
 open class AboutThisAppActivity: AppCompatActivity(), AboutThisAppCallback {
@@ -132,7 +137,16 @@ open class AboutThisAppActivity: AppCompatActivity(), AboutThisAppCallback {
     override fun clickUrl(url: String?) {
         val webUrl = url ?: return
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(webUrl))
-        startActivity(intent)
+        try {
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            val clipData = ClipData.newPlainText("", url)
+            this.clipboardManager?.setPrimaryClip(clipData)
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
+                Toast.makeText(this, R.string.about_this_app_copy_to_clipboard, Toast.LENGTH_LONG)
+                    .show()
+            }
+        }
     }
 
     override fun sendEmail(email: String?, subject: String) {
@@ -141,7 +155,12 @@ open class AboutThisAppActivity: AppCompatActivity(), AboutThisAppCallback {
         intent.type = "text/html"
         intent.putExtra(Intent.EXTRA_EMAIL, emailAddress)
         intent.putExtra(Intent.EXTRA_SUBJECT, subject)
-        startActivity(Intent.createChooser(intent, getString(R.string.about_this_app_send_email)))
+
+        try {
+            startActivity(Intent.createChooser(intent, getString(R.string.about_this_app_send_email)))
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(this, getString(R.string.about_this_app_unable_to_find_client), Toast.LENGTH_LONG).show()
+        }
     }
 
     //endregion
