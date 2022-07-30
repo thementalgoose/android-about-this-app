@@ -2,6 +2,7 @@ package tmg.aboutthisapp.viewholders
 
 import android.content.ClipData
 import android.graphics.Typeface
+import android.os.Build
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
@@ -55,11 +56,12 @@ internal class AboutThisAppViewHolderMessage(
     override fun onLongClick(p0: View?): Boolean {
         val context = p0?.context ?: return false
         context.clipboardManager?.let { manager ->
-
-            val clipData = ClipData.newPlainText(msg, msg)
+            val clipData = ClipData.newPlainText("", msg)
             manager.setPrimaryClip(clipData)
-
-            Toast.makeText(context, R.string.about_this_app_copy_to_clipboard, Toast.LENGTH_LONG).show()
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
+                Toast.makeText(context, R.string.about_this_app_copy_to_clipboard, Toast.LENGTH_LONG)
+                    .show()
+            }
         }
         return true
     }
