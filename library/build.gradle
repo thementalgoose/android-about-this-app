@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'maven-publish'
 apply plugin: "de.mannodermaus.android-junit5"
+apply plugin: 'kotlin-parcelize'
 
 repositories {
     mavenCentral()
