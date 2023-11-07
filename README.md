@@ -33,7 +33,10 @@ The "About This App" cover screen that I use in my apps
 Jitpack version: [![](https://jitpack.io/v/thementalgoose/android-about-this-app.svg)](https://jitpack.io/#thementalgoose/android-about-this-app)
 </details>
 
-Version 6.x is a built in Jetpack Compose with a different API, so updating will cause breaking changes. Stay on [5.3.2](https://github.com/thementalgoose/android-about-this-app/tree/5.3.2) to continue using the old version  
+Version 6.x is a built in Jetpack Compose with a different API, so updating will cause breaking changes.
+
+- Use the AboutThisAppConfiguration
+Stay on [5.3.2](https://github.com/thementalgoose/android-about-this-app/tree/5.3.2) to continue using the old version  
 
 ## Usage
 
@@ -42,14 +45,15 @@ Initialise with a config
 ```kotlin
 
 /**
- * Consume it in a compose navigation host or your own activity 
- * 
+ * Option 1
+ * Consume it in a compose navigation host or your own activity
+ * - Bind colours + any strings with AboutThisAppTheme
  */
 setContent { 
     AboutThisAppTheme(
         lightColors = AboutThisAppColors(), /* Optional, override for custom theme */
         darkColors = AboutThisAppColors(), /* Optional, override for custom theme */
-        strings = AboutThisAppStrings.default() /* Optional, override for custom values / use string resources */
+        labels = Labels() /* Optional, override for custom values / use string resources */
     ) {
         AboutThisAppScreen(
             appIcon = R.mipmap.ic_launcher,
@@ -76,7 +80,7 @@ setContent {
             contactEmail = "johndoe@anonymous.com",
             links = listOf(
                 Link.Github { openWebpage("https://www.github.com") },
-                Link()
+                Link(icon = R.drawable.my_icon, name = R.string.my_name, onClick = { })
             )
         )
     }
@@ -107,6 +111,9 @@ val configuration = Configuration(
     email = "johndoe@anonymous.com", /* Optional */
     website = "https://www.google.com", /* Optional */
     debugInfo = "abcdefg-abcd-abcd-abcdefgh", /* Optional */
+    lightColors = ConfigurationColours(), /* Optional */
+    darkColors = ConfigurationColours(), /* Optional */
+    labels = Labels(), /* Optional */
 )
 startActivity(AboutThisAppActivity.intent(this, configuration))
 ```
@@ -114,7 +121,7 @@ startActivity(AboutThisAppActivity.intent(this, configuration))
 ## License
 
 ```
-Copyright (C) 2022 Jordan Fisher
+Copyright (C) 2023 Jordan Fisher
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

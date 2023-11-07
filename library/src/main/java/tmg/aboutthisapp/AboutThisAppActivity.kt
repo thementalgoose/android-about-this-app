@@ -56,9 +56,9 @@ class AboutThisAppActivity: AppCompatActivity() {
         setContent {
             val windowSizeClass = calculateWindowSizeClass(activity = this@AboutThisAppActivity)
             AboutThisAppTheme(
-                lightColors = config.lightColors?.let { AboutThisAppColors(it) } ?: lightColours,
-                darkColors = config.darkColors?.let { AboutThisAppColors(it) } ?: darkColours,
-                strings = config.strings
+                lightColors = config.lightColors?.let { Colours(it) } ?: lightColours,
+                darkColors = config.darkColors?.let { Colours(it) } ?: darkColours,
+                strings = config.labels
             ) {
                 AboutThisAppScreen(
                     appIcon = config.imageRes,
@@ -90,15 +90,33 @@ class AboutThisAppActivity: AppCompatActivity() {
         configuration: Configuration
     ): List<Link> = mutableListOf<Link>()
         .apply {
-            this.add(Link.Play { openPlaystore(configuration.appPackageName) })
+            this.add(Link.play { openPlaystore(configuration.appPackageName) })
+            if (configuration.email != null) {
+                this.add(Link.email { openEmail(configuration.email) })
+            }
             if (configuration.github != null) {
-                this.add(Link.Github { openLink(configuration.github) })
+                this.add(Link.github { openLink(configuration.github) })
+            }
+            if (configuration.gitlab != null) {
+                this.add(Link.gitlab { openLink(configuration.gitlab) })
+            }
+            if (configuration.linkedin != null) {
+                this.add(Link.linkedIn { openLink(configuration.linkedin) })
+            }
+            if (configuration.reddit != null) {
+                this.add(Link.reddit { openLink(configuration.reddit) })
+            }
+            if (configuration.twitter != null) {
+                this.add(Link.twitter { openLink(configuration.twitter) })
+            }
+            if (configuration.x != null) {
+                this.add(Link.x { openLink(configuration.x) })
+            }
+            if (configuration.youtube != null) {
+                this.add(Link.youtube { openLink(configuration.youtube) })
             }
             if (configuration.website != null) {
-                this.add(Link.Website { openLink(configuration.website) })
-            }
-            if (configuration.email != null) {
-                this.add(Link.Email { openEmail(configuration.email) })
+                this.add(Link.website { openLink(configuration.website) })
             }
         }
         .toList()

@@ -11,7 +11,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import tmg.aboutthisapp.AboutThisAppTheme
-import tmg.aboutthisapp.configuration.AboutThisAppStrings
 
 @Composable
 internal fun AppVersion(

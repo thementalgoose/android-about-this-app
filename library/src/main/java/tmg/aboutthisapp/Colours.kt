@@ -5,7 +5,7 @@ import androidx.annotation.ColorInt
 import androidx.compose.ui.graphics.Color
 import kotlinx.parcelize.Parcelize
 
-internal val lightColours = AboutThisAppColors(
+internal val lightColours = Colours(
     colorPrimary = Color(0xFF6EF9F5),
     background = Color(0xFFFFFBFC),
     surface = Color(0xFFEFEBEC),
@@ -15,7 +15,7 @@ internal val lightColours = AboutThisAppColors(
     onPrimary = Color(0xFF202020)
 )
 
-internal val darkColours = AboutThisAppColors(
+internal val darkColours = Colours(
     colorPrimary = Color(0xFF07B0AB),
     background = Color(0xFF181818),
     surface = Color(0xFF282828),
@@ -26,7 +26,7 @@ internal val darkColours = AboutThisAppColors(
 )
 
 @Parcelize
-data class AboutThisAppConfigColors(
+data class ConfigurationColours(
     @ColorInt
     val colorPrimary: Int,
     @ColorInt
@@ -43,7 +43,7 @@ data class AboutThisAppConfigColors(
     val onPrimary: Int,
 ): Parcelable
 
-data class AboutThisAppColors(
+data class Colours(
     val colorPrimary: Color,
     val background: Color,
     val surface: Color,
@@ -53,7 +53,7 @@ data class AboutThisAppColors(
     val onPrimary: Color,
 ) {
     internal constructor(
-        config: AboutThisAppConfigColors
+        config: ConfigurationColours
     ): this(
         colorPrimary = Color(config.colorPrimary),
         background = Color(config.background),

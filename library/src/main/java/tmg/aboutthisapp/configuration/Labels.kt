@@ -2,14 +2,11 @@ package tmg.aboutthisapp.configuration
 
 import android.os.Parcelable
 import androidx.annotation.StringRes
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ReadOnlyComposable
-import androidx.compose.ui.res.stringResource
 import kotlinx.parcelize.Parcelize
 import tmg.aboutthisapp.R
 
 @Parcelize
-data class AboutThisAppStrings internal constructor(
+data class Labels internal constructor(
     @StringRes
     val contactEmail: Int = R.string.about_this_app_contact_email,
     @StringRes

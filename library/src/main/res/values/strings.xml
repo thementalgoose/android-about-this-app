@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="about_this_app_github">Github</string>
+    <string name="about_this_app_gitlab">Gitlab</string>
+    <string name="about_this_app_linkedin">LinkedIn</string>
+    <string name="about_this_app_reddit">Reddit</string>
+    <string name="about_this_app_twitter">Twitter</string>
+    <string name="about_this_app_x">X</string>
+    <string name="about_this_app_youtube">Youtube</string>
     <string name="about_this_app_email">Email</string>
     <string name="about_this_app_website">Website</string>
     <string name="about_this_app_play">Play</string>

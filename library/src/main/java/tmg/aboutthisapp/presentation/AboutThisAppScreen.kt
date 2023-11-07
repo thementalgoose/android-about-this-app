@@ -141,10 +141,16 @@ private fun PreviewExpanded() {
 }
 
 private fun links() = listOf(
-    Link.Github {  },
-    Link.Website {  },
-    Link.Play {  },
-    Link.Email {  },
+    Link.github {  },
+    Link.website {  },
+    Link.play {  },
+    Link.email {  },
+    Link.gitlab {  },
+    Link.linkedIn {  },
+    Link.x {  },
+    Link.twitter {  },
+    Link.youtube {  },
+    Link.reddit {  },
 )
 
 private fun dependencyList(count: Int) = List(count) {
