@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import tmg.aboutthisapp.AboutThisAppTheme
@@ -35,7 +34,7 @@ fun AboutThisAppScreen(
     contactEmail: String? = null,
     appVersion: String? = null,
     links: List<Link> = emptyList(),
-    linksColumns: Int = 4,
+    linksMaximumColumns: Int = 4,
 ) {
     if (isCompact) {
         ScreenCompact(
@@ -49,7 +48,7 @@ fun AboutThisAppScreen(
             footer = footer,
             contactEmail = contactEmail,
             links = links,
-            linksColumns = linksColumns,
+            linksMaximumColumns = linksMaximumColumns,
             appVersion = appVersion
         )
     } else {
@@ -64,7 +63,7 @@ fun AboutThisAppScreen(
             footer = footer,
             contactEmail = contactEmail,
             links = links,
-            linksColumns = linksColumns,
+            linksMaximumColumns = linksMaximumColumns,
             appVersion = appVersion
         )
     }

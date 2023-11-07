@@ -52,7 +52,7 @@ internal fun ScreenExpanded(
     backClicked: () -> Unit = { },
     contactEmail: String? = null,
     links: List<Link> = emptyList(),
-    linksColumns: Int = 4,
+    linksMaximumColumns: Int = 4,
     appVersion: String? = null,
     header: (@Composable ColumnScope.() -> Unit)? = null,
     footer: (@Composable ColumnScope.() -> Unit)? = null,
@@ -65,7 +65,7 @@ internal fun ScreenExpanded(
             modifier = Modifier
                 .fillMaxHeight()
                 .width(350.dp),
-            columns = GridCells.Fixed(linksColumns),
+            columns = GridCells.Fixed(links.size.coerceIn(1, linksMaximumColumns)),
             content = {
                 item(key = "header", span = { GridItemSpan(maxLineSpan) }) {
                     Column(Modifier.fillMaxWidth()) {

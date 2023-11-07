@@ -63,7 +63,7 @@ internal fun DependencyItem(
                     modifier = Modifier
                         .padding(top = 4.dp)
                         .clip(CircleShape)
-                        .background(AboutThisAppTheme.colours.colorPrimary)
+                        .background(icon.backgroundColor?.let { Color(it) } ?: AboutThisAppTheme.colours.colorPrimary)
                         .size(iconSize)
                 )
             }

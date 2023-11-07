@@ -163,6 +163,7 @@ class AboutThisAppActivity: AppCompatActivity() {
                     color = AboutThisAppTheme.colours.onBackground,
                     fontStyle = FontStyle.Italic,
                     modifier = Modifier
+                        .padding(8.dp)
                         .alpha(0.7f)
                         .combinedClickable(
                             onClick = { },

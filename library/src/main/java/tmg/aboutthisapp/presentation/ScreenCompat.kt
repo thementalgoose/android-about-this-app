@@ -18,13 +18,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import tmg.aboutthisapp.AboutThisAppTheme
-import tmg.aboutthisapp.R
 import tmg.aboutthisapp.configuration.Dependency
-import tmg.aboutthisapp.configuration.DependencyIcon
 import tmg.aboutthisapp.configuration.Link
 import tmg.aboutthisapp.presentation.components.AppVersion
 import tmg.aboutthisapp.presentation.components.DependencyItem
@@ -42,7 +39,7 @@ internal fun ScreenCompact(
     contactEmail: String? = null,
     links: List<Link> = emptyList(),
     backClicked: () -> Unit = { },
-    linksColumns: Int = 4,
+    linksMaximumColumns: Int = 4,
     appVersion: String? = null,
     header: (@Composable ColumnScope.() -> Unit)? = null,
     footer: (@Composable ColumnScope.() -> Unit)? = null,
@@ -51,7 +48,7 @@ internal fun ScreenCompact(
         modifier = Modifier
             .background(AboutThisAppTheme.colours.background)
             .fillMaxSize(),
-        columns = GridCells.Fixed(linksColumns),
+        columns = GridCells.Fixed(links.size.coerceIn(1, linksMaximumColumns)),
         content = {
             item(key = "header", span = { GridItemSpan(maxLineSpan) }) {
                 Column(Modifier.fillMaxWidth()) {

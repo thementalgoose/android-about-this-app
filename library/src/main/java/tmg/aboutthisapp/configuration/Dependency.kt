@@ -20,6 +20,8 @@ data class Dependency(
 sealed class DependencyIcon: Parcelable {
     data class Image(
         val url: String,
+        @ColorInt
+        val backgroundColor: Int? = null
     ): DependencyIcon(), Parcelable
 
     data class Icon(
