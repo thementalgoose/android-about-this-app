@@ -33,14 +33,13 @@ The "About This App" cover screen that I use in my apps
 Jitpack version: [![](https://jitpack.io/v/thementalgoose/android-about-this-app.svg)](https://jitpack.io/#thementalgoose/android-about-this-app)
 </details>
 
-Version 6.x is a built in Jetpack Compose with a different API, so updating will cause breaking changes.
-
-- Use the AboutThisAppConfiguration
-Stay on [5.3.2](https://github.com/thementalgoose/android-about-this-app/tree/5.3.2) to continue using the old version  
+Version 6.x is a built in Jetpack Compose with a different API, so updating will cause breaking changes. See option 2 below for migrating to the new Configuration object, or stay on [5.3.2](https://github.com/thementalgoose/android-about-this-app/tree/5.3.2) to continue using the older version  
 
 ## Usage
 
-Initialise with a config
+This is now written in Jetpack Compose, and therefore can be utilised one of two ways
+
+#### Option 1: Call the Composable
 
 ```kotlin
 
@@ -85,7 +84,11 @@ setContent {
         )
     }
 }
+```
 
+#### Option 2: Use the activity
+
+```kotlin
 /**
  * Launch this in its own activity with a configuration object
  * - Customisation of this is more restricted.
@@ -117,6 +120,15 @@ val configuration = Configuration(
 )
 startActivity(AboutThisAppActivity.intent(this, configuration))
 ```
+
+You may need to add a manifest entry for this activity in order for it to display in your app 
+
+```xml
+<activity 
+    android:name="tmg.aboutthisapp.AboutThisAppActivity"
+    android:exported="false" />
+```
+
 
 ## License
 
