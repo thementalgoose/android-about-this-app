@@ -1,4 +1,4 @@
-package tmg.aboutthisapp
+package tmg.aboutthisapp.configuration
 
 import android.os.Parcelable
 import androidx.annotation.ColorInt
@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 
 @Keep
 @Parcelize
-data class AboutThisAppDependency(
+data class Dependency(
     val order: Int,
     val dependencyName: String,
     val author: String,

@@ -4,10 +4,13 @@
     <string name="about_this_app_email">Email</string>
     <string name="about_this_app_website">Website</string>
     <string name="about_this_app_play">Play</string>
-    <string name="about_this_app_app_version">App Version %s</string>
+    <string name="about_this_app_app_version">App Version</string>
     <string name="about_this_app_send_email">Send Email</string>
+    <string name="about_this_app_contact_email">Contact Email</string>
 
     <string name="about_this_app_ab_back_button">Back</string>
+
+    <string name="about_this_app_dependency_header">Dependencies</string>
 
     <string name="about_this_app_copy_to_clipboard">Copied to clipboard</string>
     <string name="about_this_app_unable_to_find_client">Unable to find an email client</string>

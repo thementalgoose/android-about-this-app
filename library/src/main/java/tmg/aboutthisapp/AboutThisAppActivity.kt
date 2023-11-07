@@ -1,169 +1,150 @@
 package tmg.aboutthisapp
 
-import android.content.ActivityNotFoundException
-import android.content.ClipData
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import androidx.activity.compose.setContent
 import androidx.annotation.Keep
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import tmg.aboutthisapp.databinding.AboutThisAppActivityBinding
-import tmg.aboutthisapp.utils.clipboardManager
-import kotlin.reflect.KClass
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Text
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import tmg.aboutthisapp.configuration.Configuration
+import tmg.aboutthisapp.configuration.Link
+import tmg.aboutthisapp.configuration.AboutThisAppStrings
+import tmg.aboutthisapp.presentation.AboutThisAppScreen
 
-open class AboutThisAppActivity: AppCompatActivity(), AboutThisAppCallback {
-
-    private lateinit var binding: AboutThisAppActivityBinding
+open class AboutThisAppActivity: AppCompatActivity() {
 
     open fun onConfigurationNotFound() {
         Log.e("AboutThisApp", "Cannot find configuration whilst creating an activity, closing activity")
+        finish()
     }
 
+    private val configuration: Configuration? by lazy {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.extras?.getParcelable(keyConfiguration, Configuration::class.java)
+        } else {
+            intent.extras?.getParcelable(keyConfiguration)
+        }
+    }
+
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val configuration: AboutThisAppConfiguration = intent.extras?.getParcelable<AboutThisAppConfiguration>(keyConfiguration) ?: run {
+        val config = configuration ?: run {
             onConfigurationNotFound()
-            finish()
             return
         }
-        setTheme(configuration.themeRes)
 
-        binding = AboutThisAppActivityBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        binding.aboutThisAppBackButton.setOnClickListener {
-            onBackPressed()
-        }
-
-        configuration.imageBackground?.let {
-            binding.aboutThisAppIcon.setBackgroundResource(it)
-        }
-
-        if (configuration.imageUrl != null) {
-            Glide.with(this)
-                .load(configuration.imageUrl)
-                .into(binding.aboutThisAppIcon)
-        }
-        else if (configuration.imageRes != null) {
-            Glide.with(this)
-                .load(configuration.imageRes)
-                .into(binding.aboutThisAppIcon)
-        }
-
-        binding.aboutThisAppName.text = configuration.name
-        binding.aboutThisAppNameToolbar.text = configuration.name
-        binding.aboutThisAppNameDesc.text = configuration.nameDesc
-
-        val adapter = AboutThisAppAdapter(this)
-        binding.aboutThisAppList.adapter = adapter
-        binding.aboutThisAppList.layoutManager = LinearLayoutManager(this)
-
-        adapter.items = configuration.populateList()
-
-        ViewCompat.setOnApplyWindowInsetsListener(binding.aboutThisAppMotionLayout) { _, insets ->
-            binding.aboutThisAppInsets.setPadding(0, insets.systemWindowInsetTop, 0, 0)
-            binding.aboutThisAppList.setPadding(0, 0, 0, insets.systemWindowInsetBottom)
-
-            insets
-        }
-    }
-
-    private fun AboutThisAppConfiguration.populateList(): List<AboutThisAppItem> {
-        val list: MutableList<AboutThisAppItem> = mutableListOf()
-
-        list.add(
-            AboutThisAppItem.Header(
-                play = this.playStore,
-                email = this.email,
-                website = this.website,
-                github = this.github,
-                appName = this.appName
-            )
-        )
-
-        this.subtitle?.let {
-            list.add(
-                AboutThisAppItem.Message(
-                    msg = it
+        setContent {
+            val windowSizeClass = calculateWindowSizeClass(activity = this@AboutThisAppActivity)
+            AboutThisAppTheme {
+                AboutThisAppScreen(
+                    appIcon = config.imageRes,
+                    appName = config.appName,
+                    dependencies = config.dependencies,
+                    isCompact = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact,
+                    header = {
+                        Header(configuration = config)
+                    },
+                    footer = {
+                        Footer(configuration = config)
+                    },
+                    contactEmail = config.email,
+                    appVersion = config.appVersion,
+                    links = buildLinks(config),
                 )
-            )
-        }
-
-        list.addAll(this.dependencies.map {
-            AboutThisAppItem.Dependency(it)
-        })
-
-        this.footnote?.let {
-            list.add(
-                AboutThisAppItem.Message(
-                    msg = it,
-                    isCentered = false
-                )
-            )
-        }
-
-        list.add(
-            AboutThisAppItem.Message(
-                getString(
-                    R.string.about_this_app_app_version,
-                    this.appVersion
-                )
-            )
-        )
-        this.guid?.let {
-            list.add(AboutThisAppItem.Message(
-                msg = it,
-                isPrimary = false,
-                isCentered = true,
-                longClickCopy = this.guidLongClickCopy
-            ))
-        }
-        return list
-    }
-
-    //region AboutThisAppDependencyCallback
-
-    override fun dependencyItemClicked(item: AboutThisAppDependency) {
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(item.url)))
-    }
-
-    override fun clickUrl(url: String?) {
-        val webUrl = url ?: return
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(webUrl))
-        try {
-            startActivity(intent)
-        } catch (e: ActivityNotFoundException) {
-            val clipData = ClipData.newPlainText("", url)
-            this.clipboardManager?.setPrimaryClip(clipData)
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
-                Toast.makeText(this, R.string.about_this_app_copy_to_clipboard, Toast.LENGTH_LONG)
-                    .show()
             }
         }
     }
 
-    override fun sendEmail(email: String?, subject: String) {
-        val emailAddress = email ?: return
-        val intent = Intent(Intent.ACTION_SEND)
-        intent.type = "text/html"
-        intent.putExtra(Intent.EXTRA_EMAIL, emailAddress)
-        intent.putExtra(Intent.EXTRA_SUBJECT, subject)
+    private fun buildLinks(
+        configuration: Configuration
+    ): List<Link> = mutableListOf<Link>()
+        .apply {
+            this.add(Link.Play { openPlaystore(configuration.playStore) })
+            if (configuration.github != null) {
+                this.add(Link.Github { openLink(configuration.github) })
+            }
+            if (configuration.website != null) {
+                this.add(Link.Website { openLink(configuration.website) })
+            }
+            if (configuration.email != null) {
+                this.add(Link.Email { openEmail(configuration.email) })
+            }
+        }
+        .toList()
 
-        try {
-            startActivity(Intent.createChooser(intent, getString(R.string.about_this_app_send_email)))
-        } catch (e: ActivityNotFoundException) {
-            Toast.makeText(this, getString(R.string.about_this_app_unable_to_find_client), Toast.LENGTH_LONG).show()
+    @Composable
+    private fun Header(
+        configuration: Configuration
+    ) {
+        if (configuration.header != null) {
+            Text(
+                text = configuration.header,
+                color = AboutThisAppTheme.colours.onBackground,
+                modifier = Modifier.padding(
+                    horizontal = 16.dp,
+                    vertical = 12.dp
+                )
+            )
         }
     }
 
-    //endregion
+    @Composable
+    private fun Footer(
+        configuration: Configuration,
+        modifier: Modifier = Modifier
+    ) {
+        Column(modifier = modifier
+            .padding(
+                vertical = 12.dp,
+                horizontal = 16.dp
+            ),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            configuration.footnote?.let {
+                Text(
+                    text = it,
+                    color = AboutThisAppTheme.colours.onBackground,
+                )
+            }
+            configuration.guid?.let {
+                Text(
+                    text = it,
+                    fontSize = 12.sp,
+                    color = AboutThisAppTheme.colours.onBackground,
+                    fontStyle = FontStyle.Italic,
+                    modifier = Modifier.alpha(0.7f)
+                )
+            }
+        }
+    }
+
+    private fun openLink(url: String) {
+
+    }
+
+    private fun openEmail(emailAddress: String) {
+
+    }
+
+    private fun openPlaystore(playstore: String) {
+
+    }
 
     companion object {
 
@@ -172,8 +153,8 @@ open class AboutThisAppActivity: AppCompatActivity(), AboutThisAppCallback {
 
         @JvmStatic
         @Keep
-        fun intent(context: Context, configuration: AboutThisAppConfiguration?, clazz: KClass<out AboutThisAppActivity> = AboutThisAppActivity::class): Intent {
-            val intent = Intent(context, clazz.java)
+        fun intent(context: Context, configuration: Configuration?): Intent {
+            val intent = Intent(context, AboutThisAppActivity::class.java)
             intent.putExtra(keyConfiguration, configuration)
             return intent
         }

@@ -1,0 +1,36 @@
+[versions]  # ===========================================================================
+kotlin = "1.9.10"
+androidx_activity = "1.8.0"
+compose = "2023.10.01"
+composecompiler = "1.5.3"
+junit = "5.9.3"
+material3 = "1.1.2"
+
+[libraries]  # ===========================================================================
+
+androidx_core = "androidx.core:core-ktx:1.12.0"
+androidx_appcompat = "androidx.appcompat:appcompat:1.6.1"
+
+compose_bom = { module = "androidx.compose:compose-bom", version.ref = "compose" }
+compose_activity = { module = "androidx.activity:activity-compose", version.ref = "androidx_activity" }
+compose_material = { module = "androidx.compose.material:material" }
+compose_windowsize = { module = "androidx.compose.material3:material3-window-size-class" }
+compose_animation = { module = "androidx.compose.animation:animation" }
+compose_material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
+compose_ui_tooling = { module = "androidx.compose.ui:ui-tooling" }
+compose_ui_toolingpreview = { module = "androidx.compose.ui:ui-tooling-preview" }
+
+kotlin_stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+
+androidx_window = "androidx.window:window:1.1.0"
+
+coil = "io.coil-kt:coil-compose:2.5.0"
+
+junit5_jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
+junit5_api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
+junit5_engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
+junit5_params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit" }
+turbine = "app.cash.turbine:turbine:0.13.0"
+mockk = "io.mockk:mockk:1.13.5"
+
+[bundles] # ===========================================================================

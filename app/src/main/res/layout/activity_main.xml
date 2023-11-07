@@ -8,18 +8,17 @@
         android:id="@+id/btnAboutThisApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="About This App (Light mode)" />
+        android:text="About This App" />
+
+    <TextView
+        android:id="@+id/darkMode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/btnAboutThisAppDarkMode"
+        android:id="@+id/toggleDarkMode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="About This App (Dark mode)" />
-
-    <Button
-        android:id="@+id/btnAboutThisAppDarkImageRes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="About This App (Image Res)" />
+        android:text="Toggle Dark mode" />
 
 </LinearLayout>
