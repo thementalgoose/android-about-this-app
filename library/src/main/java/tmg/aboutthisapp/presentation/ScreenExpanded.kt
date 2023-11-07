@@ -16,7 +16,11 @@ import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,7 +32,6 @@ import tmg.aboutthisapp.AboutThisAppTheme
 import tmg.aboutthisapp.R
 import tmg.aboutthisapp.configuration.Dependency
 import tmg.aboutthisapp.configuration.Link
-import tmg.aboutthisapp.configuration.AboutThisAppStrings
 import tmg.aboutthisapp.presentation.components.AppVersion
 import tmg.aboutthisapp.presentation.components.DependencyIcon
 import tmg.aboutthisapp.presentation.components.DependencyItem
@@ -36,13 +39,14 @@ import tmg.aboutthisapp.presentation.components.Header
 import tmg.aboutthisapp.presentation.components.LinkItem
 
 @Composable
-fun ScreenExpanded(
+internal fun ScreenExpanded(
     @DrawableRes
     appIcon: Int,
     appName: String,
     dependencies: List<Dependency>,
+    showBack: Boolean = false,
+    backClicked: () -> Unit = { },
     contactEmail: String? = null,
-    strings: AboutThisAppStrings = AboutThisAppStrings.default(),
     links: List<Link> = emptyList(),
     linksColumns: Int = 4,
     appVersion: String? = null,
@@ -60,11 +64,22 @@ fun ScreenExpanded(
             columns = GridCells.Fixed(linksColumns),
             content = {
                 item(key = "header", span = { GridItemSpan(maxLineSpan) }) {
-                    Header(
-                        appIcon = appIcon,
-                        appName = appName,
-                        contactEmail = contactEmail
-                    )
+                    Column(Modifier.fillMaxWidth()) {
+                        if (showBack) {
+                            IconButton(onClick = backClicked) {
+                                Icon(
+                                    imageVector = Icons.Outlined.ArrowBack,
+                                    contentDescription = AboutThisAppTheme.strings.accessibilityBack,
+                                    tint = AboutThisAppTheme.colours.onBackground
+                                )
+                            }
+                        }
+                        Header(
+                            appIcon = appIcon,
+                            appName = appName,
+                            contactEmail = contactEmail
+                        )
+                    }
                 }
 
                 items(links, key = { "link-${it.label}"} ) {
@@ -107,8 +122,9 @@ fun ScreenExpanded(
             Box(modifier = Modifier
                 .fillMaxSize()
                 .padding(
-                    horizontal = 16.dp,
-                    vertical = 16.dp
+                    end = 16.dp,
+                    top = 16.dp,
+                    bottom = 16.dp
                 )
                 .clip(RoundedCornerShape(16.dp))
                 .background(AboutThisAppTheme.colours.surface)
@@ -122,7 +138,7 @@ fun ScreenExpanded(
                         item(key = "header", span = { GridItemSpan(maxLineSpan) }) {
                             Text(
                                 modifier = Modifier.padding(vertical = 12.dp),
-                                text = strings.dependencyHeader,
+                                text = AboutThisAppTheme.strings.dependencyHeader,
                                 fontSize = 18.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = AboutThisAppTheme.colours.onSurface

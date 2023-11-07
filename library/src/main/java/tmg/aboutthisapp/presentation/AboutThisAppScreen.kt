@@ -30,6 +30,8 @@ fun AboutThisAppScreen(
     appName: String,
     dependencies: List<Dependency>,
     isCompact: Boolean = true,
+    showBack: Boolean = true,
+    backClicked: () -> Unit = { },
     header: (@Composable ColumnScope.() -> Unit)? = null,
     footer: (@Composable ColumnScope.() -> Unit)? = null,
     contactEmail: String? = null,
@@ -41,6 +43,8 @@ fun AboutThisAppScreen(
         ScreenCompact(
             appIcon = appIcon,
             appName = appName,
+            showBack = showBack,
+            backClicked = backClicked,
             dependencies = dependencies,
             header = header,
             footer = footer,
@@ -53,6 +57,8 @@ fun AboutThisAppScreen(
         ScreenExpanded(
             appIcon = appIcon,
             appName = appName,
+            showBack = showBack,
+            backClicked = backClicked,
             dependencies = dependencies,
             header = header,
             footer = footer,

@@ -11,6 +11,10 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,14 +31,15 @@ import tmg.aboutthisapp.presentation.components.Header
 import tmg.aboutthisapp.presentation.components.LinkItem
 
 @Composable
-fun ScreenCompact(
+internal fun ScreenCompact(
     @DrawableRes
     appIcon: Int,
     appName: String,
     dependencies: List<Dependency>,
+    showBack: Boolean = false,
     contactEmail: String? = null,
-    strings: AboutThisAppStrings = AboutThisAppStrings.default(),
     links: List<Link> = emptyList(),
+    backClicked: () -> Unit = { },
     linksColumns: Int = 4,
     appVersion: String? = null,
     header: (@Composable ColumnScope.() -> Unit)? = null,
@@ -46,13 +51,23 @@ fun ScreenCompact(
             .fillMaxSize(),
         columns = GridCells.Fixed(linksColumns),
         content = {
-
             item(key = "header", span = { GridItemSpan(maxLineSpan) }) {
-                Header(
-                    appIcon = appIcon,
-                    appName = appName,
-                    contactEmail = contactEmail
-                )
+                Column(Modifier.fillMaxWidth()) {
+                    if (showBack) {
+                        IconButton(onClick = backClicked) {
+                            Icon(
+                                imageVector = Icons.Outlined.ArrowBack,
+                                contentDescription = AboutThisAppTheme.strings.accessibilityBack,
+                                tint = AboutThisAppTheme.colours.onBackground
+                            )
+                        }
+                    }
+                    Header(
+                        appIcon = appIcon,
+                        appName = appName,
+                        contactEmail = contactEmail
+                    )
+                }
             }
 
             items(links, key = { "link-${it.label}"} ) {

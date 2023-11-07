@@ -26,9 +26,9 @@ import tmg.aboutthisapp.configuration.Link
 import tmg.aboutthisapp.configuration.AboutThisAppStrings
 import tmg.aboutthisapp.presentation.AboutThisAppScreen
 
-open class AboutThisAppActivity: AppCompatActivity() {
+class AboutThisAppActivity: AppCompatActivity() {
 
-    open fun onConfigurationNotFound() {
+    private fun onConfigurationNotFound() {
         Log.e("AboutThisApp", "Cannot find configuration whilst creating an activity, closing activity")
         finish()
     }
@@ -56,6 +56,10 @@ open class AboutThisAppActivity: AppCompatActivity() {
                     appIcon = config.imageRes,
                     appName = config.appName,
                     dependencies = config.dependencies,
+                    showBack = true,
+                    backClicked = {
+                        finish()
+                    },
                     isCompact = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact,
                     header = {
                         Header(configuration = config)
