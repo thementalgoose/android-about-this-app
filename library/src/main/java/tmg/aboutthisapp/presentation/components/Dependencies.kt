@@ -24,20 +24,10 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import tmg.aboutthisapp.AboutThisAppTheme
 import tmg.aboutthisapp.R
+import tmg.aboutthisapp.configuration.DependencyIcon
 import tmg.aboutthisapp.utils.PreviewTheme
 
 private val iconSize: Dp = 42.dp
-
-sealed class DependencyIcon {
-    data class Image(
-        val url: String,
-    ): DependencyIcon()
-
-    data class Icon(
-        val icon: Int,
-        val backgroundColor: Color
-    ): DependencyIcon()
-}
 
 @Composable
 internal fun DependencyItem(
@@ -62,7 +52,7 @@ internal fun DependencyItem(
                         .padding(top = 4.dp)
                         .size(iconSize)
                         .clip(CircleShape)
-                        .background(icon.backgroundColor)
+                        .background(Color(icon.backgroundColor))
                 )
             }
             is DependencyIcon.Image -> {
@@ -72,9 +62,9 @@ internal fun DependencyItem(
                     contentScale = ContentScale.FillBounds,
                     modifier = Modifier
                         .padding(top = 4.dp)
+                        .clip(CircleShape)
                         .background(AboutThisAppTheme.colours.colorPrimary)
                         .size(iconSize)
-                        .clip(CircleShape)
                 )
             }
         }
@@ -82,13 +72,12 @@ internal fun DependencyItem(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 16.dp)
+                .padding(start = 12.dp)
         ) {
             Text(
                 modifier = Modifier
                     .fillMaxWidth(),
                 text = name,
-                maxLines = 1,
                 color = AboutThisAppTheme.colours.onPrimary,
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp
@@ -108,7 +97,7 @@ internal fun DependencyItem(
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 2.dp),
+                    .padding(top = 2.dp, bottom = 2.dp),
                 text = url,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
@@ -123,11 +112,12 @@ internal fun DependencyItem(
 @Composable
 private fun Preview() {
     AboutThisAppTheme {
+        val colour = 0xFF972948
         DependencyItem(
             name = "Jetpack",
             author = "Google",
             url = "https://developer.google.com/android",
-            icon = DependencyIcon.Icon(icon = R.drawable.ic_util_icon_website, backgroundColor = Color.Magenta)
+            icon = DependencyIcon.Icon(icon = R.drawable.ic_util_icon_website, backgroundColor = colour.toInt())
         )
     }
 }

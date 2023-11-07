@@ -4,18 +4,27 @@ import android.os.Parcelable
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.Keep
+import androidx.compose.ui.graphics.Color
 import kotlinx.parcelize.Parcelize
 
 @Keep
 @Parcelize
 data class Dependency(
-    val order: Int,
     val dependencyName: String,
     val author: String,
-    val imageUrl: String = "",
-    @DrawableRes
-    val imageRes: Int = 0,
-    @ColorInt
-    val backgroundColor: Int = 0,
-    val url: String
+    val url: String,
+    val icon: DependencyIcon
 ): Parcelable
+
+@Parcelize
+sealed class DependencyIcon: Parcelable {
+    data class Image(
+        val url: String,
+    ): DependencyIcon(), Parcelable
+
+    data class Icon(
+        val icon: Int,
+        @ColorInt
+        val backgroundColor: Int
+    ): DependencyIcon(), Parcelable
+}

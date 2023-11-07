@@ -13,6 +13,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -37,7 +38,7 @@ internal fun Header(
             start = 16.dp,
             end = 16.dp,
             top = 16.dp,
-            bottom = 4.dp
+            bottom = 8.dp
         )
     ) {
         AsyncImage(
@@ -65,7 +66,7 @@ internal fun Header(
             if (contactEmail != null) {
                 Spacer(Modifier.height(8.dp))
                 Text(
-                    text = AboutThisAppTheme.strings.contactEmail,
+                    text = stringResource(AboutThisAppTheme.strings.contactEmail),
                     color = AboutThisAppTheme.colours.onBackground
                 )
                 Text(

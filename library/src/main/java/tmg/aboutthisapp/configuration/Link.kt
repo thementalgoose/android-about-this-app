@@ -22,7 +22,7 @@ data class Link(
 
         @JvmStatic
         fun Email(onClick: () -> Unit) = Link(
-            label = R.string.about_this_app_send_email,
+            label = R.string.about_this_app_email,
             icon = R.drawable.ic_util_icon_email,
             onClick = onClick,
         )

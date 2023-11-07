@@ -1,13 +1,20 @@
 package tmg.aboutthisapp
 
+import android.content.ActivityNotFoundException
+import android.content.ClipData
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.annotation.Keep
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -23,15 +30,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import tmg.aboutthisapp.configuration.Configuration
 import tmg.aboutthisapp.configuration.Link
-import tmg.aboutthisapp.configuration.AboutThisAppStrings
 import tmg.aboutthisapp.presentation.AboutThisAppScreen
+import tmg.aboutthisapp.utils.clipboardManager
+import java.net.MalformedURLException
 
 class AboutThisAppActivity: AppCompatActivity() {
-
-    private fun onConfigurationNotFound() {
-        Log.e("AboutThisApp", "Cannot find configuration whilst creating an activity, closing activity")
-        finish()
-    }
 
     private val configuration: Configuration? by lazy {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -45,17 +48,25 @@ class AboutThisAppActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val config = configuration ?: run {
-            onConfigurationNotFound()
+            Log.e("AboutThisApp", "Cannot find configuration whilst creating an activity, closing activity")
+            finish()
             return
         }
 
         setContent {
             val windowSizeClass = calculateWindowSizeClass(activity = this@AboutThisAppActivity)
-            AboutThisAppTheme {
+            AboutThisAppTheme(
+                lightColors = config.lightColors?.let { AboutThisAppColors(it) } ?: lightColours,
+                darkColors = config.darkColors?.let { AboutThisAppColors(it) } ?: darkColours,
+                strings = config.strings
+            ) {
                 AboutThisAppScreen(
                     appIcon = config.imageRes,
                     appName = config.appName,
                     dependencies = config.dependencies,
+                    dependencyClicked = {
+                        openLink(it.url)
+                    },
                     showBack = true,
                     backClicked = {
                         finish()
@@ -79,7 +90,7 @@ class AboutThisAppActivity: AppCompatActivity() {
         configuration: Configuration
     ): List<Link> = mutableListOf<Link>()
         .apply {
-            this.add(Link.Play { openPlaystore(configuration.playStore) })
+            this.add(Link.Play { openPlaystore(configuration.appPackageName) })
             if (configuration.github != null) {
                 this.add(Link.Github { openLink(configuration.github) })
             }
@@ -108,6 +119,7 @@ class AboutThisAppActivity: AppCompatActivity() {
         }
     }
 
+    @OptIn(ExperimentalFoundationApi::class)
     @Composable
     private fun Footer(
         configuration: Configuration,
@@ -126,28 +138,80 @@ class AboutThisAppActivity: AppCompatActivity() {
                     color = AboutThisAppTheme.colours.onBackground,
                 )
             }
-            configuration.guid?.let {
+            configuration.debugInfo?.let {
                 Text(
                     text = it,
                     fontSize = 12.sp,
                     color = AboutThisAppTheme.colours.onBackground,
                     fontStyle = FontStyle.Italic,
-                    modifier = Modifier.alpha(0.7f)
+                    modifier = Modifier
+                        .alpha(0.7f)
+                        .combinedClickable(
+                            onClick = { },
+                            onLongClick = {
+                                copyToClipboard(R.string.about_this_app_debug_information, it)
+                            }
+                        )
                 )
             }
         }
     }
 
     private fun openLink(url: String) {
+        val uri = try {
+            Uri.parse(url)
+        } catch (e: MalformedURLException) {
+            return
+        }
 
+        val browserSelectorIntent = Intent()
+            .setAction(Intent.ACTION_VIEW)
+            .addCategory(Intent.CATEGORY_BROWSABLE)
+            .setData(Uri.parse("https:"))
+        val targetIntent = Intent()
+            .setAction(Intent.ACTION_VIEW)
+            .addCategory(Intent.CATEGORY_BROWSABLE)
+            .setData(uri)
+
+        targetIntent.selector = browserSelectorIntent
+        startActivity(targetIntent)
     }
 
     private fun openEmail(emailAddress: String) {
-
+        val uri = Uri.parse("mailto:")
+        val targetIntent = Intent()
+            .setAction(Intent.ACTION_VIEW)
+            .addCategory(Intent.CATEGORY_APP_EMAIL)
+            .setData(uri)
+            .putExtra(Intent.EXTRA_EMAIL, emailAddress)
+        startActivity(Intent.createChooser(targetIntent, getString(R.string.about_this_app_email)))
     }
 
-    private fun openPlaystore(playstore: String) {
+    private fun openPlaystore(appPackageName: String) {
+        try {
+            startActivity(Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("market://details?id=$appPackageName")
+            ))
+        } catch (e : ActivityNotFoundException) {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
+                )
+            )
+        }
+    }
 
+    private fun copyToClipboard(@StringRes label: Int, content: String) {
+        val newClipData = ClipData.newPlainText(
+            getString(label),
+            content
+        )
+        clipboardManager?.setPrimaryClip(newClipData)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            Toast.makeText(applicationContext, R.string.about_this_app_copy_to_clipboard, Toast.LENGTH_LONG).show()
+        }
     }
 
     companion object {

@@ -2,6 +2,7 @@ package tmg.aboutthisapp.presentation
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,14 +19,14 @@ import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import tmg.aboutthisapp.R
 import tmg.aboutthisapp.AboutThisAppTheme
+import tmg.aboutthisapp.R
 import tmg.aboutthisapp.configuration.Dependency
+import tmg.aboutthisapp.configuration.DependencyIcon
 import tmg.aboutthisapp.configuration.Link
-import tmg.aboutthisapp.configuration.AboutThisAppStrings
 import tmg.aboutthisapp.presentation.components.AppVersion
-import tmg.aboutthisapp.presentation.components.DependencyIcon
 import tmg.aboutthisapp.presentation.components.DependencyItem
 import tmg.aboutthisapp.presentation.components.Header
 import tmg.aboutthisapp.presentation.components.LinkItem
@@ -36,6 +37,7 @@ internal fun ScreenCompact(
     appIcon: Int,
     appName: String,
     dependencies: List<Dependency>,
+    dependencyClicked: (Dependency) -> Unit,
     showBack: Boolean = false,
     contactEmail: String? = null,
     links: List<Link> = emptyList(),
@@ -57,7 +59,7 @@ internal fun ScreenCompact(
                         IconButton(onClick = backClicked) {
                             Icon(
                                 imageVector = Icons.Outlined.ArrowBack,
-                                contentDescription = AboutThisAppTheme.strings.accessibilityBack,
+                                contentDescription = stringResource(AboutThisAppTheme.strings.accessibilityBack),
                                 tint = AboutThisAppTheme.colours.onBackground
                             )
                         }
@@ -90,14 +92,16 @@ internal fun ScreenCompact(
 
             items(dependencies, key = { "${it.dependencyName}-${it.url}"}, span = { GridItemSpan(maxLineSpan) }) {
                 DependencyItem(
-                    modifier = Modifier.padding(
-                        horizontal = 16.dp,
-                        vertical = 8.dp
-                    ),
+                    modifier = Modifier
+                        .padding(
+                            horizontal = 16.dp,
+                            vertical = 8.dp
+                        )
+                        .clickable { dependencyClicked(it) },
                     name = it.dependencyName,
                     author = it.author,
                     url = it.url,
-                    icon = DependencyIcon.Icon(icon = R.drawable.ic_util_icon_play, backgroundColor = Color.Red)
+                    icon = it.icon
                 )
             }
 

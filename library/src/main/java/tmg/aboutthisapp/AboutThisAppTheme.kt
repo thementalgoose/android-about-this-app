@@ -8,7 +8,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import tmg.aboutthisapp.configuration.AboutThisAppStrings
 
 internal val LocalColors = staticCompositionLocalOf { lightColours }
-internal val LocalStrings = staticCompositionLocalOf { AboutThisAppStrings.blank() }
+internal val LocalStrings = staticCompositionLocalOf { AboutThisAppStrings() }
 
 internal object AboutThisAppTheme {
     val colours
@@ -24,10 +24,10 @@ internal object AboutThisAppTheme {
 
 
 @Composable
-internal fun AboutThisAppTheme(
-    lightColors: AboutThisAppPallette = lightColours,
-    darkColors: AboutThisAppPallette = darkColours,
-    strings: AboutThisAppStrings = AboutThisAppStrings.default(),
+fun AboutThisAppTheme(
+    lightColors: AboutThisAppColors = lightColours,
+    darkColors: AboutThisAppColors = darkColours,
+    strings: AboutThisAppStrings = AboutThisAppStrings(),
     content: @Composable () -> Unit
 ) {
     val darkMode = isSystemInDarkTheme()

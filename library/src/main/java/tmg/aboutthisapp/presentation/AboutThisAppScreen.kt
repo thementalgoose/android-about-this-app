@@ -14,14 +14,11 @@ import androidx.compose.ui.unit.sp
 import tmg.aboutthisapp.AboutThisAppTheme
 import tmg.aboutthisapp.R
 import tmg.aboutthisapp.configuration.Dependency
+import tmg.aboutthisapp.configuration.DependencyIcon
 import tmg.aboutthisapp.configuration.Link
-import tmg.aboutthisapp.configuration.AboutThisAppStrings
 import tmg.aboutthisapp.utils.PreviewFoldable
 import tmg.aboutthisapp.utils.PreviewPhone
 import tmg.aboutthisapp.utils.PreviewTablet
-
-private val iconSize: Dp = 108.dp
-private val edgePadding: Dp = 16.dp
 
 @Composable
 fun AboutThisAppScreen(
@@ -29,6 +26,7 @@ fun AboutThisAppScreen(
     appIcon: Int,
     appName: String,
     dependencies: List<Dependency>,
+    dependencyClicked: (Dependency) -> Unit,
     isCompact: Boolean = true,
     showBack: Boolean = true,
     backClicked: () -> Unit = { },
@@ -46,6 +44,7 @@ fun AboutThisAppScreen(
             showBack = showBack,
             backClicked = backClicked,
             dependencies = dependencies,
+            dependencyClicked = dependencyClicked,
             header = header,
             footer = footer,
             contactEmail = contactEmail,
@@ -60,6 +59,7 @@ fun AboutThisAppScreen(
             showBack = showBack,
             backClicked = backClicked,
             dependencies = dependencies,
+            dependencyClicked = dependencyClicked,
             header = header,
             footer = footer,
             contactEmail = contactEmail,
@@ -81,6 +81,7 @@ private fun PreviewPhone() {
                 appIcon = R.drawable.ic_util_icon_play,
                 appName = "My Application",
                 contactEmail = "thementalgoose@gmail.com",
+                dependencyClicked = { },
                 header = {
                     Text(
                         modifier = Modifier.padding(16.dp),
@@ -133,6 +134,7 @@ private fun PreviewExpanded() {
             },
             appVersion = "1.0.1234",
             dependencies = dependencyList(10),
+            dependencyClicked = { },
             links = links()
         )
     }
@@ -151,11 +153,11 @@ private fun dependencyList(count: Int) = List(count) {
 private fun fakeDependency(
     dependencyName: String
 ) = Dependency(
-    order = 1,
     dependencyName = dependencyName,
     author = "Author",
-    imageUrl = "imageUrl",
-    imageRes = R.drawable.ic_util_icon_website,
-    backgroundColor = Color.BLUE,
     url = "http://www.url.com",
+    icon = DependencyIcon.Icon(
+        icon = R.drawable.ic_util_icon_website,
+        backgroundColor = Color.BLUE
+    ),
 )
