@@ -18,6 +18,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import tmg.aboutthisapp.AboutThisAppTheme
@@ -49,6 +50,7 @@ internal fun ScreenCompact(
     LazyVerticalGrid(
         modifier = Modifier
             .background(AboutThisAppTheme.colours.background)
+            .testTag("Screen")
             .fillMaxSize(),
         columns = GridCells.Fixed(links.size.coerceIn(1, linksMaximumColumns)),
         content = {

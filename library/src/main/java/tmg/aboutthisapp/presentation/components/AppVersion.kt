@@ -20,16 +20,16 @@ internal fun AppVersion(
     modifier: Modifier = Modifier,
     appVersion: String? = null
 ) {
-    Column(modifier = modifier
-        .padding(
-            start = medium,
-            end = medium,
-            top = small,
-            bottom = large
-        )
-        .fillMaxWidth()
-    ) {
-        if (appVersion != null) {
+    if (appVersion != null) {
+        Column(modifier = modifier
+            .padding(
+                start = medium,
+                end = medium,
+                top = small,
+                bottom = large
+            )
+            .fillMaxWidth()
+        ) {
             Row(modifier = Modifier.fillMaxWidth()) {
                 Text(
                     text = "${stringResource(AboutThisAppTheme.strings.appVersion)}:",

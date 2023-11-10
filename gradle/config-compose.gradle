@@ -20,4 +20,8 @@ dependencies {
     implementation libs.compose.activity
 
     implementation libs.androidx.window
+
+    testImplementation libs.robolectric
+    testImplementation libs.compose.junit4
+    debugImplementation libs.compose.manifest
 }
