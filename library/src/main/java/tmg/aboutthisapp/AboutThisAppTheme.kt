@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.unit.dp
 import tmg.aboutthisapp.configuration.Labels
 
 internal val LocalColors = staticCompositionLocalOf { lightColours }
@@ -20,6 +21,14 @@ internal object AboutThisAppTheme {
         @Composable
         @ReadOnlyComposable
         get() = LocalStrings.current
+
+    @Suppress("ClassName")
+    object dimens {
+        val large = 24.dp
+        val medium = 16.dp
+        val small = 8.dp
+        val xsmall = 4.dp
+    }
 }
 
 

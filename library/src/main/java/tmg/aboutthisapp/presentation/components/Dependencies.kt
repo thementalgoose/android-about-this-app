@@ -23,6 +23,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import tmg.aboutthisapp.AboutThisAppTheme
+import tmg.aboutthisapp.AboutThisAppTheme.dimens.medium
+import tmg.aboutthisapp.AboutThisAppTheme.dimens.small
 import tmg.aboutthisapp.R
 import tmg.aboutthisapp.configuration.DependencyIcon
 import tmg.aboutthisapp.utils.PreviewTheme
@@ -40,7 +42,7 @@ internal fun DependencyItem(
     Row(modifier = modifier
         .clip(RoundedCornerShape(6.dp))
         .background(AboutThisAppTheme.colours.primary)
-        .padding(horizontal = 16.dp, vertical = 8.dp)
+        .padding(horizontal = medium, vertical = small)
     ) {
         when (icon) {
             is DependencyIcon.Icon -> {

@@ -11,6 +11,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import tmg.aboutthisapp.AboutThisAppTheme
+import tmg.aboutthisapp.AboutThisAppTheme.dimens.large
+import tmg.aboutthisapp.AboutThisAppTheme.dimens.medium
+import tmg.aboutthisapp.AboutThisAppTheme.dimens.small
 
 @Composable
 internal fun AppVersion(
@@ -19,10 +22,10 @@ internal fun AppVersion(
 ) {
     Column(modifier = modifier
         .padding(
-            start = 16.dp,
-            end = 16.dp,
-            top = 8.dp,
-            bottom = 24.dp
+            start = medium,
+            end = medium,
+            top = small,
+            bottom = large
         )
         .fillMaxWidth()
     ) {
@@ -36,7 +39,7 @@ internal fun AppVersion(
                 )
 
                 Text(
-                    modifier = Modifier.padding(start = 4.dp),
+                    modifier = Modifier.padding(start = small),
                     text = appVersion,
                     maxLines = 1,
                     color = AboutThisAppTheme.colours.onBackground

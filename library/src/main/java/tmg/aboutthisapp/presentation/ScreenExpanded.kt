@@ -34,12 +34,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import tmg.aboutthisapp.AboutThisAppTheme
+import tmg.aboutthisapp.AboutThisAppTheme.dimens.medium
+import tmg.aboutthisapp.AboutThisAppTheme.dimens.small
 import tmg.aboutthisapp.configuration.Dependency
 import tmg.aboutthisapp.configuration.Link
 import tmg.aboutthisapp.presentation.components.AppVersion
 import tmg.aboutthisapp.presentation.components.DependencyItem
 import tmg.aboutthisapp.presentation.components.Header
 import tmg.aboutthisapp.presentation.components.LinkItem
+
+private val minDependencyCellSize = 220.dp
 
 @Composable
 internal fun ScreenExpanded(
@@ -126,22 +130,22 @@ internal fun ScreenExpanded(
             Box(modifier = Modifier
                 .fillMaxSize()
                 .padding(
-                    end = 16.dp,
-                    top = 16.dp,
-                    bottom = 16.dp
+                    end = medium,
+                    top = medium,
+                    bottom = medium
                 )
-                .clip(RoundedCornerShape(16.dp))
+                .clip(RoundedCornerShape(medium))
                 .background(AboutThisAppTheme.colours.surface)
             ) {
                 LazyVerticalStaggeredGrid(
                     modifier = Modifier.padding(
-                        horizontal = 16.dp
+                        horizontal = medium
                     ),
-                    columns = StaggeredGridCells.Adaptive(minSize = 220.dp),
+                    columns = StaggeredGridCells.Adaptive(minSize = minDependencyCellSize),
                     content = {
                         item(key = "header", span = StaggeredGridItemSpan.FullLine) {
                             Text(
-                                modifier = Modifier.padding(vertical = 12.dp),
+                                modifier = Modifier.padding(vertical = medium),
                                 text = stringResource(AboutThisAppTheme.strings.dependencyHeader),
                                 fontSize = 18.sp,
                                 fontWeight = FontWeight.Bold,
@@ -152,8 +156,8 @@ internal fun ScreenExpanded(
                             DependencyItem(
                                 modifier = Modifier
                                     .padding(
-                                        horizontal = 8.dp,
-                                        vertical = 8.dp
+                                        horizontal = small,
+                                        vertical = small
                                     )
                                     .clickable { dependencyClicked(it) },
                                 name = it.dependencyName,

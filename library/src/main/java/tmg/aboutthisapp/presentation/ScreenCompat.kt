@@ -21,6 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import tmg.aboutthisapp.AboutThisAppTheme
+import tmg.aboutthisapp.AboutThisAppTheme.dimens.medium
+import tmg.aboutthisapp.AboutThisAppTheme.dimens.small
 import tmg.aboutthisapp.configuration.Dependency
 import tmg.aboutthisapp.configuration.Link
 import tmg.aboutthisapp.presentation.components.AppVersion
@@ -91,8 +93,8 @@ internal fun ScreenCompact(
                 DependencyItem(
                     modifier = Modifier
                         .padding(
-                            horizontal = 16.dp,
-                            vertical = 8.dp
+                            horizontal = medium,
+                            vertical = small
                         )
                         .clickable { dependencyClicked(it) },
                     name = it.dependencyName,

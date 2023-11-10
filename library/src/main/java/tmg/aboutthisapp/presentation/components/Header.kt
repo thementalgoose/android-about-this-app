@@ -20,6 +20,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import tmg.aboutthisapp.AboutThisAppTheme
+import tmg.aboutthisapp.AboutThisAppTheme.dimens.medium
+import tmg.aboutthisapp.AboutThisAppTheme.dimens.small
+import tmg.aboutthisapp.AboutThisAppTheme.dimens.xsmall
 import tmg.aboutthisapp.R
 import tmg.aboutthisapp.utils.PreviewTheme
 
@@ -35,10 +38,10 @@ internal fun Header(
 ) {
     Row(modifier = modifier
         .padding(
-            start = 16.dp,
-            end = 16.dp,
-            top = 16.dp,
-            bottom = 8.dp
+            start = medium,
+            end = medium,
+            top = medium,
+            bottom = small
         )
     ) {
         AsyncImage(
@@ -51,8 +54,8 @@ internal fun Header(
         Column(modifier = Modifier
             .weight(1f)
             .padding(
-                start = 16.dp,
-                top = 4.dp
+                start = medium,
+                top = xsmall
             )
         ) {
             Text(
@@ -64,7 +67,7 @@ internal fun Header(
             )
 
             if (contactEmail != null) {
-                Spacer(Modifier.height(8.dp))
+                Spacer(Modifier.height(small))
                 Text(
                     text = stringResource(AboutThisAppTheme.strings.contactEmail),
                     color = AboutThisAppTheme.colours.onBackground

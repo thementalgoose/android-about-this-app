@@ -17,6 +17,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import tmg.aboutthisapp.AboutThisAppTheme
+import tmg.aboutthisapp.AboutThisAppTheme.dimens.medium
+import tmg.aboutthisapp.AboutThisAppTheme.dimens.small
 import tmg.aboutthisapp.R
 import tmg.aboutthisapp.configuration.Link
 import tmg.aboutthisapp.utils.PreviewTheme
@@ -35,8 +37,8 @@ internal fun LinkItem(
         modifier = modifier
             .fillMaxWidth()
             .padding(
-                vertical = 8.dp,
-                horizontal = 16.dp
+                vertical = small,
+                horizontal = medium
             )
             .clickable { onClick() },
         horizontalAlignment = Alignment.CenterHorizontally
@@ -55,7 +57,7 @@ internal fun LinkItem(
         }
 
         Text(
-            modifier = Modifier.padding(top = 8.dp),
+            modifier = Modifier.padding(top = small),
             text = stringResource(id = label),
             textAlign = TextAlign.Center,
             color = AboutThisAppTheme.colours.onBackground
