@@ -28,6 +28,8 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import tmg.aboutthisapp.AboutThisAppTheme.dimens.medium
+import tmg.aboutthisapp.AboutThisAppTheme.dimens.small
 import tmg.aboutthisapp.configuration.Configuration
 import tmg.aboutthisapp.configuration.Link
 import tmg.aboutthisapp.presentation.AboutThisAppScreen
@@ -130,7 +132,7 @@ class AboutThisAppActivity: AppCompatActivity() {
                 text = configuration.header,
                 color = AboutThisAppTheme.colours.onBackground,
                 modifier = Modifier.padding(
-                    horizontal = 16.dp,
+                    horizontal = medium,
                     vertical = 12.dp
                 )
             )
@@ -146,9 +148,9 @@ class AboutThisAppActivity: AppCompatActivity() {
         Column(modifier = modifier
             .padding(
                 vertical = 12.dp,
-                horizontal = 16.dp
+                horizontal = medium
             ),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
+            verticalArrangement = Arrangement.spacedBy(small)
         ) {
             configuration.footnote?.let {
                 Text(
