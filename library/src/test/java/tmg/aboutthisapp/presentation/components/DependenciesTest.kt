@@ -2,8 +2,6 @@ package tmg.aboutthisapp.presentation.components
 
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.onRoot
-import androidx.compose.ui.test.printToString
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -28,7 +26,6 @@ internal class DependenciesTest {
             )
         }
 
-        println(composeTestRule.onRoot(useUnmergedTree = true).printToString())
         composeTestRule
             .onNodeWithText("name")
             .assertExists()
