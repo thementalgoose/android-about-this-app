@@ -52,7 +52,7 @@ data class Colours(
     val onSurface: Color,
     val onPrimary: Color,
 ) {
-    internal constructor(
+    constructor(
         config: ConfigurationColours
     ): this(
         colorPrimary = Color(config.colorPrimary),
