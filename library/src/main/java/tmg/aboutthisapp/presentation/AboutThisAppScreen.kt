@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import tmg.aboutthisapp.AboutThisAppTheme
+import tmg.aboutthisapp.AboutThisAppTheme.dimens.large
 import tmg.aboutthisapp.R
 import tmg.aboutthisapp.configuration.Dependency
 import tmg.aboutthisapp.configuration.DependencyIcon
@@ -83,7 +84,7 @@ private fun PreviewPhone() {
                 dependencyClicked = { },
                 header = {
                     Text(
-                        modifier = Modifier.padding(16.dp),
+                        modifier = Modifier.padding(large),
                         fontSize = 16.sp,
                         color = AboutThisAppTheme.colours.onBackground,
                         text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mattis maximus nisi ac mollis. Vivamus fringilla mi vulputate turpis bibendum congue. Proin ut consectetur nisl, non tempor risus. Phasellus venenatis lacinia dignissim. Pellentesque pretium, elit quis condimentum egestas, ligula ante venenatis ex, sed faucibus tellus quam at purus"
@@ -91,7 +92,7 @@ private fun PreviewPhone() {
                 },
                 footer = {
                     Text(
-                        modifier = Modifier.padding(16.dp),
+                        modifier = Modifier.padding(large),
                         fontSize = 16.sp,
                         color = AboutThisAppTheme.colours.onBackground,
                         text = "Special thanks to everyone here. If we're missing anyone or anything please let us know"
@@ -117,7 +118,7 @@ private fun PreviewExpanded() {
             contactEmail = "thementalgoose@gmail.com",
             header = {
                 Text(
-                    modifier = Modifier.padding(16.dp),
+                    modifier = Modifier.padding(large),
                     fontSize = 16.sp,
                     color = AboutThisAppTheme.colours.onBackground,
                     text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mattis maximus nisi ac mollis. Vivamus fringilla mi vulputate turpis bibendum congue. Proin ut consectetur nisl, non tempor risus. Phasellus venenatis lacinia dignissim. Pellentesque pretium, elit quis condimentum egestas, ligula ante venenatis ex, sed faucibus tellus quam at purus"
@@ -125,7 +126,7 @@ private fun PreviewExpanded() {
             },
             footer = {
                 Text(
-                    modifier = Modifier.padding(16.dp),
+                    modifier = Modifier.padding(large),
                     fontSize = 16.sp,
                     color = AboutThisAppTheme.colours.onBackground,
                     text = "Special thanks to everyone here. If we're missing anyone or anything please let us know"

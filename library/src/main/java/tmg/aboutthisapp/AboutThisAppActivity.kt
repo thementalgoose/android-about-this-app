@@ -1,5 +1,6 @@
 package tmg.aboutthisapp
 
+import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.ClipData
 import android.content.Context
@@ -9,15 +10,23 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.annotation.Keep
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
@@ -25,6 +34,7 @@ import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -46,8 +56,10 @@ class AboutThisAppActivity: AppCompatActivity() {
         }
     }
 
+    @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge(statusBarStyle = SystemBarStyle.auto(lightColours.background.toArgb(), darkColours.background.toArgb()))
         super.onCreate(savedInstanceState)
         val config = configuration ?: run {
             Log.e("AboutThisApp", "Cannot find configuration whilst creating an activity, closing activity")
@@ -62,28 +74,36 @@ class AboutThisAppActivity: AppCompatActivity() {
                 darkColors = config.darkColors?.let { Colours(it) } ?: darkColours,
                 strings = config.labels
             ) {
-                AboutThisAppScreen(
-                    appIcon = config.imageRes,
-                    appName = config.appName,
-                    dependencies = config.dependencies,
-                    dependencyClicked = {
-                        openLink(it.url)
-                    },
-                    showBack = true,
-                    backClicked = {
-                        finish()
-                    },
-                    isCompact = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact,
-                    header = {
-                        Header(configuration = config)
-                    },
-                    footer = {
-                        Footer(configuration = config)
-                    },
-                    contactEmail = config.email,
-                    appVersion = config.appVersion,
-                    links = buildLinks(config),
-                )
+                Scaffold {
+                    Box(Modifier
+                        .background(AboutThisAppTheme.colours.background)
+                        .fillMaxSize()
+                        .systemBarsPadding()
+                    ) {
+                        AboutThisAppScreen(
+                            appIcon = config.imageRes,
+                            appName = config.appName,
+                            dependencies = config.dependencies,
+                            dependencyClicked = {
+                                openLink(it.url)
+                            },
+                            showBack = true,
+                            backClicked = {
+                                finish()
+                            },
+                            isCompact = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact,
+                            header = {
+                                Header(configuration = config)
+                            },
+                            footer = {
+                                Footer(configuration = config)
+                            },
+                            contactEmail = config.email,
+                            appVersion = config.appVersion,
+                            links = buildLinks(config),
+                        )
+                    }
+                }
             }
         }
     }
@@ -133,7 +153,7 @@ class AboutThisAppActivity: AppCompatActivity() {
                 color = AboutThisAppTheme.colours.onBackground,
                 modifier = Modifier.padding(
                     horizontal = medium,
-                    vertical = 12.dp
+                    vertical = medium
                 )
             )
         }
@@ -147,7 +167,7 @@ class AboutThisAppActivity: AppCompatActivity() {
     ) {
         Column(modifier = modifier
             .padding(
-                vertical = 12.dp,
+                vertical = medium,
                 horizontal = medium
             ),
             verticalArrangement = Arrangement.spacedBy(small)

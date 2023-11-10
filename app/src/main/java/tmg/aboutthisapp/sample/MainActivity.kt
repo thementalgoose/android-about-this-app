@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
                 debugInfo = "abcdefg-abcd-abcd-abcdefg",
                 appPackageName = this.packageName,
                 website = "https://jordanfisher.io",
-                imageRes = R.mipmap.ic_launcher,
+                imageRes = R.drawable.ic_launcher_background,
             )
 
             startActivity(

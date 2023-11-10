@@ -20,13 +20,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import tmg.aboutthisapp.AboutThisAppTheme
+import tmg.aboutthisapp.AboutThisAppTheme.dimens.large
 import tmg.aboutthisapp.AboutThisAppTheme.dimens.medium
 import tmg.aboutthisapp.AboutThisAppTheme.dimens.small
 import tmg.aboutthisapp.AboutThisAppTheme.dimens.xsmall
 import tmg.aboutthisapp.R
 import tmg.aboutthisapp.utils.PreviewTheme
 
-private val iconSize: Dp = 108.dp
+private val iconSize: Dp = 84.dp
 
 @Composable
 internal fun Header(
@@ -41,7 +42,7 @@ internal fun Header(
             start = medium,
             end = medium,
             top = medium,
-            bottom = small
+            bottom = large
         )
     ) {
         AsyncImage(
