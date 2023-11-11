@@ -16,4 +16,4 @@ jobs:
 
       # Unit tests
       - name: Unit Tests
-        run: ./gradlew :library:test
+        run: ./gradlew :library:testDebug
