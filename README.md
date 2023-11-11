@@ -4,7 +4,10 @@ The "About This App" cover screen that I use in my apps
 
 [![](https://jitpack.io/v/thementalgoose/android-about-this-app.svg)](https://jitpack.io/#thementalgoose/android-about-this-app) [![main](https://github.com/thementalgoose/android-about-this-app/workflows/Main/badge.svg)](https://github.com/thementalgoose/android-about-this-app/actions)
 
-![about-this-app](res/aboutthisapp.gif)
+| Phone                                               | Foldable                                            | Tablet                                              |
+|-----------------------------------------------------|-----------------------------------------------------|-----------------------------------------------------|
+| <img src="res/screenshot1-light.png" width="275" /> | <img src="res/screenshot2-light.png" width="275" /> | <img src="res/screenshot3-light.png" width="275" /> |
+| <img src="res/screenshot1-dark.png" width="275" />  | <img src="res/screenshot2-dark.png" width="275" />  | <img src="res/screenshot3-dark.png" width="275" />  |
 
 ## Installation
 
@@ -23,85 +26,114 @@ The "About This App" cover screen that I use in my apps
     <summary><code>app/build.gradle</code></summary>
 
     dependencies {
-        implementation 'com.github.thementalgoose:android-about-this-app:5.3.0'
+        implementation 'com.github.thementalgoose:android-about-this-app:6.0.0'
         // Use Jitpack version if newer
     }
 
 Jitpack version: [![](https://jitpack.io/v/thementalgoose/android-about-this-app.svg)](https://jitpack.io/#thementalgoose/android-about-this-app)
 </details>
 
+Version 6.x is a built in Jetpack Compose with a different API, so updating will cause breaking changes. See option 2 below for migrating to the new Configuration object, or stay on [5.3.2](https://github.com/thementalgoose/android-about-this-app/tree/5.3.2) to continue using the older version  
 
 ## Usage
 
-Initialise with a config
+This is now written in Jetpack Compose, and therefore can be utilised one of two ways
+
+#### Option 1: Call the Composable
 
 ```kotlin
-// Specify a configuration
-val configuration = AboutThisAppConfiguration(
-    themeRes = R.style.AppTheme,
+
+/**
+ * Option 1
+ * Consume it in a compose navigation host or your own activity
+ * - Bind colours + any strings with AboutThisAppTheme
+ */
+setContent { 
+    AboutThisAppTheme(
+        lightColors = AboutThisAppColors(), /* Optional, override for custom theme */
+        darkColors = AboutThisAppColors(), /* Optional, override for custom theme */
+        labels = Labels() /* Optional, override for custom values / use string resources */
+    ) {
+        AboutThisAppScreen(
+            appIcon = R.mipmap.ic_launcher,
+            appName = "Sample App",
+            appVersion = "1.0.0",
+            dependencies = List(14) {
+                Dependency(
+                    dependencyName = "Library $it",
+                    author = "John Doe",
+                    imageUrl = "https://avatars0.githubusercontent.com/u/5982159?s=460&v=4",
+                    url = "https://github.com/thementalgoose/android-about-this-app"
+                )
+            },
+            dependencyClicked = { /* Open it.url */ },
+            isCompact = windowWidthSizeClass == Compact,
+            showBack = true,
+            backClicked = { finish() },
+            header = { 
+                Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mattis maximus nisi ac mollis.")
+            },
+            footer = {
+                Text("Thanks again!")
+            },
+            contactEmail = "johndoe@anonymous.com",
+            links = listOf(
+                Link.Github { openWebpage("https://www.github.com") },
+                Link(icon = R.drawable.my_icon, name = R.string.my_name, onClick = { })
+            )
+        )
+    }
+}
+```
+
+#### Option 2: Use the activity
+
+```kotlin
+/**
+ * Launch this in its own activity with a configuration object
+ * - Customisation of this is more restricted.
+ * - String resources should be overridden via. defining your own R.string with the same key
+ * - Colours can be passed in to the configuration object via. an optional param
+ */
+val configuration = Configuration(
+    imageRes = R.mipmap.ic_launcher,
     appName = "Sample App",
     appVersion = "1.0.0",
     dependencies = List(14) {
-        AboutThisAppDependency(
-            order = it,
-            dependencyName = "Myself",
-            author = "Jordan Fisher",
+        Dependency(
+            dependencyName = "Library $it",
+            author = "John Doe",
             imageUrl = "https://avatars0.githubusercontent.com/u/5982159?s=460&v=4",
             url = "https://github.com/thementalgoose/android-about-this-app"
         )
     },
-    email = "thementalgoose@gmail.com",
-    footnote = "Thank you!",
-    github = "https://github.com/thementalgoose",
-    play = null,
-    guid = "abcdefg-abcd-abcd-abcdefg",
-    guidLongClickCopy = true,
-    name = "My Application",
-    nameDesc = "A sample app being shown",
-    imageUrl = "https://avatars0.githubusercontent.com/u/5982159?s=460&v=4",
-    appPackageName = this.packageName,
-    subtitle = "Thank you!",
-    website = "https://google.com"
+    header = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mattis maximus nisi ac mollis.", /* Optional */
+    footnote = "Thanks again!", /* Optional */
+    appPackageName = "tmg.aboutthisapp",
+    github = "https://github.com/profile/my_profile", /* Optional */
+    email = "johndoe@anonymous.com", /* Optional */
+    website = "https://www.google.com", /* Optional */
+    debugInfo = "abcdefg-abcd-abcd-abcdefgh", /* Optional */
+    lightColors = ConfigurationColours(), /* Optional */
+    darkColors = ConfigurationColours(), /* Optional */
+    labels = Labels(), /* Optional */
 )
-
-// Launch
 startActivity(AboutThisAppActivity.intent(this, configuration))
 ```
 
-Inside your app style supplied to this activity, provide the following attributes
+You may need to add a manifest entry for this activity in order for it to display in your app 
 
 ```xml
-<!-- About This App Activity (light) -->
-<item name="aboutThisApp_header">?attr/colorPrimary</item>
-<item name="aboutThisApp_textPrimary">#181818</item>
-<item name="aboutThisApp_textSecondary">#383838</item>
-<item name="aboutThisApp_textToolbar">#f8f8f8</item>
-<item name="aboutThisApp_iconPrimary">?attr/aboutThisApp_textPrimary</item>
-<item name="aboutThisApp_backgroundPrimary">#fbfbfb</item>
-<item name="aboutThisApp_backgroundSecondary">#f2f2f2</item>
-
-<!-- About This App Activity (dark) -->
-<item name="aboutThisApp_header">@color/colorPrimary</item>
-<item name="aboutThisApp_textPrimary">#f8f8f8</item>
-<item name="aboutThisApp_textSecondary">#e8e8e8</item>
-<item name="aboutThisApp_textToolbar">#f8f8f8</item>
-<item name="aboutThisApp_iconPrimary">?attr/aboutThisApp_textPrimary</item>
-<item name="aboutThisApp_backgroundPrimary">#181818</item>
-<item name="aboutThisApp_backgroundSecondary">#383838</item>
-
-<!-- 
-Overscroll mode is disabled on API 30 and below. 
-To enable, override the int constant 
--->
-<integer name="aboutThisApp_overscrollMode">2</integer> <!-- never -->
-<integer name="aboutThisApp_overscrollMode">1</integer> <!-- ifContentScrolls -->
-<integer name="aboutThisApp_overscrollMode">0</integer> <!-- always -->
+<activity 
+    android:name="tmg.aboutthisapp.AboutThisAppActivity"
+    android:exported="false" />
 ```
+
 
 ## License
 
 ```
-Copyright (C) 2022 Jordan Fisher
+Copyright (C) 2023 Jordan Fisher
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

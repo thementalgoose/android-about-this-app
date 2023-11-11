@@ -1,0 +1,27 @@
+android {
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion libs.versions.composecompiler.get()
+    }
+}
+
+dependencies {
+    implementation platform(libs.compose.bom)
+    implementation libs.compose.material
+    implementation libs.compose.material3
+    implementation libs.compose.windowsize
+    implementation libs.compose.animation
+    debugImplementation libs.compose.ui.tooling
+    implementation libs.compose.ui.toolingpreview
+
+    implementation libs.compose.activity
+
+    implementation libs.androidx.window
+
+    testImplementation libs.robolectric
+    testImplementation libs.compose.junit4
+    debugImplementation libs.compose.manifest
+}

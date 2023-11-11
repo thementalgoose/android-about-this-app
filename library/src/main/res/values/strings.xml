@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="about_this_app_github">Github</string>
+    <string name="about_this_app_gitlab">Gitlab</string>
+    <string name="about_this_app_linkedin">LinkedIn</string>
+    <string name="about_this_app_reddit">Reddit</string>
+    <string name="about_this_app_twitter">Twitter</string>
+    <string name="about_this_app_x">X</string>
+    <string name="about_this_app_youtube">Youtube</string>
     <string name="about_this_app_email">Email</string>
     <string name="about_this_app_website">Website</string>
     <string name="about_this_app_play">Play</string>
-    <string name="about_this_app_app_version">App Version %s</string>
+    <string name="about_this_app_app_version">App Version</string>
     <string name="about_this_app_send_email">Send Email</string>
+    <string name="about_this_app_contact_email">Contact Email</string>
 
     <string name="about_this_app_ab_back_button">Back</string>
 
+    <string name="about_this_app_dependency_header">Dependencies</string>
+
     <string name="about_this_app_copy_to_clipboard">Copied to clipboard</string>
-    <string name="about_this_app_unable_to_find_client">Unable to find an email client</string>
+    <string name="about_this_app_debug_information">Copied to clipboard</string>
 </resources>
