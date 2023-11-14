@@ -218,13 +218,16 @@ class AboutThisAppActivity: AppCompatActivity() {
     }
 
     private fun openEmail(emailAddress: String) {
-        val uri = Uri.parse("mailto:")
-        val targetIntent = Intent()
-            .setAction(Intent.ACTION_VIEW)
-            .addCategory(Intent.CATEGORY_APP_EMAIL)
-            .setData(uri)
-            .putExtra(Intent.EXTRA_EMAIL, emailAddress)
-        startActivity(Intent.createChooser(targetIntent, getString(R.string.about_this_app_email)))
+        try {
+            val intent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:")
+                putExtra(Intent.EXTRA_EMAIL, emailAddress)
+                putExtra(Intent.EXTRA_SUBJECT, "")
+            }
+            startActivity(Intent.createChooser(intent, getString(R.string.about_this_app_email)))
+        } catch (e: ActivityNotFoundException) {
+            copyToClipboard(R.string.about_this_app_email, emailAddress)
+        }
     }
 
     private fun openPlaystore(appPackageName: String) {
