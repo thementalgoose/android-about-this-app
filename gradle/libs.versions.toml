@@ -3,7 +3,7 @@ gradle = "8.1.4"
 kotlin = "1.9.23"
 androidx_activity = "1.8.2"
 compose = "2024.03.00"
-composecompiler = "1.5.3"
+composecompiler = "1.5.11"
 material3 = "1.2.1"
 
 robolectric = "4.11.1"
