@@ -14,13 +14,13 @@ repositories {
 group = 'com.github.thementalgoose'
 
 android {
-    compileSdk 34
+    compileSdk 35
 
     namespace "tmg.aboutthisapp"
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 34
+        targetSdkVersion 35
         versionCode 1
         versionName "1.0"
 
