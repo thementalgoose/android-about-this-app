@@ -1,6 +1,7 @@
 package tmg.aboutthisapp
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
@@ -44,6 +45,8 @@ fun AboutThisAppTheme(
         LocalColors provides if (darkMode) darkColors else lightColors,
         LocalStrings provides strings
     ) {
-        content()
+        MaterialTheme {
+            content()
+        }
     }
 }

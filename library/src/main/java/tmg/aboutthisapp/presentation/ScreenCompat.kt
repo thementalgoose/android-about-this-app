@@ -102,7 +102,7 @@ internal fun ScreenCompact(
                     name = it.dependencyName,
                     author = it.author,
                     url = it.url,
-                    icon = it.icon
+                    icon = it.icon,
                 )
             }
 
