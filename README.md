@@ -26,7 +26,7 @@ The "About This App" cover screen that I use in my apps
     <summary><code>app/build.gradle</code></summary>
 
     dependencies {
-        implementation 'com.github.thementalgoose:android-about-this-app:6.0.3'
+        implementation 'com.github.thementalgoose:android-about-this-app:6.0.4'
         // Use Jitpack version if newer
     }
 
