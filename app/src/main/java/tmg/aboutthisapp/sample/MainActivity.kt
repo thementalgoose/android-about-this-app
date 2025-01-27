@@ -1,45 +1,22 @@
 package tmg.aboutthisapp.sample
 
-import android.content.res.Configuration.UI_MODE_NIGHT_MASK
-import android.content.res.Configuration.UI_MODE_NIGHT_NO
-import android.content.res.Configuration.UI_MODE_NIGHT_UNDEFINED
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
+import tmg.aboutthisapp.AboutThisAppActivity
 import tmg.aboutthisapp.configuration.Configuration
 import tmg.aboutthisapp.configuration.Dependency
-import tmg.aboutthisapp.AboutThisAppActivity
 import tmg.aboutthisapp.configuration.DependencyIcon
+import tmg.aboutthisapp.configuration.Typography
 import tmg.aboutthisapp.sample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val isDarkMode
-        get() = when (this.resources?.configuration?.uiMode?.and(UI_MODE_NIGHT_MASK)) {
-            UI_MODE_NIGHT_YES -> true
-            UI_MODE_NIGHT_NO -> false
-            UI_MODE_NIGHT_UNDEFINED -> null
-            else -> null
-        }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        binding.darkMode.text = "Dark mode: $isDarkMode"
-        binding.toggleDarkMode.setOnClickListener {
-            if (isDarkMode == true) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            }
-
-            binding.darkMode.text = "Dark mode: $isDarkMode"
-        }
 
         binding.btnAboutThisApp.setOnClickListener {
 
