@@ -2,8 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'maven-publish'
 apply plugin: 'kotlin-parcelize'
-
-apply from: rootDir.absolutePath + "/gradle/config-compose.gradle"
+this.pluginManager.apply(libs.plugins.composecompiler.get().pluginId)
 
 repositories {
     mavenCentral()
@@ -29,7 +28,7 @@ android {
     }
 
     buildFeatures {
-        viewBinding true
+        compose true
     }
 
     compileOptions {
@@ -81,10 +80,13 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation libs.kotlin.stdlib
-    implementation libs.androidx.appcompat
-    implementation libs.androidx.core
+    implementation platform(libs.compose.bom)
+    implementation libs.compose.material3.base
+    implementation libs.compose.material3.ripple
+    implementation libs.compose.material3.windowsize
+    implementation libs.compose.activity
+    debugImplementation libs.compose.ui.tooling
+    implementation libs.compose.ui.toolingpreview
 
     implementation libs.coil
 
