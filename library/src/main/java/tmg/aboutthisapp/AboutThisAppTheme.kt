@@ -1,15 +1,22 @@
 package tmg.aboutthisapp
 
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.dp
+import tmg.aboutthisapp.configuration.AboutThisAppColors
+import tmg.aboutthisapp.configuration.AboutThisAppTypography
 import tmg.aboutthisapp.configuration.Labels
+import tmg.aboutthisapp.configuration.aboutThisAppDarkColors
+import tmg.aboutthisapp.configuration.aboutThisAppLightColors
+import tmg.aboutthisapp.configuration.defaultTypography
 
-internal val LocalColors = staticCompositionLocalOf { lightColours }
+internal val LocalColors = staticCompositionLocalOf { aboutThisAppLightColors }
+internal val LocalTypography = staticCompositionLocalOf { defaultTypography }
 internal val LocalStrings = staticCompositionLocalOf { Labels() }
 
 internal object AboutThisAppTheme {
@@ -35,18 +42,20 @@ internal object AboutThisAppTheme {
 
 @Composable
 fun AboutThisAppTheme(
-    lightColors: Colours = lightColours,
-    darkColors: Colours = darkColours,
+    lightColors: AboutThisAppColors = aboutThisAppLightColors,
+    darkColors: AboutThisAppColors = aboutThisAppDarkColors,
+    typography: AboutThisAppTypography = defaultTypography,
     strings: Labels = Labels(),
     content: @Composable () -> Unit
 ) {
     val darkMode = isSystemInDarkTheme()
+    val colors = if (darkMode) darkColors else lightColors
     CompositionLocalProvider(
-        LocalColors provides if (darkMode) darkColors else lightColors,
-        LocalStrings provides strings
+        LocalColors provides colors,
+        LocalStrings provides strings,
+        LocalTypography provides typography,
+        LocalIndication provides ripple()
     ) {
-        MaterialTheme {
-            content()
-        }
+        content()
     }
 }

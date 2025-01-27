@@ -10,12 +10,10 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.SystemBarStyle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.annotation.Keep
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
@@ -24,41 +22,45 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.os.BundleCompat
 import tmg.aboutthisapp.AboutThisAppTheme.dimens.medium
 import tmg.aboutthisapp.AboutThisAppTheme.dimens.small
+import tmg.aboutthisapp.AboutThisAppTheme.dimens.xsmall
+import tmg.aboutthisapp.configuration.AboutThisAppColors
+import tmg.aboutthisapp.configuration.AboutThisAppTypography
 import tmg.aboutthisapp.configuration.Configuration
 import tmg.aboutthisapp.configuration.Link
+import tmg.aboutthisapp.configuration.aboutThisAppDarkColors
+import tmg.aboutthisapp.configuration.aboutThisAppLightColors
+import tmg.aboutthisapp.configuration.defaultTypography
 import tmg.aboutthisapp.presentation.AboutThisAppScreen
 import tmg.aboutthisapp.utils.clipboardManager
 import java.net.MalformedURLException
 
-class AboutThisAppActivity: AppCompatActivity() {
+class AboutThisAppActivity: ComponentActivity() {
 
     private val configuration: Configuration? by lazy {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.extras?.getParcelable(keyConfiguration, Configuration::class.java)
-        } else {
-            intent.extras?.getParcelable(keyConfiguration)
+        return@lazy intent.extras?.let {
+            BundleCompat.getParcelable(it, keyConfiguration, Configuration::class.java)
         }
     }
 
     @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge(statusBarStyle = SystemBarStyle.auto(lightColours.background.toArgb(), darkColours.background.toArgb()))
         super.onCreate(savedInstanceState)
         val config = configuration ?: run {
             Log.e("AboutThisApp", "Cannot find configuration whilst creating an activity, closing activity")
@@ -66,18 +68,23 @@ class AboutThisAppActivity: AppCompatActivity() {
             return
         }
 
+        val lightColors = config.lightColors?.let { AboutThisAppColors(it) } ?: aboutThisAppLightColors
+        val darkColors = config.darkColors?.let { AboutThisAppColors(it) } ?: aboutThisAppDarkColors
+        val typography = config.typography?.let { AboutThisAppTypography(it) } ?: defaultTypography
+
         setContent {
             val windowSizeClass = calculateWindowSizeClass(activity = this@AboutThisAppActivity)
             AboutThisAppTheme(
-                lightColors = config.lightColors?.let { Colours(it) } ?: lightColours,
-                darkColors = config.darkColors?.let { Colours(it) } ?: darkColours,
+                lightColors = lightColors,
+                darkColors = darkColors,
+                typography = typography,
                 strings = config.labels
             ) {
                 Scaffold {
                     Box(Modifier
                         .background(AboutThisAppTheme.colours.background)
                         .fillMaxSize()
-                        .systemBarsPadding()
+                        .padding(it)
                     ) {
                         AboutThisAppScreen(
                             appIcon = config.imageRes,
@@ -164,15 +171,16 @@ class AboutThisAppActivity: AppCompatActivity() {
         configuration: Configuration,
         modifier: Modifier = Modifier
     ) {
-        Column(modifier = modifier
-            .padding(
-                vertical = medium,
-                horizontal = medium
-            ),
+        Column(modifier = modifier,
             verticalArrangement = Arrangement.spacedBy(small)
         ) {
             configuration.footnote?.let {
                 Text(
+                    modifier = Modifier
+                        .padding(
+                            vertical = small,
+                            horizontal = medium
+                        ),
                     text = it,
                     color = AboutThisAppTheme.colours.onBackground,
                 )
@@ -184,13 +192,21 @@ class AboutThisAppActivity: AppCompatActivity() {
                     color = AboutThisAppTheme.colours.onBackground,
                     fontStyle = FontStyle.Italic,
                     modifier = Modifier
-                        .padding(top = 8.dp)
                         .alpha(0.7f)
+                        .padding(
+                            horizontal = small,
+                            vertical = xsmall
+                        )
+                        .clip(RoundedCornerShape(6.dp))
                         .combinedClickable(
                             onClick = { },
                             onLongClick = {
                                 copyToClipboard(R.string.about_this_app_debug_information, it)
                             }
+                        )
+                        .padding(
+                            horizontal = small,
+                            vertical = xsmall
                         )
                 )
             }

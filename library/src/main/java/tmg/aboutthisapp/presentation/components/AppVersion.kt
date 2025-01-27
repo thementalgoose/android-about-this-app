@@ -4,16 +4,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import tmg.aboutthisapp.AboutThisAppTheme
-import tmg.aboutthisapp.AboutThisAppTheme.dimens.large
-import tmg.aboutthisapp.AboutThisAppTheme.dimens.medium
 import tmg.aboutthisapp.AboutThisAppTheme.dimens.small
+import tmg.aboutthisapp.LocalTypography
+import tmg.aboutthisapp.utils.PreviewTheme
 
 @Composable
 internal fun AppVersion(
@@ -21,17 +20,10 @@ internal fun AppVersion(
     appVersion: String? = null
 ) {
     if (appVersion != null) {
-        Column(modifier = modifier
-            .padding(
-                start = medium,
-                end = medium,
-                top = small,
-                bottom = large
-            )
-            .fillMaxWidth()
-        ) {
+        Column(modifier = modifier) {
             Row(modifier = Modifier.fillMaxWidth()) {
                 Text(
+                    style = LocalTypography.current.body2,
                     text = "${stringResource(AboutThisAppTheme.strings.appVersion)}:",
                     fontWeight = FontWeight.Bold,
                     maxLines = 1,
@@ -39,6 +31,7 @@ internal fun AppVersion(
                 )
 
                 Text(
+                    style = LocalTypography.current.body2,
                     modifier = Modifier.padding(start = small),
                     text = appVersion,
                     maxLines = 1,
@@ -46,5 +39,15 @@ internal fun AppVersion(
                 )
             }
         }
+    }
+}
+
+@PreviewTheme
+@Composable
+private fun Preview() {
+    AboutThisAppTheme {
+        AppVersion(
+            appVersion = "1.0.0"
+        )
     }
 }
