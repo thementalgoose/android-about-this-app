@@ -21,9 +21,9 @@ import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.runtime.Composable
@@ -34,14 +34,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import tmg.aboutthisapp.AboutThisAppTheme
+import tmg.aboutthisapp.AboutThisAppTheme.dimens.large
 import tmg.aboutthisapp.AboutThisAppTheme.dimens.medium
 import tmg.aboutthisapp.AboutThisAppTheme.dimens.small
+import tmg.aboutthisapp.R
 import tmg.aboutthisapp.configuration.Dependency
 import tmg.aboutthisapp.configuration.Link
 import tmg.aboutthisapp.presentation.components.AppVersion
 import tmg.aboutthisapp.presentation.components.DependencyItem
 import tmg.aboutthisapp.presentation.components.Header
 import tmg.aboutthisapp.presentation.components.LinkItem
+import tmg.aboutthisapp.utils.PreviewFoldable
+import tmg.aboutthisapp.utils.PreviewTablet
 
 private val minDependencyCellSize = 220.dp
 
@@ -92,10 +96,13 @@ internal fun ScreenExpanded(
 
                 items(links, key = { "link-${it.label}"} ) {
                     LinkItem(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(6.dp))
+                            .clickable(onClick = it.onClick),
                         label = it.label,
                         icon = it.icon,
                         tint = it.tint,
-                        onClick = it.onClick
                     )
                 }
 
@@ -117,6 +124,10 @@ internal fun ScreenExpanded(
 
                 item(key = "app-version", span = { GridItemSpan(maxLineSpan) }) {
                     AppVersion(
+                        modifier = Modifier.padding(
+                            horizontal = medium,
+                            vertical = medium,
+                        ),
                         appVersion = appVersion,
                     )
                 }
@@ -159,7 +170,10 @@ internal fun ScreenExpanded(
                                         horizontal = small,
                                         vertical = small
                                     )
-                                    .clickable { dependencyClicked(it) },
+                                    .clip(RoundedCornerShape(6.dp))
+                                    .clickable(
+                                        onClick = { dependencyClicked(it) }
+                                    ),
                                 name = it.dependencyName,
                                 author = it.author,
                                 url = it.url,
@@ -170,5 +184,16 @@ internal fun ScreenExpanded(
                 )
             }
         }
+    }
+}
+
+
+
+@PreviewTablet
+@PreviewFoldable
+@Composable
+private fun PreviewExpanded() {
+    AboutThisAppTheme {
+        PreviewScreenExpanded()
     }
 }

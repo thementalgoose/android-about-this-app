@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -24,7 +24,9 @@ import tmg.aboutthisapp.AboutThisAppTheme.dimens.large
 import tmg.aboutthisapp.AboutThisAppTheme.dimens.medium
 import tmg.aboutthisapp.AboutThisAppTheme.dimens.small
 import tmg.aboutthisapp.AboutThisAppTheme.dimens.xsmall
+import tmg.aboutthisapp.LocalTypography
 import tmg.aboutthisapp.R
+import tmg.aboutthisapp.configuration.Typography
 import tmg.aboutthisapp.utils.PreviewTheme
 
 private val iconSize: Dp = 84.dp
@@ -63,17 +65,20 @@ internal fun Header(
                 modifier = Modifier.fillMaxWidth(),
                 color = AboutThisAppTheme.colours.onBackground,
                 text = appName,
-                fontSize = 24.sp,
+                style = LocalTypography.current.header,
                 fontWeight = FontWeight.Bold
             )
 
             if (contactEmail != null) {
                 Spacer(Modifier.height(small))
                 Text(
+                    style = LocalTypography.current.body1,
                     text = stringResource(AboutThisAppTheme.strings.contactEmail),
                     color = AboutThisAppTheme.colours.onBackground
                 )
                 Text(
+                    modifier = Modifier.padding(top = 2.dp),
+                    style = LocalTypography.current.body2,
                     text = contactEmail,
                     color = AboutThisAppTheme.colours.onBackground
                 )

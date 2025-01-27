@@ -26,7 +26,7 @@ The "About This App" cover screen that I use in my apps
     <summary><code>app/build.gradle</code></summary>
 
     dependencies {
-        implementation 'com.github.thementalgoose:android-about-this-app:6.0.4'
+        implementation 'com.github.thementalgoose:android-about-this-app:6.0.5'
         // Use Jitpack version if newer
     }
 
@@ -52,6 +52,7 @@ setContent {
     AboutThisAppTheme(
         lightColors = AboutThisAppColors(), /* Optional, override for custom theme */
         darkColors = AboutThisAppColors(), /* Optional, override for custom theme */
+        typography = AboutThisAppTypography(), /* Optional, override for custom theme */
         labels = Labels() /* Optional, override for custom values / use string resources */
     ) {
         AboutThisAppScreen(

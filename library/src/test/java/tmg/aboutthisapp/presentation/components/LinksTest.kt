@@ -1,5 +1,7 @@
 package tmg.aboutthisapp.presentation.components
 
+import androidx.compose.foundation.clickable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
@@ -23,8 +25,7 @@ internal class LinksTest {
         composeTestRule.setContent {
             LinkItem(
                 label = R.string.about_this_app_github,
-                icon = R.drawable.ic_util_icon_github,
-                onClick = { }
+                icon = R.drawable.ic_util_icon_github
             )
         }
 
@@ -38,9 +39,9 @@ internal class LinksTest {
         val onClick: () -> Unit = mockk(relaxed = true)
         composeTestRule.setContent {
             LinkItem(
+                modifier = Modifier.clickable { onClick() },
                 label = R.string.about_this_app_github,
-                icon = R.drawable.ic_util_icon_github,
-                onClick = onClick
+                icon = R.drawable.ic_util_icon_github
             )
         }
 

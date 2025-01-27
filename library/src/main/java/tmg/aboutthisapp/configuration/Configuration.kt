@@ -1,10 +1,10 @@
 package tmg.aboutthisapp.configuration
 
 import android.os.Parcelable
+import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.Keep
 import kotlinx.parcelize.Parcelize
-import tmg.aboutthisapp.ConfigurationColours
 
 @Keep
 @Parcelize
@@ -27,7 +27,8 @@ data class Configuration(
     val email: String? = null,
     val website: String? = null,
     val debugInfo: String? = null,
-    val lightColors: ConfigurationColours? = null,
-    val darkColors: ConfigurationColours? = null,
-    val labels: Labels = Labels()
+    val lightColors: Colours? = null,
+    val darkColors: Colours? = null,
+    val typography: Typography? = null,
+    val labels: Labels = Labels(),
 ): Parcelable

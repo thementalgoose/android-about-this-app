@@ -1,6 +1,7 @@
 package tmg.aboutthisapp.presentation.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -8,8 +9,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -25,6 +26,7 @@ import coil.compose.AsyncImage
 import tmg.aboutthisapp.AboutThisAppTheme
 import tmg.aboutthisapp.AboutThisAppTheme.dimens.medium
 import tmg.aboutthisapp.AboutThisAppTheme.dimens.small
+import tmg.aboutthisapp.LocalTypography
 import tmg.aboutthisapp.R
 import tmg.aboutthisapp.configuration.DependencyIcon
 import tmg.aboutthisapp.utils.PreviewTheme
@@ -81,8 +83,8 @@ internal fun DependencyItem(
                     .fillMaxWidth(),
                 text = name,
                 color = AboutThisAppTheme.colours.onPrimary,
+                style = LocalTypography.current.body1,
                 fontWeight = FontWeight.Bold,
-                fontSize = 16.sp
             )
 
             Text(
@@ -92,8 +94,7 @@ internal fun DependencyItem(
                 text = author,
                 maxLines = 1,
                 color = AboutThisAppTheme.colours.onPrimary,
-                fontWeight = FontWeight.Bold,
-                fontSize = 14.sp
+                style = LocalTypography.current.body1,
             )
 
             Text(
@@ -104,7 +105,7 @@ internal fun DependencyItem(
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 color = AboutThisAppTheme.colours.onPrimary,
-                fontSize = 14.sp
+                style = LocalTypography.current.body2,
             )
         }
     }
@@ -114,12 +115,14 @@ internal fun DependencyItem(
 @Composable
 private fun Preview() {
     AboutThisAppTheme {
-        val colour = 0xFF972948
-        DependencyItem(
-            name = "Jetpack",
-            author = "Google",
-            url = "https://developer.google.com/android",
-            icon = DependencyIcon.Icon(icon = R.drawable.ic_util_icon_website, backgroundColor = colour.toInt())
-        )
+        Box(Modifier.padding(16.dp)) {
+            val colour = 0xFF972948
+            DependencyItem(
+                name = "Jetpack",
+                author = "Google",
+                url = "https://developer.google.com/android",
+                icon = DependencyIcon.Icon(icon = R.drawable.ic_util_icon_website, backgroundColor = colour.toInt())
+            )
+        }
     }
 }
