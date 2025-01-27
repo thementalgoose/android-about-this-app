@@ -2,9 +2,7 @@ package tmg.aboutthisapp.utils
 
 import android.content.res.Configuration
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
@@ -46,13 +44,13 @@ annotation class PreviewPhone
 @Preview(
     showBackground = true,
     uiMode = Configuration.UI_MODE_NIGHT_YES,
-    device = "spec:shape=Normal,width=1200,height=800,unit=dp,dpi=480",
+    device = "spec:width=1200dp,height=800dp,dpi=480",
     name = "Tablet Dark"
 )
 @Preview(
     showBackground = true,
     uiMode = Configuration.UI_MODE_NIGHT_NO,
-    device = "spec:shape=Normal,width=1200,height=800,unit=dp,dpi=480",
+    device = "spec:width=1200dp,height=800dp,dpi=480",
     name = "Tablet Light"
 )
 annotation class PreviewTablet
@@ -60,14 +58,16 @@ annotation class PreviewTablet
 
 @Preview(
     showBackground = true,
+    backgroundColor = 0xff181818,
     uiMode = Configuration.UI_MODE_NIGHT_YES,
-    device = "spec:shape=Normal,width=673,height=841,unit=dp,dpi=480",
+    device = "spec:width=673dp,height=841dp,dpi=480",
     name = "Foldable Dark"
 )
 @Preview(
     showBackground = true,
+    backgroundColor = 0xfff8f8f8,
     uiMode = Configuration.UI_MODE_NIGHT_NO,
-    device = "spec:shape=Normal,width=673,height=841,unit=dp,dpi=480",
+    device = "spec:width=673dp,height=841dp,dpi=480",
     name = "Foldable Light"
 )
 annotation class PreviewFoldable
@@ -75,11 +75,13 @@ annotation class PreviewFoldable
 
 @Preview(
     showBackground = true,
+    backgroundColor = 0xff181818,
     uiMode = Configuration.UI_MODE_NIGHT_YES,
     name = "Dark"
 )
 @Preview(
     showBackground = true,
+    backgroundColor = 0xfff8f8f8,
     uiMode = Configuration.UI_MODE_NIGHT_NO,
     name = "Light"
 )
