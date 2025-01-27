@@ -94,6 +94,10 @@ dependencies {
 
     testImplementation libs.junit
     testImplementation libs.mockk
+
+    testImplementation libs.robolectric
+    testImplementation libs.compose.junit4
+    debugImplementation libs.compose.manifest
 }
 
 project.afterEvaluate {
