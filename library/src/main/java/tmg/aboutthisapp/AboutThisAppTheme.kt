@@ -45,10 +45,10 @@ fun AboutThisAppTheme(
     lightColors: AboutThisAppColors = aboutThisAppLightColors,
     darkColors: AboutThisAppColors = aboutThisAppDarkColors,
     typography: AboutThisAppTypography = defaultTypography,
+    darkMode: Boolean = isSystemInDarkTheme(),
     strings: Labels = Labels(),
     content: @Composable () -> Unit
 ) {
-    val darkMode = isSystemInDarkTheme()
     val colors = if (darkMode) darkColors else lightColors
     CompositionLocalProvider(
         LocalColors provides colors,

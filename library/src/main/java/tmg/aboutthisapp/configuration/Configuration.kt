@@ -27,6 +27,7 @@ data class Configuration(
     val email: String? = null,
     val website: String? = null,
     val debugInfo: String? = null,
+    val setIsDarkMode: Boolean? = null,
     val lightColors: Colours? = null,
     val darkColors: Colours? = null,
     val typography: Typography? = null,
