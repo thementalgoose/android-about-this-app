@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+
 package tmg.aboutthisapp
 
 import android.annotation.SuppressLint
@@ -17,6 +19,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -165,6 +168,7 @@ class AboutThisAppActivity: ComponentActivity() {
         }
     }
 
+    @OptIn(ExperimentalFoundationApi::class)
     @Composable
     private fun Footer(
         configuration: Configuration,
