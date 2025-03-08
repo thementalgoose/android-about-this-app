@@ -26,8 +26,6 @@ compose_ui_toolingpreview = { module = "androidx.compose.ui:ui-tooling-preview" 
 compose_junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 compose_manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 
-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
-
 kotlin_stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 
 androidx_window = "androidx.window:window:1.3.0"

@@ -7,13 +7,20 @@ import android.content.ActivityNotFoundException
 import android.content.ClipData
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration.UI_MODE_NIGHT_MASK
+import android.content.res.Configuration.UI_MODE_NIGHT_NO
+import android.content.res.Configuration.UI_MODE_NIGHT_UNDEFINED
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.annotation.Keep
 import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -69,6 +76,25 @@ class AboutThisAppActivity: ComponentActivity() {
             finish()
             return
         }
+
+        this.enableEdgeToEdge(
+            statusBarStyle = when (config.setIsDarkMode) {
+                true -> SystemBarStyle.dark(Color.TRANSPARENT)
+                false -> SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
+                null -> SystemBarStyle.auto(
+                    lightScrim = Color.WHITE,
+                    darkScrim = Color.BLACK
+                )
+            },
+            navigationBarStyle = when (config.setIsDarkMode) {
+                true -> SystemBarStyle.dark(Color.TRANSPARENT)
+                false -> SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT)
+                null -> SystemBarStyle.auto(
+                    lightScrim = Color.WHITE,
+                    darkScrim = Color.BLACK
+                )
+            },
+        )
 
         val lightColors = config.lightColors?.let { AboutThisAppColors(it) } ?: aboutThisAppLightColors
         val darkColors = config.darkColors?.let { AboutThisAppColors(it) } ?: aboutThisAppDarkColors
