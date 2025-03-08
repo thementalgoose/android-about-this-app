@@ -59,7 +59,6 @@ class AboutThisAppActivity: ComponentActivity() {
     }
 
     @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val config = configuration ?: run {
@@ -77,6 +76,7 @@ class AboutThisAppActivity: ComponentActivity() {
             AboutThisAppTheme(
                 lightColors = lightColors,
                 darkColors = darkColors,
+                darkMode = config.setIsDarkMode ?: isSystemInDarkTheme(),
                 typography = typography,
                 strings = config.labels
             ) {
@@ -165,7 +165,6 @@ class AboutThisAppActivity: ComponentActivity() {
         }
     }
 
-    @OptIn(ExperimentalFoundationApi::class)
     @Composable
     private fun Footer(
         configuration: Configuration,
