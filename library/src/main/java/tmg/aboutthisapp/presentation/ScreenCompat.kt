@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import tmg.aboutthisapp.AboutThisAppTheme
 import tmg.aboutthisapp.AboutThisAppTheme.dimens.medium
 import tmg.aboutthisapp.AboutThisAppTheme.dimens.small
+import tmg.aboutthisapp.AboutThisAppTheme.dimens.xsmall
 import tmg.aboutthisapp.configuration.Dependency
 import tmg.aboutthisapp.configuration.Link
 import tmg.aboutthisapp.configuration.License
@@ -57,8 +58,8 @@ internal fun ScreenCompact(
     header: (@Composable ColumnScope.() -> Unit)? = null,
     footer: (@Composable ColumnScope.() -> Unit)? = null,
 ) {
-    val expandDependencies = rememberSaveable { mutableStateOf(true) }
-    val expandLicenses = rememberSaveable { mutableStateOf(true) }
+    val expandDependencies = rememberSaveable { mutableStateOf(false) }
+    val expandLicenses = rememberSaveable { mutableStateOf(false) }
 
     LazyVerticalGrid(
         modifier = Modifier
@@ -145,7 +146,7 @@ internal fun ScreenCompact(
                 }
             }
 
-            if (dependencies.isNotEmpty()) {
+            if (licenses.isNotEmpty()) {
                 item(key = "license-header", span = { GridItemSpan(maxLineSpan) }) {
                     CollapsableSection(
                         titleRes = AboutThisAppTheme.strings.licensesHeader,
@@ -181,7 +182,10 @@ internal fun ScreenCompact(
 
             if (footer != null) {
                 item(key = "content-footer", span = { GridItemSpan(maxLineSpan) }) {
-                    Column(Modifier.fillMaxWidth()) {
+                    Column(Modifier
+                        .fillMaxWidth()
+                        .padding(top = xsmall)
+                    ) {
                         footer.invoke(this)
                     }
                 }

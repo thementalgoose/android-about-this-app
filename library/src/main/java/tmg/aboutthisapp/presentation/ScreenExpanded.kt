@@ -88,7 +88,7 @@ internal fun ScreenExpanded(
         LazyVerticalGrid(
             modifier = Modifier
                 .fillMaxHeight()
-                .width(350.dp),
+                .weight(2f),
             columns = GridCells.Fixed(links.size.coerceIn(1, linksMaximumColumns)),
             contentPadding = contentPadding,
             content = {
@@ -151,10 +151,10 @@ internal fun ScreenExpanded(
             }
         )
 
-        if (dependencies.isNotEmpty() && licenses.isNotEmpty()) {
+        if (dependencies.isNotEmpty() || licenses.isNotEmpty()) {
             Column(
                 modifier = Modifier
-                    .weight(1f)
+                    .weight(3f)
                     .fillMaxHeight()
             ) {
                 Box(modifier = Modifier

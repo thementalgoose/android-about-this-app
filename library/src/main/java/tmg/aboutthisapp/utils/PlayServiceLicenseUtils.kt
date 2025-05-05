@@ -34,6 +34,7 @@ object PlayServiceLicenseUtils {
                     return@mapNotNull label to file.substring(startIndex, endIndex)
                 }
                 .distinctBy { it.first }
+                .sortedBy { it.first.lowercase() }
                 .map { (label, content) ->
                     if (content.startsWith("http://")) {
                         content.replace("http://", "https://")

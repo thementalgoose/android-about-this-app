@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -34,8 +36,9 @@ class MainActivity : AppCompatActivity() {
                             modifier = Modifier
                                 .fillMaxSize()
                                 .padding(paddingValues)
-                                .padding(16.dp),
-                            verticalArrangement = Arrangement.spacedBy(16.dp)
+                                .padding(16.dp)
+                                .verticalScroll(rememberScrollState()),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
                             Link(
                                 label = "About this app (system)",
@@ -48,6 +51,18 @@ class MainActivity : AppCompatActivity() {
                             Link(
                                 label = "About this app (dark mode)",
                                 configurationToOpen = sampleConfiguration.copy(setIsDarkMode = true)
+                            )
+                            Link(
+                                label = "About this app (no dependencies)",
+                                configurationToOpen = sampleConfiguration.copy(dependencies = emptyList())
+                            )
+                            Link(
+                                label = "About this app (no licenses)",
+                                configurationToOpen = sampleConfiguration.copy(license = OpenSourceLicenses.Manual(emptyList()))
+                            )
+                            Link(
+                                label = "About this app (no dependencies or licenses)",
+                                configurationToOpen = sampleConfiguration.copy(dependencies = emptyList(), license = OpenSourceLicenses.Manual(emptyList()))
                             )
                         }
                     }
