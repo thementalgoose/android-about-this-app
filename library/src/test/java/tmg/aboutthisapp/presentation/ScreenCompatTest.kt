@@ -65,7 +65,7 @@ internal class ScreenCompatTest {
                 appName = "appName",
                 dependencies = dependencies,
                 dependencyClicked = dependencyClicked,
-                licenses = OpenSourceLicenses.Manual(licenses),
+                licenses = licenses,
                 showBack = showBack,
                 contactEmail = contactEmail,
                 links = links,
@@ -106,11 +106,30 @@ internal class ScreenCompatTest {
             .performScrollToIndex(2)
 
         composeTestRule
+            .onNodeWithText("Licenses")
+            .performClick()
+
+        composeTestRule
+            .onNodeWithText("licenses1")
+            .assertExists()
+        composeTestRule
+            .onNodeWithText("licenses2")
+            .assertExists()
+
+        composeTestRule
+            .onNodeWithText("Dependencies")
+            .performClick()
+
+        composeTestRule
             .onNodeWithText("dependencyName")
             .assertExists()
         composeTestRule
             .onNodeWithText("dependencyName2")
             .assertExists()
+
+        composeTestRule
+            .onNodeWithTag("Screen")
+            .performScrollToIndex(8)
 
         composeTestRule
             .onNodeWithText("Footer")
@@ -151,6 +170,10 @@ internal class ScreenCompatTest {
     @Test
     fun `click dependency fires callback`() {
         initUnderTest()
+
+        composeTestRule
+            .onNodeWithText("Dependencies")
+            .performClick()
 
         composeTestRule
             .onNodeWithText("dependencyName")
