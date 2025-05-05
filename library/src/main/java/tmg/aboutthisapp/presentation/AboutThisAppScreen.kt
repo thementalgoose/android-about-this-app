@@ -19,6 +19,7 @@ fun AboutThisAppScreen(
     appName: String,
     dependencies: List<Dependency>,
     dependencyClicked: (Dependency) -> Unit,
+    license: List<License>,
     isCompact: Boolean = true,
     showBack: Boolean = true,
     backClicked: () -> Unit = { },
@@ -28,6 +29,7 @@ fun AboutThisAppScreen(
     appVersion: String? = null,
     links: List<Link> = emptyList(),
     linksMaximumColumns: Int = 4,
+    contentPadding: PaddingValues = PaddingValues.Absolute()
 ) {
     if (isCompact) {
         ScreenCompact(
@@ -37,12 +39,14 @@ fun AboutThisAppScreen(
             backClicked = backClicked,
             dependencies = dependencies,
             dependencyClicked = dependencyClicked,
+            license = license,
             header = header,
             footer = footer,
             contactEmail = contactEmail,
             links = links,
             linksMaximumColumns = linksMaximumColumns,
-            appVersion = appVersion
+            appVersion = appVersion,
+            contentPadding = contentPadding,
         )
     } else {
         ScreenExpanded(
@@ -52,12 +56,14 @@ fun AboutThisAppScreen(
             backClicked = backClicked,
             dependencies = dependencies,
             dependencyClicked = dependencyClicked,
+            license = license,
             header = header,
             footer = footer,
             contactEmail = contactEmail,
             links = links,
             linksMaximumColumns = linksMaximumColumns,
-            appVersion = appVersion
+            appVersion = appVersion,
+            contentPadding = contentPadding
         )
     }
 }

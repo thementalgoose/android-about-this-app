@@ -1,5 +1,6 @@
 package tmg.aboutthisapp.presentation
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.padding
@@ -13,6 +14,7 @@ import tmg.aboutthisapp.AboutThisAppTheme.dimens.large
 import tmg.aboutthisapp.R
 import tmg.aboutthisapp.configuration.Dependency
 import tmg.aboutthisapp.configuration.DependencyIcon
+import tmg.aboutthisapp.configuration.License
 import tmg.aboutthisapp.configuration.Link
 
 internal fun fakeLinks() = listOf(
@@ -26,6 +28,16 @@ internal fun fakeLinks() = listOf(
     Link.twitter {  },
     Link.youtube {  },
     Link.reddit {  },
+)
+
+internal fun fakeLicenses(count: Int) = List(count) {
+    fakeLicense(name = "license $it")
+}
+internal fun fakeLicense(
+    name: String
+) = License.Url(
+    label = name,
+    url = "https://www.testurl.com"
 )
 
 internal fun fakeDependencyList(count: Int) = List(count) {
@@ -43,6 +55,7 @@ internal fun fakeDependency(
     ),
 )
 
+@SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 internal fun PreviewScreenCompat() {
     BoxWithConstraints {
@@ -70,11 +83,13 @@ internal fun PreviewScreenCompat() {
             },
             appVersion = "1.0.1234",
             dependencies = fakeDependencyList(1),
+            license = fakeLicenses(1),
             links = fakeLinks()
         )
     }
 }
 
+@SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 internal fun PreviewScreenExpanded() {
     AboutThisAppTheme {
@@ -101,7 +116,8 @@ internal fun PreviewScreenExpanded() {
             appVersion = "1.0.1234",
             dependencies = fakeDependencyList(10),
             dependencyClicked = { },
-            links = fakeLinks()
+            license = fakeLicenses(10),
+            links = fakeLinks(),
         )
     }
 }

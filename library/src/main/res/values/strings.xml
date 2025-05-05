@@ -18,6 +18,8 @@
 
     <string name="about_this_app_dependency_header">Dependencies</string>
 
+    <string name="about_this_app_license_header">Licenses</string>
+
     <string name="about_this_app_copy_to_clipboard">Copied to clipboard</string>
     <string name="about_this_app_debug_information">Copied to clipboard</string>
 </resources>

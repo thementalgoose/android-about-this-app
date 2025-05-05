@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.google.android.gms.oss-licenses-plugin'
 
 apply from: rootDir.absolutePath + "/gradle/config-compose.gradle"
 
@@ -72,6 +73,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(path: ':library')
+
+    implementation 'com.google.android.gms:play-services-oss-licenses:17.0.0'
 
     implementation libs.kotlin.stdlib
     implementation libs.androidx.appcompat

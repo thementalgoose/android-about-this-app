@@ -59,6 +59,9 @@ import tmg.aboutthisapp.configuration.defaultTypography
 import tmg.aboutthisapp.presentation.AboutThisAppScreen
 import tmg.aboutthisapp.utils.clipboardManager
 import java.net.MalformedURLException
+import androidx.core.net.toUri
+import tmg.aboutthisapp.configuration.OpenSourceLicenses
+import tmg.aboutthisapp.utils.PlayServiceLicenseUtils
 
 class AboutThisAppActivity: ComponentActivity() {
 
@@ -104,6 +107,7 @@ class AboutThisAppActivity: ComponentActivity() {
             is OpenSourceLicenses.Manual -> config.license.licenses
             OpenSourceLicenses.PlayServicesOpenSource -> PlayServiceLicenseUtils.readLicenses(this)
         }
+
         setContent {
             val windowSizeClass = calculateWindowSizeClass(activity = this@AboutThisAppActivity)
             AboutThisAppTheme(
@@ -117,7 +121,6 @@ class AboutThisAppActivity: ComponentActivity() {
                     Box(Modifier
                         .background(AboutThisAppTheme.colours.background)
                         .fillMaxSize()
-                        .padding(it)
                     ) {
                         AboutThisAppScreen(
                             appIcon = config.imageRes,
@@ -141,6 +144,7 @@ class AboutThisAppActivity: ComponentActivity() {
                             contactEmail = config.email,
                             appVersion = config.appVersion,
                             links = buildLinks(config),
+                            contentPadding = it
                         )
                     }
                 }
