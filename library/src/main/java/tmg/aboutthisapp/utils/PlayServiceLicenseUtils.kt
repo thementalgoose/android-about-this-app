@@ -31,7 +31,7 @@ object PlayServiceLicenseUtils {
                     val startIndex = indexes.first().toIntOrNull() ?: return@mapNotNull null
                     val endIndex = indexes.last().toIntOrNull() ?: return@mapNotNull null
 
-                    return@mapNotNull label to file.substring(startIndex, endIndex)
+                    return@mapNotNull label to file.substring(startIndex, endIndex).trim()
                 }
                 .distinctBy { it.first }
                 .sortedBy { it.first.lowercase() }
