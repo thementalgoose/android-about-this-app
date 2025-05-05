@@ -19,6 +19,7 @@ import tmg.aboutthisapp.AboutThisAppTheme
 import tmg.aboutthisapp.configuration.Configuration
 import tmg.aboutthisapp.configuration.Dependency
 import tmg.aboutthisapp.configuration.DependencyIcon
+import tmg.aboutthisapp.configuration.OpenSourceLicenses
 
 class MainActivity : AppCompatActivity() {
 
@@ -85,6 +86,7 @@ class MainActivity : AppCompatActivity() {
                     url = "https://github.com/thementalgoose/android-about-this-app"
                 )
             },
+            license = OpenSourceLicenses.PlayServicesOpenSource,
             email = "thementalgoose@gmail.com",
             header = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mattis maximus nisi ac mollis. Vivamus fringilla mi vulputate turpis bibendum congue. Proin ut consectetur nisl, non tempor risus. Phasellus venenatis lacinia dignissim. Pellentesque pretium, elit quis condimentum egestas, ligula ante venenatis ex, sed faucibus tellus quam at purus",
             footnote = "Thank you!",

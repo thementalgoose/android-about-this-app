@@ -74,8 +74,6 @@ dependencies {
 
     implementation project(path: ':library')
 
-    implementation 'com.google.android.gms:play-services-oss-licenses:17.0.0'
-
     implementation libs.kotlin.stdlib
     implementation libs.androidx.appcompat
     implementation libs.androidx.core
