@@ -14,35 +14,41 @@ The "About This App" cover screen that I use in my apps
 <details>
     <summary><code>build.gradle</code></summary>
 
-    allprojects {
-        repositories {
-            ...
-            maven { url 'https://jitpack.io' }
-        }
-        
-        // Optional: Open source licenses can be generated and picked up 
-        //  automatically by this library. Apply google play services plugin
-        //  to consume
-        // https://github.com/google/play-services-plugins/tree/main/oss-licenses-plugin
-        dependencies {
-            classpath 'com.google.android.gms:oss-licenses-plugin:0.10.6'
-        }
+```groovy
+allprojects {
+    repositories {
+        // ...
+        maven { url 'https://jitpack.io' }
     }
+    
+    // Optional: Open source licenses can be generated and picked up 
+    //  automatically by this library. Apply google play services plugin
+    //  to consume
+    // https://github.com/google/play-services-plugins/tree/main/oss-licenses-plugin
+    dependencies {
+        classpath 'com.google.android.gms:oss-licenses-plugin:0.10.6'
+    }
+}
+```
+
 </details>
 
 <details>
     <summary><code>app/build.gradle</code></summary>
 
-    // Optional: Open source licenses can be generated and picked up 
-    //  automatically by this library. Apply google play services plugin
-    //  to consume
-    // https://github.com/google/play-services-plugins/tree/main/oss-licenses-plugin
-    apply plugin: 'com.google.android.gms.oss-licenses-plugin'
+```groovy
+// Optional: Open source licenses can be generated and picked up 
+//  automatically by this library. Apply google play services plugin
+//  to consume
+// https://github.com/google/play-services-plugins/tree/main/oss-licenses-plugin
+apply plugin: 'com.google.android.gms.oss-licenses-plugin'
 
-    dependencies {
-        implementation 'com.github.thementalgoose:android-about-this-app:6.0.6'
-        // Use Jitpack version if newer
-    }
+dependencies {
+    implementation 'com.github.thementalgoose:android-about-this-app:6.1.0'
+    // Use Jitpack version if newer
+}
+```
+
 
 Jitpack version: [![](https://jitpack.io/v/thementalgoose/android-about-this-app.svg)](https://jitpack.io/#thementalgoose/android-about-this-app)
 </details>
