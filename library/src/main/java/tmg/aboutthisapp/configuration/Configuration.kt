@@ -15,6 +15,7 @@ data class Configuration(
     val appVersion: String,
     val appPackageName: String,
     val dependencies: List<Dependency>,
+    val license: OpenSourceLicenses = OpenSourceLicenses.PlayServicesOpenSource,
     val header: String? = null,
     val footnote: String? = null,
     val github: String? = null,

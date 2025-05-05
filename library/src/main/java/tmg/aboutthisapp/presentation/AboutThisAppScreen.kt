@@ -2,10 +2,12 @@ package tmg.aboutthisapp.presentation
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import tmg.aboutthisapp.AboutThisAppTheme
 import tmg.aboutthisapp.configuration.Dependency
 import tmg.aboutthisapp.configuration.Link
+import tmg.aboutthisapp.configuration.License
 import tmg.aboutthisapp.utils.PreviewFoldable
 import tmg.aboutthisapp.utils.PreviewPhone
 import tmg.aboutthisapp.utils.PreviewTablet

@@ -100,6 +100,10 @@ class AboutThisAppActivity: ComponentActivity() {
         val darkColors = config.darkColors?.let { AboutThisAppColors(it) } ?: aboutThisAppDarkColors
         val typography = config.typography?.let { AboutThisAppTypography(it) } ?: defaultTypography
 
+        val licenses = when (config.license) {
+            is OpenSourceLicenses.Manual -> config.license.licenses
+            OpenSourceLicenses.PlayServicesOpenSource -> PlayServiceLicenseUtils.readLicenses(this)
+        }
         setContent {
             val windowSizeClass = calculateWindowSizeClass(activity = this@AboutThisAppActivity)
             AboutThisAppTheme(
@@ -122,6 +126,7 @@ class AboutThisAppActivity: ComponentActivity() {
                             dependencyClicked = {
                                 openLink(it.url)
                             },
+                            license = licenses,
                             showBack = true,
                             backClicked = {
                                 finish()
