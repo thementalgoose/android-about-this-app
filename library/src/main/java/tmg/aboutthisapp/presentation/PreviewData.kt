@@ -83,7 +83,7 @@ internal fun PreviewScreenCompat() {
             },
             appVersion = "1.0.1234",
             dependencies = fakeDependencyList(1),
-            license = fakeLicenses(1),
+            licenses = fakeLicenses(1),
             links = fakeLinks()
         )
     }
@@ -116,7 +116,7 @@ internal fun PreviewScreenExpanded() {
             appVersion = "1.0.1234",
             dependencies = fakeDependencyList(10),
             dependencyClicked = { },
-            license = fakeLicenses(10),
+            licenses = fakeLicenses(10),
             links = fakeLinks(),
         )
     }

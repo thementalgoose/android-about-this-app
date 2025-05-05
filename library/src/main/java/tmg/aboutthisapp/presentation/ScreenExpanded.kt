@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package tmg.aboutthisapp.presentation
 
 import androidx.annotation.DrawableRes
@@ -11,10 +13,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -28,20 +28,25 @@ import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import tmg.aboutthisapp.AboutThisAppTheme
 import tmg.aboutthisapp.AboutThisAppTheme.dimens.medium
 import tmg.aboutthisapp.AboutThisAppTheme.dimens.small
 import tmg.aboutthisapp.AboutThisAppTheme.dimens.small_medium
+import tmg.aboutthisapp.LocalTypography
 import tmg.aboutthisapp.configuration.Dependency
 import tmg.aboutthisapp.configuration.Link
 import tmg.aboutthisapp.configuration.License
@@ -62,7 +67,7 @@ internal fun ScreenExpanded(
     appName: String,
     dependencies: List<Dependency>,
     dependencyClicked: (Dependency) -> Unit,
-    license: List<License>,
+    licenses: List<License>,
     showBack: Boolean = false,
     backClicked: () -> Unit = { },
     contactEmail: String? = null,
@@ -146,7 +151,7 @@ internal fun ScreenExpanded(
             }
         )
 
-        if (dependencies.isNotEmpty() && license.isNotEmpty()) {
+        if (dependencies.isNotEmpty() && licenses.isNotEmpty()) {
             Column(
                 modifier = Modifier
                     .weight(1f)
@@ -203,7 +208,7 @@ internal fun ScreenExpanded(
                                     )
                                 }
                             }
-                            if (license.isNotEmpty()) {
+                            if (licenses.isNotEmpty()) {
                                 item(key = "header-licenses", span = StaggeredGridItemSpan.FullLine) {
                                     CollapsableSection(
                                         titleRes = AboutThisAppTheme.strings.licensesHeader,
@@ -218,7 +223,7 @@ internal fun ScreenExpanded(
                                 }
                             }
                             if (expandLicenses.value) {
-                                items(license, key = { "licenses-${it.label()}" }) {
+                                items(licenses, key = { "licenses-${it.label()}" }) {
                                     tmg.aboutthisapp.presentation.components.License(
                                         modifier = Modifier
                                             .animateItem()
@@ -226,11 +231,8 @@ internal fun ScreenExpanded(
                                                 horizontal = small,
                                                 vertical = small
                                             )
-                                            .clip(RoundedCornerShape(6.dp))
-                                            .clickable(
-                                                onClick = {  }
-                                            ),
-                                        name = it.label()
+                                            .clip(RoundedCornerShape(6.dp)),
+                                        model = it
                                     )
                                 }
                             }

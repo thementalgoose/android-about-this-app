@@ -129,7 +129,7 @@ class AboutThisAppActivity: ComponentActivity() {
                             dependencyClicked = {
                                 openLink(it.url)
                             },
-                            license = licenses,
+                            licenses = licenses,
                             showBack = true,
                             backClicked = {
                                 finish()

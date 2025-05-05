@@ -46,7 +46,7 @@ internal fun ScreenCompact(
     appName: String,
     dependencies: List<Dependency>,
     dependencyClicked: (Dependency) -> Unit,
-    license: List<License>,
+    licenses: List<License>,
     showBack: Boolean = false,
     contactEmail: String? = null,
     links: List<Link> = emptyList(),
@@ -162,7 +162,7 @@ internal fun ScreenCompact(
                 }
             }
             if (expandLicenses.value) {
-                items(license, key = { "license-${it.label()}"}, span = { GridItemSpan(maxLineSpan) }) {
+                items(licenses, key = { "license-${it.label()}"}, span = { GridItemSpan(maxLineSpan) }) {
                     tmg.aboutthisapp.presentation.components.License(
                         modifier = Modifier
                             .animateItem()
@@ -174,7 +174,7 @@ internal fun ScreenCompact(
                             .clickable(
                                 onClick = {  }
                             ),
-                        name = it.label(),
+                        model = it,
                     )
                 }
             }
