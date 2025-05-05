@@ -249,7 +249,7 @@ class AboutThisAppActivity: ComponentActivity() {
 
     private fun openLink(url: String) {
         val uri = try {
-            Uri.parse(url)
+            url.toUri()
         } catch (e: MalformedURLException) {
             return
         }
@@ -257,7 +257,7 @@ class AboutThisAppActivity: ComponentActivity() {
         val browserSelectorIntent = Intent()
             .setAction(Intent.ACTION_VIEW)
             .addCategory(Intent.CATEGORY_BROWSABLE)
-            .setData(Uri.parse("https:"))
+            .setData("https:".toUri())
         val targetIntent = Intent()
             .setAction(Intent.ACTION_VIEW)
             .addCategory(Intent.CATEGORY_BROWSABLE)
@@ -270,7 +270,7 @@ class AboutThisAppActivity: ComponentActivity() {
     private fun openEmail(emailAddress: String) {
         try {
             val intent = Intent(Intent.ACTION_SENDTO).apply {
-                data = Uri.parse("mailto:")
+                data = "mailto:".toUri()
                 putExtra(Intent.EXTRA_EMAIL, emailAddress)
                 putExtra(Intent.EXTRA_SUBJECT, "")
             }
@@ -284,13 +284,13 @@ class AboutThisAppActivity: ComponentActivity() {
         try {
             startActivity(Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("market://details?id=$appPackageName")
+                "market://details?id=$appPackageName".toUri()
             ))
         } catch (e : ActivityNotFoundException) {
             startActivity(
                 Intent(
                     Intent.ACTION_VIEW,
-                    Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
+                    "https://play.google.com/store/apps/details?id=$appPackageName".toUri()
                 )
             )
         }
