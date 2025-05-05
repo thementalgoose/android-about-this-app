@@ -59,6 +59,9 @@ import tmg.aboutthisapp.configuration.defaultTypography
 import tmg.aboutthisapp.presentation.AboutThisAppScreen
 import tmg.aboutthisapp.utils.clipboardManager
 import java.net.MalformedURLException
+import androidx.core.net.toUri
+import tmg.aboutthisapp.configuration.OpenSourceLicenses
+import tmg.aboutthisapp.utils.PlayServiceLicenseUtils
 
 class AboutThisAppActivity: ComponentActivity() {
 
@@ -100,6 +103,11 @@ class AboutThisAppActivity: ComponentActivity() {
         val darkColors = config.darkColors?.let { AboutThisAppColors(it) } ?: aboutThisAppDarkColors
         val typography = config.typography?.let { AboutThisAppTypography(it) } ?: defaultTypography
 
+        val licenses = when (config.license) {
+            is OpenSourceLicenses.Manual -> config.license.licenses
+            OpenSourceLicenses.PlayServicesOpenSource -> PlayServiceLicenseUtils.readLicenses(this)
+        }
+
         setContent {
             val windowSizeClass = calculateWindowSizeClass(activity = this@AboutThisAppActivity)
             AboutThisAppTheme(
@@ -113,7 +121,6 @@ class AboutThisAppActivity: ComponentActivity() {
                     Box(Modifier
                         .background(AboutThisAppTheme.colours.background)
                         .fillMaxSize()
-                        .padding(it)
                     ) {
                         AboutThisAppScreen(
                             appIcon = config.imageRes,
@@ -122,6 +129,7 @@ class AboutThisAppActivity: ComponentActivity() {
                             dependencyClicked = {
                                 openLink(it.url)
                             },
+                            licenses = licenses,
                             showBack = true,
                             backClicked = {
                                 finish()
@@ -136,6 +144,7 @@ class AboutThisAppActivity: ComponentActivity() {
                             contactEmail = config.email,
                             appVersion = config.appVersion,
                             links = buildLinks(config),
+                            contentPadding = it
                         )
                     }
                 }
@@ -244,7 +253,7 @@ class AboutThisAppActivity: ComponentActivity() {
 
     private fun openLink(url: String) {
         val uri = try {
-            Uri.parse(url)
+            url.toUri()
         } catch (e: MalformedURLException) {
             return
         }
@@ -252,7 +261,7 @@ class AboutThisAppActivity: ComponentActivity() {
         val browserSelectorIntent = Intent()
             .setAction(Intent.ACTION_VIEW)
             .addCategory(Intent.CATEGORY_BROWSABLE)
-            .setData(Uri.parse("https:"))
+            .setData("https:".toUri())
         val targetIntent = Intent()
             .setAction(Intent.ACTION_VIEW)
             .addCategory(Intent.CATEGORY_BROWSABLE)
@@ -265,7 +274,7 @@ class AboutThisAppActivity: ComponentActivity() {
     private fun openEmail(emailAddress: String) {
         try {
             val intent = Intent(Intent.ACTION_SENDTO).apply {
-                data = Uri.parse("mailto:")
+                data = "mailto:".toUri()
                 putExtra(Intent.EXTRA_EMAIL, emailAddress)
                 putExtra(Intent.EXTRA_SUBJECT, "")
             }
@@ -279,13 +288,13 @@ class AboutThisAppActivity: ComponentActivity() {
         try {
             startActivity(Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("market://details?id=$appPackageName")
+                "market://details?id=$appPackageName".toUri()
             ))
         } catch (e : ActivityNotFoundException) {
             startActivity(
                 Intent(
                     Intent.ACTION_VIEW,
-                    Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
+                    "https://play.google.com/store/apps/details?id=$appPackageName".toUri()
                 )
             )
         }

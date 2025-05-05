@@ -16,7 +16,9 @@ import org.robolectric.RobolectricTestRunner
 import tmg.aboutthisapp.R
 import tmg.aboutthisapp.configuration.Dependency
 import tmg.aboutthisapp.configuration.DependencyIcon
+import tmg.aboutthisapp.configuration.License
 import tmg.aboutthisapp.configuration.Link
+import tmg.aboutthisapp.configuration.OpenSourceLicenses
 
 @RunWith(RobolectricTestRunner::class)
 internal class ScreenCompatTest {
@@ -44,6 +46,16 @@ internal class ScreenCompatTest {
                 icon = DependencyIcon.Image("")
             )
         ),
+        licenses: List<License> = listOf(
+            License.Text(
+                label = "licenses1",
+                text = "Text"
+            ),
+            License.Url(
+                label = "licenses2",
+                url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+            ),
+        ),
         contactEmail: String? = "email",
         links: List<Link> = listOf(Link.x(linkClicked))
     ) {
@@ -53,6 +65,7 @@ internal class ScreenCompatTest {
                 appName = "appName",
                 dependencies = dependencies,
                 dependencyClicked = dependencyClicked,
+                licenses = licenses,
                 showBack = showBack,
                 contactEmail = contactEmail,
                 links = links,
@@ -93,11 +106,30 @@ internal class ScreenCompatTest {
             .performScrollToIndex(2)
 
         composeTestRule
+            .onNodeWithText("Licenses")
+            .performClick()
+
+        composeTestRule
+            .onNodeWithText("licenses1")
+            .assertExists()
+        composeTestRule
+            .onNodeWithText("licenses2")
+            .assertExists()
+
+        composeTestRule
+            .onNodeWithText("Dependencies")
+            .performClick()
+
+        composeTestRule
             .onNodeWithText("dependencyName")
             .assertExists()
         composeTestRule
             .onNodeWithText("dependencyName2")
             .assertExists()
+
+        composeTestRule
+            .onNodeWithTag("Screen")
+            .performScrollToIndex(8)
 
         composeTestRule
             .onNodeWithText("Footer")
@@ -138,6 +170,10 @@ internal class ScreenCompatTest {
     @Test
     fun `click dependency fires callback`() {
         initUnderTest()
+
+        composeTestRule
+            .onNodeWithText("Dependencies")
+            .performClick()
 
         composeTestRule
             .onNodeWithText("dependencyName")

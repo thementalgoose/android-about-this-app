@@ -34,6 +34,7 @@ internal object AboutThisAppTheme {
     object dimens {
         val large = 24.dp
         val medium = 16.dp
+        val small_medium = 12.dp
         val small = 8.dp
         val xsmall = 4.dp
     }

@@ -14,6 +14,7 @@ import org.robolectric.RobolectricTestRunner
 import tmg.aboutthisapp.R
 import tmg.aboutthisapp.configuration.Dependency
 import tmg.aboutthisapp.configuration.DependencyIcon
+import tmg.aboutthisapp.configuration.License
 import tmg.aboutthisapp.configuration.Link
 
 @RunWith(RobolectricTestRunner::class)
@@ -42,6 +43,16 @@ internal class ScreenExpandedTest {
                 icon = DependencyIcon.Image("")
             )
         ),
+        licenses: List<License> = listOf(
+            License.Text(
+                label = "licenses1",
+                text = "Text"
+            ),
+            License.Url(
+                label = "licenses2",
+                url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+            ),
+        ),
         contactEmail: String? = "email",
         links: List<Link> = listOf(Link.x(linkClicked))
     ) {
@@ -51,6 +62,7 @@ internal class ScreenExpandedTest {
                 appName = "appName",
                 dependencies = dependencies,
                 dependencyClicked = dependencyClicked,
+                licenses = licenses,
                 showBack = showBack,
                 contactEmail = contactEmail,
                 links = links,

@@ -15,4 +15,6 @@ data class Labels internal constructor(
     val accessibilityBack: Int = R.string.about_this_app_ab_back_button,
     @StringRes
     val dependencyHeader: Int = R.string.about_this_app_dependency_header,
+    @StringRes
+    val licensesHeader: Int = R.string.about_this_app_license_header,
 ): Parcelable
