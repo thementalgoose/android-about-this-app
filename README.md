@@ -19,11 +19,25 @@ The "About This App" cover screen that I use in my apps
             ...
             maven { url 'https://jitpack.io' }
         }
+        
+        // Optional: Open source licenses can be generated and picked up 
+        //  automatically by this library. Apply google play services plugin
+        //  to consume
+        // https://github.com/google/play-services-plugins/tree/main/oss-licenses-plugin
+        dependencies {
+            classpath 'com.google.android.gms:oss-licenses-plugin:0.10.6'
+        }
     }
 </details>
 
 <details>
     <summary><code>app/build.gradle</code></summary>
+
+    // Optional: Open source licenses can be generated and picked up 
+    //  automatically by this library. Apply google play services plugin
+    //  to consume
+    // https://github.com/google/play-services-plugins/tree/main/oss-licenses-plugin
+    apply plugin: 'com.google.android.gms.oss-licenses-plugin'
 
     dependencies {
         implementation 'com.github.thementalgoose:android-about-this-app:6.0.6'
@@ -68,6 +82,16 @@ setContent {
                 )
             },
             dependencyClicked = { /* Open it.url */ },
+            licenses = listOf(
+                License.Url(
+                    label = "Open Source License", 
+                    url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+                ),
+                License.Text(
+                    label = "Open Source License",
+                    url = "This is the raw license text"
+                )
+            ),
             isCompact = windowWidthSizeClass == Compact,
             showBack = true,
             backClicked = { finish() },
@@ -108,6 +132,7 @@ val configuration = Configuration(
             url = "https://github.com/thementalgoose/android-about-this-app"
         )
     },
+    licenses = OpenSourceLicenses.PlayServicesOpenSource, /* Optional, plugin must be included for this to work: https://github.com/google/play-services-plugins/tree/main/oss-licenses-plugin */
     header = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mattis maximus nisi ac mollis.", /* Optional */
     footnote = "Thanks again!", /* Optional */
     appPackageName = "tmg.aboutthisapp",
