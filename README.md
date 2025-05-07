@@ -44,7 +44,7 @@ allprojects {
 apply plugin: 'com.google.android.gms.oss-licenses-plugin'
 
 dependencies {
-    implementation 'com.github.thementalgoose:android-about-this-app:6.1.0'
+    implementation 'com.github.thementalgoose:android-about-this-app:6.1.1'
     // Use Jitpack version if newer
 }
 ```
@@ -161,6 +161,15 @@ You may need to add a manifest entry for this activity in order for it to displa
     android:exported="false" />
 ```
 
+You may need to exclude the metadata file from being intercepted by proguard
+
+```xml
+<!-- res/raw/keep.xml -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@raw/third_party_licenses, @raw/third_party_license_metadata">
+</resources>
+```
 
 ## License
 

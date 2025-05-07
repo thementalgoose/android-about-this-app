@@ -2,24 +2,34 @@
 
 package tmg.aboutthisapp.presentation.components
 
+import android.graphics.Typeface
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.overscroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import tmg.aboutthisapp.AboutThisAppTheme
 import tmg.aboutthisapp.AboutThisAppTheme.dimens.medium
@@ -54,7 +64,8 @@ internal fun License(
     }
 
     if (show.value) {
-        BasicAlertDialog(
+        ModalBottomSheet(
+            containerColor = AboutThisAppTheme.colours.background,
             onDismissRequest = {
                 show.value = false
             },
@@ -62,30 +73,37 @@ internal fun License(
                 Column(
                     modifier = Modifier
                         .padding(medium)
-                        .clip(RoundedCornerShape(6.dp))
-                        .background(AboutThisAppTheme.colours.background)
                         .verticalScroll(rememberScrollState()),
                 ) {
                     when (model) {
                         is License.Text -> {
-                            Text(
-                                modifier = Modifier
-                                    .padding(medium)
-                                    .fillMaxWidth(),
-                                text = model.text,
-                                color = AboutThisAppTheme.colours.onPrimary,
-                                style = LocalTypography.current.body1,
-                            )
+                            Row(modifier = Modifier
+                                .fillMaxWidth()
+                                .horizontalScroll(rememberScrollState())
+                            ) {
+                                Text(
+                                    modifier = Modifier
+                                        .fillMaxWidth(),
+                                    text = model.text,
+                                    color = AboutThisAppTheme.colours.onPrimary,
+                                    style = LocalTypography.current.body1,
+                                    fontFamily = FontFamily(Typeface.MONOSPACE),
+                                )
+                            }
                         }
                         is License.Url -> {
-                            Text(
-                                modifier = Modifier
-                                    .padding(medium)
-                                    .fillMaxWidth(),
-                                text = model.url,
-                                color = AboutThisAppTheme.colours.onPrimary,
-                                style = LocalTypography.current.body1,
-                            )
+                            Row(modifier = Modifier
+                                .fillMaxWidth()
+                                .horizontalScroll(rememberScrollState())
+                            ) {
+                                Text(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    text = model.url,
+                                    color = AboutThisAppTheme.colours.onPrimary,
+                                    style = LocalTypography.current.body1,
+                                    fontFamily = FontFamily(Typeface.MONOSPACE)
+                                )
+                            }
                         }
                     }
                 }
