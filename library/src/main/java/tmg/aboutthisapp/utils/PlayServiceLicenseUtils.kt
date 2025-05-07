@@ -14,8 +14,6 @@ object PlayServiceLicenseUtils {
             val file = context.readRawResourceAsString(context.getRawId(fileName))
             val fileMetadata = context.readRawResourceAsString(context.getRawId(fileNameMetadata))
 
-            Log.d("AboutThisApp", file)
-
             return fileMetadata
                 .trim()
                 .split("\n")
@@ -29,9 +27,17 @@ object PlayServiceLicenseUtils {
                         return@mapNotNull null
                     }
                     val startIndex = indexes.first().toIntOrNull() ?: return@mapNotNull null
-                    val endIndex = indexes.last().toIntOrNull() ?: return@mapNotNull null
+                    val length = indexes.last().toIntOrNull() ?: return@mapNotNull null
 
-                    return@mapNotNull label to file.substring(startIndex, endIndex).trim()
+                    val content = try {
+                        file.substring(startIndex, startIndex + length).trim()
+                    } catch (e: StringIndexOutOfBoundsException) {
+                        // Something went wrong, omit the license
+                        Log.e("AboutThisApp", "License $label has been omitted as license info not found (${e.message})")
+                        return@mapNotNull label to "Unknown license"
+                    }
+
+                    return@mapNotNull label to content
                 }
                 .distinctBy { it.first }
                 .sortedBy { it.first.lowercase() }
