@@ -26,7 +26,7 @@ allprojects {
     //  to consume
     // https://github.com/google/play-services-plugins/tree/main/oss-licenses-plugin
     dependencies {
-        classpath 'com.google.android.gms:oss-licenses-plugin:0.10.6'
+        classpath 'com.google.android.gms:oss-licenses-plugin:0.10.9'
     }
 }
 ```
@@ -44,7 +44,7 @@ allprojects {
 apply plugin: 'com.google.android.gms.oss-licenses-plugin'
 
 dependencies {
-    implementation 'com.github.thementalgoose:android-about-this-app:6.1.1'
+    implementation 'com.github.thementalgoose:android-about-this-app:6.2.0'
     // Use Jitpack version if newer
 }
 ```
