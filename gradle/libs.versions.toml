@@ -17,6 +17,7 @@ compose_bom = { module = "androidx.compose:compose-bom", version.ref = "compose"
 compose_activity = { module = "androidx.activity:activity-compose", version.ref = "androidx_activity" }
 compose_material3_base = { module = "androidx.compose.material3:material3", version.ref = "material3" }
 compose_material3_ripple = { module = "androidx.compose.material:material-ripple" }
+compose_material_icons = { module = "androidx.compose.material:material-icons-core" }
 compose_material3_windowsize = { module = "androidx.compose.material3:material3-window-size-class" }
 compose_animation = { module = "androidx.compose.animation:animation" }
 compose_ui_tooling = { module = "androidx.compose.ui:ui-tooling" }
