@@ -5,14 +5,14 @@ apply plugin: 'com.google.android.gms.oss-licenses-plugin'
 apply from: rootDir.absolutePath + "/gradle/config-compose.gradle"
 
 android {
-    compileSdk 35
+    compileSdk 36
 
     namespace "tmg.aboutthisapp.sample"
 
     defaultConfig {
         applicationId "tmg.components.sample"
-        minSdkVersion 21
-        targetSdkVersion 35
+        minSdkVersion 23
+        targetSdkVersion 36
         versionCode 1
         versionName "1.0"
 

@@ -13,13 +13,13 @@ repositories {
 group = 'com.github.thementalgoose'
 
 android {
-    compileSdk 35
+    compileSdkVersion 36
 
     namespace "tmg.aboutthisapp"
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 35
+        minSdkVersion 23
+        targetSdkVersion 36
         versionCode 1
         versionName "1.0"
 
@@ -84,6 +84,7 @@ dependencies {
     implementation libs.compose.material3.base
     implementation libs.compose.material3.ripple
     implementation libs.compose.material3.windowsize
+    implementation libs.compose.material.icons
     implementation libs.compose.activity
     debugImplementation libs.compose.ui.tooling
     implementation libs.compose.ui.toolingpreview
