@@ -11,6 +11,7 @@ dependencies {
     implementation libs.compose.material3.base
     implementation libs.compose.material3.ripple
     implementation libs.compose.material3.windowsize
+    implementation libs.compose.material.icons
     implementation libs.compose.animation
     debugImplementation libs.compose.ui.tooling
     implementation libs.compose.ui.toolingpreview
