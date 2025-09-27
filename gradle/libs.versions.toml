@@ -10,7 +10,7 @@ robolectric = "4.11.1"
 [libraries]  # ===========================================================================
 gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
 
-androidx_core = "androidx.core:core-ktx:1.16.0"
+androidx_core = "androidx.core:core-ktx:1.17.0"
 androidx_appcompat = "androidx.appcompat:appcompat:1.7.0"
 
 compose_bom = { module = "androidx.compose:compose-bom", version.ref = "compose" }
