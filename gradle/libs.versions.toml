@@ -11,7 +11,7 @@ robolectric = "4.11.1"
 gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
 
 androidx_core = "androidx.core:core-ktx:1.17.0"
-androidx_appcompat = "androidx.appcompat:appcompat:1.7.0"
+androidx_appcompat = "androidx.appcompat:appcompat:1.7.1"
 
 compose_bom = { module = "androidx.compose:compose-bom", version.ref = "compose" }
 compose_activity = { module = "androidx.activity:activity-compose", version.ref = "androidx_activity" }
